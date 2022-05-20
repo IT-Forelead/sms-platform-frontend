@@ -5,6 +5,9 @@
 - Vite
 
 ---
+## Install dependencies
+```./update.sh```
+
 ## Run project
 ```./ui.sh```
 
