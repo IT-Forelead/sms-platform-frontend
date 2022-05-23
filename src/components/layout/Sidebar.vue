@@ -1,6 +1,6 @@
 <template>
   <div class="w-80 h-screen fixed" id="sidenavSecExample">
-    <div class="pt-4 pb-2 px-6 mt-4">
+    <div class="p-2 px-6 mt-4">
       <router-link to="/">
         <div class="flex items-center">
           <div class="shrink-0">
