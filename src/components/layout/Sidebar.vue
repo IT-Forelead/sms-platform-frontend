@@ -1,13 +1,13 @@
 <template>
-  <div class="w-60 h-screen fixed" id="sidenavSecExample">
-    <div class="pt-4 pb-2 px-6 mt-4">
+  <div class="w-64 h-screen fixed pr-5" id="sidenavSecExample">
+    <div class="h-20 py-4 sticky-top mb-3 flex justify-center items-center text-center">
       <router-link to="/">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="../../assets/logo.png" class="w-10" alt="Avatar" />
+            <img src="../../assets/logo.png" class="w-10" alt="#"/>
           </div>
           <div class="grow ml-3">
-            <p class="text-sm font-semibold text-gray-400 uppercase hover:text-gray-200 transition duration-300 ease-in-out">Air SMS</p>
+            <h2 class="text-lg font-semibold text-zinc-900 hover:text-gray-200">Saroy SMS</h2>
           </div>
         </div>
       </router-link>
@@ -41,6 +41,7 @@ export default {
 
 <style scoped>
 .active {
-  
+  background-color: rgb(231,226,248);
+  color: rgb(110,65,243);
 }
 </style>
