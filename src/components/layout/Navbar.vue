@@ -3,14 +3,11 @@
     <div class="ml-5">
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex pl-2 items-center">
-          <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
-            <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="19" height="19" rx="9" stroke="#222628" stroke-width="1.4" />
-              <line x1="16.9899" y1="18" x2="19.5355" y2="20.5456" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+          <button type="submit" class="p-4 focus:outline-none focus:shadow-outline">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500 w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </button>
         </span>
-        <input type="search" name="search" class="bg-gray-200 text-gray-500 py-3 text-lg w-96 rounded-md pl-10 focus:outline-none focus:bg-gray-200" placeholder="Search..." autocomplete="off" />
+        <input type="search" name="search" class="bg-gray-200 text-gray-500 py-3 text-lg w-96 rounded-md pl-16 focus:outline-none focus:bg-gray-200  outline-none border-0" placeholder="Search..." autocomplete="off" />
       </div>
     </div>
     <div class="mr-5 flex items-center">
@@ -55,10 +52,8 @@
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import userService from '../../services/user.service'
-import { useRouter } from 'vue-router'
 
 const store = useStore()
-const router = useRouter()
 
 function checkLogin(data) {
   store.commit('setLogin', data)
@@ -67,7 +62,6 @@ function checkLogin(data) {
 function onLogout() {
   store.dispatch('auth/logout').then(() => {
     checkLogin(false)
-    router.push('/login')
   })
 }
 

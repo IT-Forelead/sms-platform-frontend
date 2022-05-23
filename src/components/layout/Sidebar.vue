@@ -1,6 +1,6 @@
 <template>
   <div class="w-80 h-screen fixed" id="sidenavSecExample">
-    <div class="p-2 px-6 mt-4">
+    <div class="p-2 pl-10 mt-3">
       <router-link class="cursor-pointer" to="/">
         <div class="flex items-center">
           <div class="shrink-0">
@@ -29,9 +29,9 @@ export default {
       menus: [
         { id: 1, url: '/', icon: 'fa-solid fa-dashboard', name: 'Dashboard' },
         { id: 2, url: '/reports', icon: 'fa-solid fa-chart-line', name: 'Reports' },
-        { id: 2, url: '/statistics', icon: 'fa-solid fa-chart-column', name: 'Statistics' },
-        { id: 3, url: '/contacts', icon: 'fa-regular fa-address-book', name: 'Contancts' },
-        { id: 4, url: '/settings', icon: 'fa-solid fa-gear', name: 'Settings' },
+        { id: 3, url: '/statistics', icon: 'fa-solid fa-chart-column', name: 'Statistics' },
+        { id: 4, url: '/contacts', icon: 'fa-regular fa-address-book', name: 'Contancts' },
+        { id: 5, url: '/settings', icon: 'fa-solid fa-gear', name: 'Settings' },
       ],
     }
   },
@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .active {
-  background-color: rgb(219 234 254);
-  color: rgb(29 78 216);
+  background-color: rgb(237 233 254);
+  color: rgb(139 92 246);
 }
 </style>

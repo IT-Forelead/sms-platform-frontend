@@ -1,11 +1,11 @@
 <template>
   <router-link :to="menu.url" @click="changePage(menu.name)"
                :class="{'active': page === menu.name || $router.currentRoute.value.path === menu.url}"
-               class="flex items-center font-bold mx-5 text-lg py-6 px-6 h-12 rounded-lg overflow-hidden text-zinc-900 text-ellipsis whitespace-nowrap hover:text-blue-700 hover:bg-blue-100"
+               class="flex items-center font-bold mx-5 my-2 text-lg py-6 px-6 h-12 rounded-lg overflow-hidden text-ellipsis whitespace-nowrap hover:text-violet-700 hover:bg-violet-100 transition duration-200 ease-in"
                data-mdb-ripple="true"
                data-mdb-ripple-color="primary"
   >
-    <span class="font-bold"><span class="text-gray-500 mr-3" :class="menu.icon"></span>{{ menu.name }}</span>
+    <span class="font-bold flex items-center text-base"><span class="mr-5 text-2xl" :class="menu.icon"></span>{{ menu.name }}</span>
   </router-link>
 </template>
 
