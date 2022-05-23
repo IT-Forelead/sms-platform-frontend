@@ -1,16 +1,17 @@
 import { createStore } from 'vuex'
 import { auth } from './auth.module'
-import { user } from './user.module'
+import { singleUser } from './user.module'
 
 const store = createStore({
   modules: {
     auth,
-    user,
+    singleUser,
   },
   state() {
     return {
       isLogin: false,
       user: {},
+      currentPage: '',
     }
   },
   mutations: {
@@ -20,6 +21,9 @@ const store = createStore({
     setUser(state, data) {
       state.user = data
     },
+    setSelectedPage(state, page) {
+      state.currentPage = page
+    }
   },
 })
 export default store

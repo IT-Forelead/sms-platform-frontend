@@ -1,6 +1,6 @@
 import UserService from '../services/user.service';
 
-export const user = {
+export const singleUser = {
   namespaced: true,
   actions: {
     get({ commit }) {

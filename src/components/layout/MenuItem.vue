@@ -10,32 +10,32 @@
 </template>
 
 <script>
-import {useStore} from "vuex";
-import {computed} from "vue";
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
   props: {
     menu: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   setup() {
     const store = useStore()
-
-    let page = computed(() => {
-      return store.state.selectedPage
-    })
 
     const changePage = (page) => {
       store.commit('setSelectedPage', page)
     }
 
+    const page = computed(() => {
+      return store.state.currentPage
+    })
+
     return {
+      changePage,
       page,
-      changePage
     }
-  }
+  },
 }
 </script>
 
