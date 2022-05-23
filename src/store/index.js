@@ -10,15 +10,15 @@ const store = createStore({
   state() {
     return {
       isLogin: false,
-      users: [],
+      user: {},
     }
   },
   mutations: {
     setLogin(state, payload) {
       state.isLogin = payload
     },
-    setUsers(state, data) {
-      state.users = data
+    setUser(state, data) {
+      state.user = data
     },
   },
 })

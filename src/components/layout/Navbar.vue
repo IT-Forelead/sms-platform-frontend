@@ -1,59 +1,73 @@
 <template>
   <div class="bg-zinc-100 h-20 py-4 sticky-top mb-3 flex justify-between items-center">
-      <div class="ml-5">
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 flex pl-2">
-            <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500 w-6 h-6 mr-3"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </button>
-          </span>
-          <input type="search" name="search" class="bg-gray-200 text-gray-500 w-80 py-3 text-sm rounded-md pl-10 focus:outline-none focus:bg-gray-200" placeholder="Search..." autocomplete="off">
-        </div>
+    <div class="ml-5">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex pl-2 items-center">
+          <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+            <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="19" height="19" rx="9" stroke="#222628" stroke-width="1.4" />
+              <line x1="16.9899" y1="18" x2="19.5355" y2="20.5456" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </span>
+        <input type="search" name="search" class="bg-gray-200 text-gray-500 py-3 text-lg w-96 rounded-md pl-10 focus:outline-none focus:bg-gray-200" placeholder="Search..." autocomplete="off" />
       </div>
-      <div class="mr-5">
-        <button class='inline-block relative bg-white text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-200'>
-          <i class="fa-regular fa-bell px-1 cursor-pointe"></i>
-          <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
-        </button>
-        <div class="border-l-2 pl-3 inline-block">
-          <div class="inline-block relative bg-white text-gray-500 p-2 rounded-full hover:bg-gray-200">
-            <i class="fa-regular fa-user px-1 cursor-pointe"></i>
-          </div>
-          <strong class="text-lg font-semibold px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">Admin</strong>
-          <a href="/login"><i class="fa-solid fa-chevron-down px-2 cursor-pointer text-gray-500 hover:text-rose-500" @click="onLogout()"></i></a>
+    </div>
+    <div class="mr-5 flex items-center">
+      <button class="inline-block relative bg-white text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-200 shadow">
+        <svg class="px-1 cursor-pointer" width="27" height="27" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10 19C15.3739 19 19 17.9032 19 15.1613C19 12.4194 18 12.4194 17.2 11.871C17.2 8.59908 16 2 10 2C4 2 2.8 8.59908 2.8 11.871C2 12.4194 1 13.1419 1 15.1613C1 18.4516 4.6271 19 10 19Z" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M13 19C13 19 12.5 21 10 21C7.5 21 7 19 7 19" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M10 1V2" stroke="#222628" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+        <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
+      </button>
+      <div class="border-l-2 pl-3 flex items-center">
+        <div class="inline-block relative bg-white text-gray-500 p-2 rounded-full hover:bg-gray-200 shadow">
+          <svg class="px-1 cursor-pointer" width="27" height="27" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1.40334 15.3222C1.44 14.9879 1.45832 14.8208 1.48127 14.7015C1.75983 13.2543 2.93043 12.2799 4.40422 12.2686C4.52566 12.2677 4.71526 12.2816 5.09447 12.3095C6.27227 12.3959 7.599 12.4667 8.78541 12.4667C10.0237 12.4667 11.3969 12.3896 12.5907 12.298C12.9564 12.27 13.1392 12.256 13.2581 12.2563C14.6545 12.2601 15.7825 13.1264 16.1463 14.4745C16.1773 14.5893 16.2069 14.748 16.2661 15.0653V15.0653C16.3314 15.4153 16.364 15.5902 16.3767 15.7324C16.524 17.3759 15.3162 18.8298 13.6735 18.9865C13.5314 19 13.3534 19 12.9975 19L8.78541 19H4.69989C4.37599 19 4.21405 19 4.08163 18.9882C2.50997 18.8487 1.31503 17.5155 1.34763 15.938C1.35038 15.8051 1.36803 15.6441 1.40334 15.3222V15.3222Z"
+              stroke="#222628"
+              stroke-width="1.4"
+            />
+            <path d="M5 5C5 2.79086 6.79086 1 9 1V1C11.2091 1 13 2.79086 13 5V5.57143C13 7.46498 11.465 9 9.57143 9V9H8.42857V9C6.53502 9 5 7.46498 5 5.57143V5Z" stroke="#222628" stroke-width="1.4" />
+          </svg>
         </div>
+        <strong class="text-lg font-semibold px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">{{ name }}</strong>
+        <a><i class="fa-solid fa-chevron-down px-2 cursor-pointer text-gray-500 hover:text-rose-500" @click="onLogout()"></i></a>
       </div>
+    </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
+import userService from '../../services/user.service'
 import { useRouter } from 'vue-router'
-// import {computed} from "vue";
 
-export default {
-  setup() {
-    const store = useStore()
-    const router = useRouter()
+const store = useStore()
+const router = useRouter()
 
-    // const userInfo = computed(() => JSON.parse(localStorage.getItem('user')))
-    function checkLogin(data) {
-      store.commit('setLogin', data)
-    }
-
-    function onLogout() {
-      store.dispatch('auth/logout').then(() => {
-        checkLogin(false)
-        router.push('/login')
-      })
-    }
-
-    return {
-      onLogout,
-      // userInfo,
-    }
-  },
+function checkLogin(data) {
+  store.commit('setLogin', data)
 }
+
+function onLogout() {
+  store.dispatch('auth/logout').then(() => {
+    checkLogin(false)
+    router.push('/login')
+  })
+}
+
+const addUserInStore = () => {
+  userService.getUser().then((data) => store.commit('setUser', data))
+}
+
+const name = computed(() => {
+  return store.state.user.name
+})
+onMounted(() => addUserInStore())
 </script>
 
 <style scoped>

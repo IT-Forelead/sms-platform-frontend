@@ -4,7 +4,7 @@ import authHeader from './auth-header.js'
 const API_URL = 'http://localhost:9000/'
 
 class UserService {
-  getAllUsers() {
+  getUser() {
     return axios.get(API_URL + 'user', { headers: authHeader() }).then((response) => {
       return response.data
     })

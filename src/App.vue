@@ -2,7 +2,7 @@
   <div v-if="login">
     <div class="w-screen">
       <Sidebar />
-      <div class="ml-60">
+      <div class="ml-80">
         <Navbar />
         <router-view />
       </div>

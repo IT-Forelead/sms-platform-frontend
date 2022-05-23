@@ -4,7 +4,7 @@ export const user = {
   namespaced: true,
   actions: {
     get({ commit }) {
-      return UserService.getAllUsers().then(
+      return UserService.getUser().then(
         user => {
           return Promise.resolve(user);
         },
