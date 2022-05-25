@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-zinc-100 h-20 py-4 sticky-top mb-3 flex justify-between items-center">
+  <div class="bg-zinc-100 h-20 py-4 sticky-top flex justify-between items-center">
     <div class="ml-5">
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex pl-2 items-center">
