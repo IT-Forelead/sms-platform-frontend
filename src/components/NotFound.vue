@@ -7,7 +7,7 @@
           <p class="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
             <span class="text-red-500">Kechirasiz!</span> Bunday sahifa mavjud emas!
           </p>
-          <router-link to="/" class="px-6 py-2 mt-6 text-sm font-semibold text-blue-800 bg-blue-100 rounded hover:text-white hover:bg-indigo-500 transition">Bosh sahifaga qaytish</router-link>
+          <a href="/" class="px-6 py-2 mt-6 text-sm font-semibold text-blue-800 bg-blue-100 rounded hover:text-white hover:bg-indigo-500 transition">Bosh sahifaga qaytish</a>
         </div>
       </div>
     </div>

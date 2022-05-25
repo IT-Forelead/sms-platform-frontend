@@ -7,7 +7,7 @@
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500 w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </button>
         </span>
-        <input type="search" name="search" class="bg-gray-200 text-gray-500 py-3 text-lg w-96 rounded-md pl-16 focus:outline-none focus:bg-gray-200  outline-none border-0" placeholder="Search..." autocomplete="off" />
+        <input type="search" name="search" class="bg-gray-200 text-gray-500 py-3 text-lg w-96 rounded-md pl-16 focus:outline-none focus:bg-gray-200 outline-none border-0" placeholder="Search..." autocomplete="off" />
       </div>
     </div>
     <div class="mr-5 flex items-center">
@@ -30,17 +30,17 @@
             <path d="M5 5C5 2.79086 6.79086 1 9 1V1C11.2091 1 13 2.79086 13 5V5.57143C13 7.46498 11.465 9 9.57143 9V9H8.42857V9C6.53502 9 5 7.46498 5 5.57143V5Z" stroke="#222628" stroke-width="1.4" />
           </svg>
         </div>
-        <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        <button id="dropdownBtn" @click="toggleDropDown()" class="px-4 py-2.5 text-center inline-flex items-center" type="button">
           <strong class="text-lg font-semibold px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">{{ name }}</strong> <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </button>
-        <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa fa-user"></i> Profil</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100"><i class="fa fa-user"></i> Profil</a>
             </li>
           </ul>
           <div class="py-1">
-            <a href="/login" @click="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><i class="fa fa-sign-out"></i> Chiqish</a>
+            <a href="/login" @click="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-sign-out"></i> Chiqish</a>
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import userService from '../../services/user.service'
+import $ from 'jquery'
 
 const store = useStore()
 
@@ -72,8 +73,29 @@ const addUserInStore = () => {
 const name = computed(() => {
   return store.state.user.name
 })
+
+function toggleDropDown() {
+  $('#dropdownInformation').toggleClass('hidden')
+}
+
+$(document).click(function (event) {
+  if (!$(event.target).closest('#dropdownBtn').length && !$(event.target).is('#dropdownBtn')) {
+    $('#dropdownInformation').addClass('hidden')
+  }
+})
+
 onMounted(() => addUserInStore())
 </script>
 
 <style scoped>
+.hidden {
+  display: none;
+  transition: all 0.5s ease-in-out;
+}
+#dropdownInformation {
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  z-index: 10;
+}
 </style>

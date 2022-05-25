@@ -1,6 +1,6 @@
 <template>
   <div class="w-80 h-screen fixed" id="sidenavSecExample">
-    <div class="p-2 pl-10 mt-3">
+    <div class="p-2 pl-10 mt-3 ml-3">
       <router-link class="cursor-pointer" to="/">
         <div class="flex items-center">
           <div class="shrink-0">
@@ -12,7 +12,7 @@
         </div>
       </router-link>
     </div>
-    <ul class="relative mt-5">
+    <ul class="relative mt-5 ml-3">
       <li class="relative" v-for="menu of menus" :key="menu">
         <MenuItem :menu="menu" />
       </li>
