@@ -73,7 +73,7 @@ const onSubmit = (user) => {
         authService.logout()
         router.push('/login')
         checkLogin(false)
-      }, 2000 * 60 * 60)
+      }, 500 * 60 * 60)
     },
     (error) => {
       iziToast.error({

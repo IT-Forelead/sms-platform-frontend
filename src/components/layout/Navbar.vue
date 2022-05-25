@@ -53,8 +53,11 @@ import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import userService from '../../services/user.service'
 import $ from 'jquery'
+import authService from '../../services/auth.service'
+import { useRouter } from 'vue-router'
 
 const store = useStore()
+const router = useRouter()
 
 function checkLogin(data) {
   store.commit('setLogin', data)
@@ -84,7 +87,17 @@ $(document).click(function (event) {
   }
 })
 
-onMounted(() => addUserInStore())
+function autoLogout() {
+  setTimeout(() => {
+    if (!store.state.user.name) {
+      authService.logout()
+      checkLogin(false)
+      router.go('/login')
+    }
+  }, 3000)
+}
+
+onMounted(() => addUserInStore(), autoLogout())
 </script>
 
 <style scoped>
