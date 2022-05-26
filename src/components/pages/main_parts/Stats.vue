@@ -11,7 +11,6 @@
 
 <script>
 import CardChildren from './CardChildren.vue'
-import { ref } from 'vue'
 
 export default {
   components: {
