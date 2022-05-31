@@ -6,7 +6,7 @@
         <Contacts />
       </div>
       <div class="p-3">
-        <CreateContact />
+        <ContactMessages />
       </div>
     </div>
   </div>

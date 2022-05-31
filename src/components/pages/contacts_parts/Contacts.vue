@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 mt-5">
+  <div class="p-3">
     <div class="flex items-center justify-center">
       <div class="bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200">Barchasi</div>
       <div class="bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200">Yangilari</div>

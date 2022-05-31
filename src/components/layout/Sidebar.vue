@@ -27,11 +27,11 @@ export default {
   data() {
     return {
       menus: [
-        { id: 1, url: '/', icon: 'fa-solid fa-dashboard', name: 'Dashboard' },
-        { id: 2, url: '/reports', icon: 'fa-solid fa-chart-line', name: 'Reports' },
-        { id: 3, url: '/statistics', icon: 'fa-solid fa-chart-column', name: 'Statistics' },
-        { id: 4, url: '/contacts', icon: 'fa-regular fa-address-book', name: 'Contancts' },
-        { id: 5, url: '/settings', icon: 'fa-solid fa-gear', name: 'Settings' },
+        { id: 1, url: '/', icon: 'grid-outline', name: 'Dashboard' },
+        { id: 2, url: '/reports', icon: 'analytics-outline', name: 'Reports' },
+        { id: 3, url: '/statistics', icon: 'trending-up-outline', name: 'Statistics' },
+        { id: 4, url: '/contacts', icon: 'people-outline', name: 'Contancts' },
+        { id: 5, url: '/settings', icon: 'settings-outline', name: 'Settings' },
       ],
     }
   },

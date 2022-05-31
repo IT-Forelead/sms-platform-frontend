@@ -5,7 +5,7 @@
                data-mdb-ripple="true"
                data-mdb-ripple-color="primary"
   >
-    <span class="font-bold flex items-center text-base"><span class="mr-5 text-2xl" :class="menu.icon"></span>{{ menu.name }}</span>
+    <span class="font-bold flex items-center text-base"><ion-icon class="mr-5 text-2xl" :name="menu.icon"></ion-icon>{{ menu.name }}</span>
   </router-link>
 </template>
 
