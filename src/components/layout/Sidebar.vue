@@ -4,10 +4,10 @@
       <router-link class="cursor-pointer" to="/">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img src="../../assets/logo.png" class="w-10" alt="#"/>
+            <img src="../../assets/logo.png" class="w-16" alt="#"/>
           </div>
           <div class="grow ml-3">
-            <h2 class="text-lg font-semibold text-zinc-900">Saroy SMS</h2>
+            <h2 class="font-semibold text-2xl text-zinc-900">IT-Forelead</h2>
           </div>
         </div>
       </router-link>

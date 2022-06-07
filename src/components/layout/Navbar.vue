@@ -20,7 +20,7 @@
         <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
       </button>
       <div class="border-l-2 pl-3 flex items-center">
-        <div class="inline-block relative bg-white text-gray-500 p-2 rounded-full shadow">
+        <div class="inline-block relative bg-white text-gray-500 p-2 rounded-full hover:bg-gray-200 shadow">
           <svg class="px-1" width="27" height="27" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M1.40334 15.3222C1.44 14.9879 1.45832 14.8208 1.48127 14.7015C1.75983 13.2543 2.93043 12.2799 4.40422 12.2686C4.52566 12.2677 4.71526 12.2816 5.09447 12.3095C6.27227 12.3959 7.599 12.4667 8.78541 12.4667C10.0237 12.4667 11.3969 12.3896 12.5907 12.298C12.9564 12.27 13.1392 12.256 13.2581 12.2563C14.6545 12.2601 15.7825 13.1264 16.1463 14.4745C16.1773 14.5893 16.2069 14.748 16.2661 15.0653V15.0653C16.3314 15.4153 16.364 15.5902 16.3767 15.7324C16.524 17.3759 15.3162 18.8298 13.6735 18.9865C13.5314 19 13.3534 19 12.9975 19L8.78541 19H4.69989C4.37599 19 4.21405 19 4.08163 18.9882C2.50997 18.8487 1.31503 17.5155 1.34763 15.938C1.35038 15.8051 1.36803 15.6441 1.40334 15.3222V15.3222Z"
@@ -31,7 +31,8 @@
           </svg>
         </div>
         <button id="dropdownBtn" @click="toggleDropDown()" class="px-4 py-2.5 text-center inline-flex items-center" type="button">
-          <strong class="text-lg font-semibold px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">{{ name }}</strong> <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <strong class="text-lg font-semibold px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">{{ name }}</strong>
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </button>
         <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">

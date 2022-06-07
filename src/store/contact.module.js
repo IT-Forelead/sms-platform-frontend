@@ -12,6 +12,17 @@ export const contacts = {
           return Promise.reject(error);
         }
       );
+    },
+    
+    create({ commit }, contactData) {
+      return ContactService.createContact(contactData).then(
+        contact => {
+          return Promise.resolve(contact);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
     }
   },
 

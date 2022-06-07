@@ -9,6 +9,14 @@ class ContactService {
       return response.data
     })
   }
+
+  createContact(data) {
+    console.log(data);
+    return axios.post(API_URL + 'contact', {...data}, { headers: authHeader() }).then((response) => {
+      return response.data
+    })
+  }
+  
 }
 
 export default new ContactService()
