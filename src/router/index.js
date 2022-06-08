@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../components/pages/Reports.vue'),
   },
   {
+    path: '/sms-template',
+    name: 'SMS Template',
+    component: () => import('../components/pages/SMSTemplate.vue'),
+  },
+  {
     path: '/contacts',
     name: 'Contacts',
     component: () => import('../components/pages/Contacts.vue'),

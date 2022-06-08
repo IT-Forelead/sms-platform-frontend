@@ -31,6 +31,7 @@ export default {
         { id: 2, url: '/reports', icon: 'analytics-outline', name: 'Reports' },
         { id: 3, url: '/statistics', icon: 'trending-up-outline', name: 'Statistics' },
         { id: 4, url: '/contacts', icon: 'people-outline', name: 'Contancts' },
+        { id: 4, url: '/sms-template', icon: 'chatbox-ellipses-outline', name: 'SMS Template' },
         { id: 5, url: '/settings', icon: 'settings-outline', name: 'Settings' },
       ],
     }
