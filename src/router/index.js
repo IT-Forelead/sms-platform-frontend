@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../components/pages/Contacts.vue'),
   },
   {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../components/pages/Profile.vue'),
+  },
+  {
     path: '/:pathMach(.*)*',
     name: 'NotFound',
     component: () => import('../components/NotFound.vue'),

@@ -37,7 +37,7 @@
         <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100"><i class="fa fa-user"></i> Profil</a>
+              <router-link to="/profile" class="block px-4 py-2 hover:bg-gray-100"><i class="fa fa-user"></i> Profil</router-link>
             </li>
           </ul>
           <div class="py-1">
