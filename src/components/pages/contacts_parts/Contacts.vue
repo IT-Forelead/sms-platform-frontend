@@ -20,13 +20,13 @@
 
         <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1 absolute top-1 right-1"></i>
 
-        <div :id="'cit-' + index" class="test absolute right-1 top-7 z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44">
+        <div :id="'cit-' + index" class="test absolute right-1 top-7 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
             <li class="border-b border-dotted">
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-user"></i> Taxrirlash</a>
+              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-user"></i> O'chirish</a>
+              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
             </li>
           </ul>
         </div>
