@@ -54,7 +54,7 @@ const contacts = computed(() => {
 onMounted(() => addContactInStore())
 
 function toggleDropDown(id) {
-  $('.test-p').children('.test').addClass('hidden')
+  // $('.test-p').children('.test').addClass('hidden')
   $(`#cit-${id}`).toggleClass('hidden')
 }
 </script>
