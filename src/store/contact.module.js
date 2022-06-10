@@ -1,6 +1,6 @@
 import ContactService from '../services/contact.service';
 
-export const contacts = {
+export const contactsModule = {
   namespaced: true,
   actions: {
     get({ commit }) {

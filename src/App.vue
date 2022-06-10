@@ -1,8 +1,8 @@
 <template>
   <div v-if="login">
-    <div class="w-screen">
+    <div class="flex">
       <Sidebar />
-      <div class="ml-80">
+      <div class="ml-80 flex-1">
         <Navbar />
         <router-view />
       </div>

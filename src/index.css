@@ -7,3 +7,22 @@
 * {
     font-family: 'Mulish', sans-serif;;
 }
+/* Scrollbar Style */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #ede9fe;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #8B5CF6; 
+}
+.max-content-h {
+    height: max-content;
+}

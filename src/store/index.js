@@ -1,13 +1,16 @@
 import { createStore } from 'vuex'
 import { auth } from './auth.module'
 import { singleUser } from './user.module'
-import { contacts } from './contact.module'
+import { contactsModule } from './contact.module'
+import { templatesModule } from './template.module'
+import { templateCategories } from './templateCategories.module'
 
 const store = createStore({
   modules: {
     auth,
     singleUser,
-    contacts
+    contactsModule,
+    templatesModule
   },
   state() {
     return {
@@ -15,6 +18,7 @@ const store = createStore({
       user: {},
       currentPage: '',
       contacts: [],
+      templates: []
     }
   },
   mutations: {
@@ -29,6 +33,12 @@ const store = createStore({
     },
     setContacts(state, data) {
       state.contacts = data
+    },
+    setSMSTemplate(state, data) {
+      state.templates = data
+    },
+    setTemplateCategory(state, data) {
+      state.templateCategories = data
     }
   },
 })

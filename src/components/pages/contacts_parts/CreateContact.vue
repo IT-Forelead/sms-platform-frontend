@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg p-3 px-5 mt-5">
+  <div class="bg-white rounded-lg p-3 px-5 mt-3 max-content-h">
     <h3 class="text-2xl font-extrabold mb-3">Create Contact</h3>
     <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
     <form @submit.prevent="createContact">
@@ -55,31 +55,31 @@ const addContactsInStore = () => {
   ContactService.getContacts().then((data) => store.commit('setContacts', data))
 }
 const createContact = () => {
-  if (firstName.value === '') {
+  if (first_name.value === '') {
     notify.warning({
       title: "Diqqat!",
       message: "Iltimos, familyani kiriting!",
       position: 'bottomLeft',
     })
-  } else if (lastName.value === '') {
+  } else if (last_name.value === '') {
     notify.warning({
       title: "Diqqat!",
       message: "Iltimos, ismni kiriting!",
       position: 'bottomLeft',
     })
-  } else if (gender.value === '') {
+  } else if (gender_.value === '') {
     notify.warning({
       title: "Diqqat!",
       message: "Iltimos, jinsni tanlang!",
       position: 'bottomLeft',
     })
-  } else if (birthday.value === '') {
+  } else if (birthday_.value === '') {
     notify.warning({
       title: "Diqqat!",
       message: "Iltimos, tug'ilgan kunni kiriting!",
       position: 'bottomLeft',
     })
-  } else if (phone.value === '') {
+  } else if (phone_.value === '') {
     notify.warning({
       title: "Diqqat!",
       message: "Iltimos, telefon raqamni kiriting!",
@@ -87,11 +87,11 @@ const createContact = () => {
     })
   } else {
     const contactData = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      gender: gender.value,
-      birthday: birthday.value,
-      phone: phone.value,
+      firstName: first_name.value,
+      lastName: last_name.value,
+      gender: gender_.value,
+      birthday: birthday_.value,
+      phone: phone_.value,
     }
     store.dispatch('contacts/create', contactData).then(
       () => {
@@ -100,15 +100,15 @@ const createContact = () => {
           position: 'bottomRight',
         })
         addContactsInStore()
-        this.form.firstName = ""
-        lastName = ref('')
-        gender = ref('Jinsni tanlang')
-        birthday = ref('')
-        phone.value = ""
+        first_name.value = ''
+        last_name.value = ''
+        gender_.value = 'Jinsni tanlang'
+        birthday_.value = ''
+        phone_.value = ''
       },
       (error) => {
         notify.error({
-          message: 'Kontakt yaratishda xatolik yuz berdi!' + error,
+          message: 'Kontakt yaratishda xatolik yuz berdi!',
           position: 'bottomRight',
         })
       }
