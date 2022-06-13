@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import { auth } from './auth.module'
 import { singleUser } from './user.module'
 import { contactsModule } from './contact.module'
+import { holidaysModule } from './holiday.module'
 import { templatesModule } from './template.module'
 import { templateCategories } from './templateCategories.module'
 
@@ -10,6 +11,7 @@ const store = createStore({
     auth,
     singleUser,
     contactsModule,
+    holidaysModule,
     templatesModule
   },
   state() {
@@ -18,6 +20,7 @@ const store = createStore({
       user: {},
       currentPage: '',
       contacts: [],
+      holidays: [],
       templates: []
     }
   },
@@ -33,6 +36,9 @@ const store = createStore({
     },
     setContacts(state, data) {
       state.contacts = data
+    },
+    setHolidays(state, data) {
+      state.holidays = data
     },
     setSMSTemplate(state, data) {
       state.templates = data

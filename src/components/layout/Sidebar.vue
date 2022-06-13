@@ -29,10 +29,10 @@ export default {
       menus: [
         { id: 1, url: '/', icon: 'home-outline', name: 'Asosiy sahifa' },
         { id: 2, url: '/reports', icon: 'mail-unread-outline', name: 'Hisobotlar' },
-        { id: 4, url: '/contacts', icon: 'people-outline', name: 'Kontaktlar' },
+        { id: 3, url: '/contacts', icon: 'people-outline', name: 'Kontaktlar' },
         { id: 4, url: '/sms-template', icon: 'chatbox-ellipses-outline', name: 'SMS shablonlar' },
-        { id: 4, url: '/holidays', icon: 'gift-outline', name: 'Bayramlar' },
-        { id: 5, url: '/settings', icon: 'settings-outline', name: 'Sozlamalar' },
+        { id: 5, url: '/holidays', icon: 'gift-outline', name: 'Bayramlar' },
+        { id: 6, url: '/settings', icon: 'settings-outline', name: 'Sozlamalar' },
       ],
     }
   },

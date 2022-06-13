@@ -55,7 +55,7 @@
         <div class="bg-white rounded-lg p-3 px-5">
           <h3 class="text-2xl font-extrabold mb-3">SMS shablon yaratish</h3>
           <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-          <form @submit.prevent="createSMSTemplate" id="ggg">
+          <form @submit.prevent="createSMSTemplate">
             <div class="mb-6">
               <label for="title-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
               <input type="text" v-model="title_" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
@@ -113,7 +113,7 @@ function openActions(id) {
 const store = useStore()
 
 const templateCategoryId_ = ref("Bo'limni tanlang")
-let title_ = ref('')
+const title_ = ref('')
 const text_ = ref('')
 const access_ = ref('Kim uchunligini tanlang')
 
@@ -198,12 +198,14 @@ const createSMSTemplate = () => {
           position: 'bottomRight',
         })
         addSMSTemplateInStore()
-        title_ = ref('')
-        $('#ggg')[0].reset()
+        templateCategoryId_.value = "Bo'limni tanlang"
+        title_.value = ''
+        text_.value = ''
+        access_.value = 'Kim uchunligini tanlang'
       },
       (error) => {
         notify.error({
-          message: 'SMS shablon yaratishda xatolik yuz berdi!' + error,
+          message: 'SMS shablon yaratishda xatolik yuz berdi!',
           position: 'bottomRight',
         })
       }
@@ -213,6 +215,7 @@ const createSMSTemplate = () => {
 
 onMounted(() => addSMSTemplateInStore(), addTemplateCategoryInStore())
 </script>
+
 <style scoped>
 .custom-height {
   height: 75vh;

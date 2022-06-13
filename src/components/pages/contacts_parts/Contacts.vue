@@ -99,6 +99,7 @@ window.onclick = function (event) {
     }
   }
 }
+
 const addContactsInStore = () => {
   contactService.getContacts().then((data) => store.commit('setContacts', data))
 }
@@ -121,6 +122,7 @@ const deleteContact = (id) => {
   )
 }
 </script>
+
 <style scoped>
 .custom-height {
   height: 75vh;
