@@ -10,31 +10,33 @@
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500 w-5 h-5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </button>
             </span>
-            <input type="search" name="search" class="bg-white text-gray-500 py-1.5 text-lg rounded-lg pl-12 focus:outline-none outline-none border-0" placeholder="Sarlavha bo'yicha izlash..." autocomplete="off" />
+            <input v-model="search" type="search" name="search" class="bg-white text-gray-500 py-1.5 text-lg rounded-lg pl-12 focus:outline-none outline-none border-0" placeholder="Sarlavha bo'yicha izlash..." autocomplete="off" />
           </div>
           <div class="flex">
             <div class="relative">
-              <div id="filterByCategoryBtn" @click="toggleDropDownFilterByCategory()" class=" bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-layer-group"></i> Bo'lim</div>
+              <div id="filterByCategoryBtn" @click="toggleDropDownFilterByCategory()" class="bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer">
+                <i class="fa fa-layer-group"></i> {{ sortByCategoryId === '' ? "Bo'lim" : templateCategories.map((t) => (t.id === sortByCategoryId ? t.name : null)).filter((d) => d !== null)[0] }} <i @click="clearCategorySort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByCategoryId !== '' }"></i>
+              </div>
               <div id="filterByCategory" class="dropdown-content absolute right-2 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
                   <li v-for="(templateCategory, index) in templateCategories" :key="index" class="border-b border-dotted">
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-angle-right mr-1"></i> {{ templateCategory.name }}</a>
+                    <a @click="sortByCategory(templateCategory.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"><i class="fa-solid fa-angle-right mr-1"></i>{{ templateCategory.name }}</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div class="relative">
-              <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> Shablon turi</div>
+              <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortByAccess === '' ? 'Shablon turi' : changeGenderAccess(sortByAccess) }} <i @click="clearAccessSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByAccess !== '' }"></i></div>
               <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
                   <li class="border-b border-dotted">
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
+                    <a href="#" @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
                   </li>
                   <li class="border-b border-dotted">
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
+                    <a href="#" @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
                   </li>
                   <li class="border-b border-dotted">
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
+                    <a href="#" @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
                   </li>
                 </ul>
               </div>
@@ -42,7 +44,7 @@
           </div>
         </div>
         <div class="custom-height overflow-y-auto mt-3 px-1">
-          <blockquote v-for="(template, index) in templates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
+          <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
                 <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
@@ -124,7 +126,7 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </button>
           <div class="p-5 pt-8">
-            <form @submit.prevent="createSMSTemplateCategory">
+            <form @submit.prevent="createSMSTemplateCategory()">
               <div class="mb-6">
                 <label for="category-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim</label>
                 <div class="flex items-center">
@@ -207,14 +209,22 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import templateService from '../../services/template.service'
 import templateCategoryService from '../../services/templateCategories.service'
 import $ from 'jquery'
+
+const search = ref('')
+const sortByCategoryId = ref('')
+const sortByAccess = ref('')
+
+const sortByCategory = (selectedId) => (sortByCategoryId.value = selectedId)
+const sortByAccessFunc = (access) => (sortByAccess.value = access)
+const clearAccessSort = () => (sortByAccess.value = '')
+const clearCategorySort = () => (sortByCategoryId.value = '')
 
 function openActions(id) {
   let x = $(`#st-${id}`)
@@ -228,7 +238,7 @@ function toggleDropDownFilterByCategory() {
 }
 
 function toggleDropDownFilterByGender() {
-  $('#filterByGender').toggleClass('hidden')
+  $('#filterByGender').removeClass('hidden')
 }
 
 $(document).click(function (event) {
@@ -262,8 +272,14 @@ const addTemplateCategoryInStore = () => {
   templateCategoryService.getTemplateCategories().then((data) => store.commit('setTemplateCategory', data))
 }
 
-const templates = computed(() => {
-  return store.state.templates
+const filteredTemplates = computed(() => {
+  if (sortByCategoryId.value !== '') {
+    return store.state.templates.filter((temp) => temp.templateCategoryId === sortByCategoryId.value).filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
+  } else if (sortByAccess.value !== '') {
+    return store.state.templates.filter((temp) => temp.genderAccess === sortByAccess.value).filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
+  } else {
+    return store.state.templates.filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
+  }
 })
 
 const templateCategories = computed(() => {
