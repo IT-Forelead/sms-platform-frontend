@@ -7,7 +7,7 @@
     </div>
     <div class="mt-3 p-3 rounded-lg relative custom-height overflow-y-auto">
       <div v-for="(contact, index) in contacts" :key="index" class="relative test-p bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
-        <div class="flex items-center justify-center bg-red-700 h-16 w-16 border-1 border-gray-200 rounded-full">
+        <div class="flex items-center justify-center h-16 w-16 border border-gray-200 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4,6)))">
           <div class="text-center text-white">
             <div class="text-xl font-bold">{{ contact.birthday.slice(8, 10) }}</div>
             <div class="text-sm font-bold">{{ month(contact.birthday.slice(5, 7)) }}</div>
@@ -48,6 +48,25 @@ const addContactInStore = () => {
 const contacts = computed(() => {
   return store.state.contacts
 })
+
+const phonePrefixColor = (phonePrefix) => {
+  switch (phonePrefix) {
+    case 93 || 94:
+      return 'bg-sky-500'
+    case 97 || 88:
+      return 'bg-red-500'
+    case 90 || 91:
+      return 'bg-yellow-300'
+    case 95 || 98:
+      return 'bg-green-500'
+    case 99:
+      return 'bg-blue-500'
+    case 33:
+      return 'bg-yellow-400'
+    default:
+      return 'bg-lime-500'
+  }
+}
 
 const month = (index) => {
   const months = ['', 'YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
