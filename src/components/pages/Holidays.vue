@@ -4,15 +4,8 @@
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="custom-height overflow-y-auto mt-3 px-1">
         <div class="grid grid-cols-2 gap-2">
-          <div class="flex flex-col bg-white rounded-lg">
-            <div class="rounded-full w-20 h-20 bg-sky-300"></div>
-            <div class="bg-rose-300 py-5 -mb-2 rounded-b-lg text-center">
-              <h3>Yangi yil</h3>
-            </div>
-            <div class="bg-blue-300 pt-5 pb-3 rounded-b-lg text-center">31-dekabr</div>
-          </div>
-
-          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+          
+          <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
             <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
               <div class="text-center -mt-10 mb-2">
                 <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
@@ -23,20 +16,8 @@
               <p class="text-gray-500 mb-1 py-1 text-center">31-dekabr</p>
             </div>
           </div>
-
-          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
-            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
-              <div class="text-center -mt-10 mb-2">
-                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
-                  <i class="fa-solid fa-gift"></i>
-                </div>
-              </div>
-              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Yangi yil bayrami</h3>
-              <p class="text-gray-500 mb-1 py-1 text-center">31-dekabr</p>
-            </div>
-          </div>
-
-          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+          
+          <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
             <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
               <div class="text-center -mt-10 mb-2">
                 <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
@@ -63,36 +44,7 @@
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
               <select id="gender-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bayram kunini tanlang</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
+                <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
               </select>
             </div>
             <div class="mb-6">
