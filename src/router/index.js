@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'Main',
+    name: 'Asosiy sahifa',
     component: () => import('../components/pages/Main.vue'),
   },
   {
@@ -12,29 +12,29 @@ const routes = [
     component: () => import('../components/Login.vue'),
   },
   {
-    path: '/statistics',
-    name: 'Statistics',
-    component: () => import('../components/pages/Statistics.vue'),
-  },
-  {
     path: '/settings',
-    name: 'Settings',
+    name: 'Sozlamalar',
     component: () => import('../components/pages/Settings.vue'),
   },
   {
     path: '/reports',
-    name: 'Reports',
+    name: 'Hisobotlar',
     component: () => import('../components/pages/Reports.vue'),
   },
   {
     path: '/sms-template',
-    name: 'SMS Template',
+    name: 'SMS shablonlar',
     component: () => import('../components/pages/SMSTemplate.vue'),
   },
   {
     path: '/contacts',
-    name: 'Contacts',
+    name: 'Kontaktlar',
     component: () => import('../components/pages/Contacts.vue'),
+  },
+  {
+    path: '/holidays',
+    name: 'Bayramlar',
+    component: () => import('../components/pages/Holidays.vue'),
   },
   {
     path: '/profile',

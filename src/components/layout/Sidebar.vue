@@ -27,12 +27,12 @@ export default {
   data() {
     return {
       menus: [
-        { id: 1, url: '/', icon: 'grid-outline', name: 'Dashboard' },
-        { id: 2, url: '/reports', icon: 'analytics-outline', name: 'Reports' },
-        { id: 3, url: '/statistics', icon: 'trending-up-outline', name: 'Statistics' },
-        { id: 4, url: '/contacts', icon: 'people-outline', name: 'Contancts' },
-        { id: 4, url: '/sms-template', icon: 'chatbox-ellipses-outline', name: 'SMS Template' },
-        { id: 5, url: '/settings', icon: 'settings-outline', name: 'Settings' },
+        { id: 1, url: '/', icon: 'home-outline', name: 'Asosiy sahifa' },
+        { id: 2, url: '/reports', icon: 'mail-unread-outline', name: 'Hisobotlar' },
+        { id: 4, url: '/contacts', icon: 'people-outline', name: 'Kontaktlar' },
+        { id: 4, url: '/sms-template', icon: 'chatbox-ellipses-outline', name: 'SMS shablonlar' },
+        { id: 4, url: '/holidays', icon: 'gift-outline', name: 'Bayramlar' },
+        { id: 5, url: '/settings', icon: 'settings-outline', name: 'Sozlamalar' },
       ],
     }
   },

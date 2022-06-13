@@ -1,6 +1,6 @@
 <template>
   <div class="px-3">
-    <h3 class="text-3xl font-extrabold mb-1">Settings</h3>
+    <h3 class="text-3xl font-extrabold ml-2 mb-1">Settings</h3>
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="p-3">
         <div class="bg-white rounded-lg p-3 px-5 my-3">

@@ -1,6 +1,6 @@
 <template>
   <div class="px-3">
-    <h3 class="text-3xl font-extrabold mb-3 ml-2">SMS namunalar</h3>
+    <h3 class="text-3xl font-extrabold mb-3 ml-2">SMS shablonlar</h3>
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="p-3">
         <div class="flex items-center justify-between">
@@ -191,7 +191,7 @@ const createSMSTemplate = () => {
       text: text_.value,
       genderAccess: access_.value,
     }
-    store.dispatch('templates/create', templateData).then(
+    store.dispatch('templatesModule/create', templateData).then(
       () => {
         notify.success({
           message: 'SMS shablon muvaffaqiyatli yaratildi!',
