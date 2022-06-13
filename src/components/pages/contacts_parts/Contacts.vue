@@ -7,7 +7,7 @@
     </div>
     <div class="mt-3 p-3 rounded-lg relative custom-height overflow-y-auto">
       <div v-for="(contact, index) in contacts" :key="index" class="relative test-p bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
-        <div class="flex items-center justify-center h-16 w-16 border border-gray-200 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4,6)))">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4,6)))">
           <div class="text-center text-white">
             <div class="text-xl font-bold">{{ contact.birthday.slice(8, 10) }}</div>
             <div class="text-sm font-bold">{{ month(contact.birthday.slice(5, 7)) }}</div>
@@ -24,7 +24,7 @@
               <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
+              <a href="#" @click="deleteContact(contact.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
             </li>
           </ul>
         </div>
@@ -37,6 +37,8 @@
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import $ from 'jquery'
+import notify from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
 import contactService from '../../../services/contact.service'
 
 const store = useStore()
@@ -96,6 +98,27 @@ window.onclick = function (event) {
       }
     }
   }
+}
+const addContactsInStore = () => {
+  contactService.getContacts().then((data) => store.commit('setContacts', data))
+}
+
+const deleteContact = (id) => {
+  store.dispatch('contactsModule/delete', id).then(
+    () => {
+      notify.success({
+        message: 'Kontakt muvaffaqiyatli o`chirildi!',
+        position: 'bottomRight',
+      })
+      addContactsInStore()
+    },
+    (error) => {
+      notify.error({
+        message: 'Kontakt o`chirishda xatolik yuz berdi!',
+        position: 'bottomRight',
+      })
+    }
+  )
 }
 </script>
 <style scoped>

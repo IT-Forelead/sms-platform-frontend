@@ -23,6 +23,17 @@ export const contactsModule = {
           return Promise.reject(error);
         }
       );
+    },
+    
+    delete({ commit }, id) {
+      return ContactService.deleteContact(id).then(
+        contact => {
+          return Promise.resolve(contact);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
     }
   },
 

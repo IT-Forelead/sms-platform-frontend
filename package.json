@@ -17,6 +17,7 @@
     "jquery": "^3.6.0",
     "randomcolor": "^0.6.2",
     "tw-elements": "^1.0.0-alpha12",
+    "v-mask": "latest",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.25",
     "vue-chartjs": "^4.0.7",
