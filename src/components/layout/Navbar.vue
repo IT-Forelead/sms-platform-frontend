@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-zinc-100 h-20 py-4 sticky-top flex justify-between items-center">
+  <div class="bg-zinc-100 h-20 py-4 sticky-top flex justify-between items-center z-10">
     <div class="ml-5">
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex pl-2 items-center">
@@ -17,6 +17,7 @@
           <path d="M13 19C13 19 12.5 21 10 21C7.5 21 7 19 7 19" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M10 1V2" stroke="#222628" stroke-width="1.4" stroke-linecap="round" />
         </svg>
+        <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full animate-ping"></div>
         <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
       </button>
       <div class="border-l-2 pl-3 flex items-center">

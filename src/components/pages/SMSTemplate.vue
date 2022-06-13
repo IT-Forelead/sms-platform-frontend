@@ -61,7 +61,10 @@
               <input type="text" v-model="title_" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
             </div>
             <div class="mb-6">
-              <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
+              <div class="flex justify-between items-center">
+                <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
+                <i @click="openModal()" class="fa fa-plus p-1 bg-green-400 rounded text-white cursor-pointer hover:bg-green-500"></i>
+              </div>
               <select v-model="templateCategoryId_" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bo'limni tanlang</option>
                 <option v-for="(templateCategory, index) in templateCategories" :key="index" :value="templateCategory.id">{{ templateCategory.name }}</option>
@@ -90,6 +93,92 @@
         </div>
       </div>
     </div>
+    <div id="popup-modal" tabindex="-1" class="hidden cursor-pointer overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+          <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <div class="p-5 pt-8">
+            <form @submit.prevent="createSMSTemplateCategory">
+              <div class="mb-6">
+                <label for="category-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim</label>
+                <div class="flex items-center">
+                  <input type="text" v-model="category" id="category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                  <i class="fa fa-plus p-3 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2"></i>
+                </div>
+              </div>
+            </form>
+            <div class="w-full mb-8 overflow-hidden rounded-lg">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full divide-y divide-gray-300">
+                  <thead class="bg-gray-50">
+                    <tr class="text-md font-semibold tracking-wide text-left text-gray-900">
+                      <th scope="col" class="px-4 py-3">Kontakt</th>
+                      <th scope="col" class="px-4 py-3">Yuborilgan vaqti</th>
+                      <th scope="col" class="px-4 py-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200 bg-white">
+                    <tr class="text-gray-700">
+                      <td class="whitespace-nowrap px-4 py-3">
+                        <div class="flex items-center text-md">
+                          <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                            <div class="text-center text-md font-bold text-white">J</div>
+                          </div>
+                          <div>
+                            <p class="font-semibold text-gray-900">+998937475995</p>
+                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
+                      <td class="whitespace-nowrap px-4 py-3 text-sm">
+                        <span class="px-5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg">Yetkazildi</span>
+                      </td>
+                    </tr>
+                    <tr class="text-gray-700">
+                      <td class="whitespace-nowrap px-4 py-3">
+                        <div class="flex items-center text-md">
+                          <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border-1 border-gray-200 rounded-full">
+                            <div class="text-center text-md font-bold text-white">K</div>
+                          </div>
+                          <div>
+                            <p class="font-semibold text-gray-900">+998937475995</p>
+                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
+                      <td class="whitespace-nowrap px-4 py-3 text-sm">
+                        <span class="px-5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-lg"> Yetkazilmadi </span>
+                      </td>
+                    </tr>
+                    <tr class="text-gray-700">
+                      <td class="whitespace-nowrap px-4 py-3">
+                        <div class="flex items-center text-md">
+                          <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                            <div class="text-center text-md font-bold text-white">S</div>
+                          </div>
+                          <div>
+                            <p class="font-semibold text-gray-900">+998937475995</p>
+                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
+                      <td class="whitespace-nowrap px-4 py-3 text-sm">
+                        <span class="px-5 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-lg"> Kutilmoqda </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -111,6 +200,13 @@ function openActions(id) {
 }
 
 const store = useStore()
+
+const openModal = () => {
+  $('#popup-modal').removeClass('hidden')
+}
+const closeModal = () => {
+  $('#popup-modal').addClass('hidden')
+}
 
 const templateCategoryId_ = ref("Bo'limni tanlang")
 const title_ = ref('')
@@ -219,5 +315,8 @@ onMounted(() => addSMSTemplateInStore(), addTemplateCategoryInStore())
 <style scoped>
 .custom-height {
   height: 75vh;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>
