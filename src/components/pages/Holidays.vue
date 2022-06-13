@@ -4,70 +4,50 @@
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="custom-height overflow-y-auto mt-3 px-1">
         <div class="grid grid-cols-2 gap-2">
-
-            
-<div class='flex items-center justify-center from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br'>
-    <div class='w-full max-w-lg mx-auto bg-white rounded-lg shadow-xl'>
-        <div style="background-image: radial-gradient(
-        transparent 28px,
-        #ffffff 28px,
-        #ffffff 32px,
-        transparent 32px
-    );height: 150px;width: 100%; background-color: #00b5f7;
-    background-size: 53px 53px;" class="rounded-t-lg"></div>
-        <div>
-            <div class="text-center" style="margin-top: -44px">
-                <span class="border-4 rounded-full mx-auto inline-block">
-                    <img class="rounded-full w-20 h-20" src="https://randomwordgenerator.com/img/picture-generator/51e6dc41434faa0df7c5d57bc32f3e7b1d3ac3e455517349762f72d794_640.jpg" alt="profile" />
-                </span>
+          <div class="flex flex-col bg-white rounded-lg">
+            <div class="rounded-full w-20 h-20 bg-sky-300"></div>
+            <div class="bg-rose-300 py-5 -mb-2 rounded-b-lg text-center">
+              <h3>Yangi yil</h3>
             </div>
-            <h3 class="text-lg text-center leading-normal mb-2 font-semibold text-black">Yangi yil bayrami</h3>
-            <p class="text-gray-500 text-center">31-dekabr</p>
-        </div>
-    </div>
-</div>
-
-
-
-          <div class="flex flex-col justify-center p-5 mb-5 bg-white rounded-lg">
-            <div class="text-gray-900 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg leading-normal mb-2 font-semibold text-black">Yangi yil bayrami</h3>
-            <p class="text-gray-500">31-dekabr</p>
+            <div class="bg-blue-300 pt-5 pb-3 rounded-b-lg text-center">31-dekabr</div>
           </div>
-          <div class="py-8 px-12 mb-5 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
-            <div class="inline-block text-gray-900 mb-4">
-              <!-- icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              </svg>
+
+          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+              <div class="text-center -mt-10 mb-2">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+              </div>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Yangi yil bayrami</h3>
+              <p class="text-gray-500 mb-1 py-1 text-center">31-dekabr</p>
             </div>
-            <h3 class="text-lg leading-normal mb-2 font-semibold text-black">SEO Services</h3>
-            <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
           </div>
-          <div class="py-8 px-12 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
-            <div class="inline-block text-gray-900 mb-4">
-              <!-- icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              </svg>
+
+          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+              <div class="text-center -mt-10 mb-2">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+              </div>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Yangi yil bayrami</h3>
+              <p class="text-gray-500 mb-1 py-1 text-center">31-dekabr</p>
             </div>
-            <h3 class="text-lg leading-normal mb-2 font-semibold text-black">SEO Services</h3>
-            <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
           </div>
-          <div class="py-8 px-12 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
-            <div class="inline-block text-gray-900 mb-4">
-              <!-- icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
-              </svg>
+
+          <div class="relative rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+              <div class="text-center -mt-10 mb-2">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+              </div>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Yangi yil bayrami</h3>
+              <p class="text-gray-500 mb-1 py-1 text-center">31-dekabr</p>
             </div>
-            <h3 class="text-lg leading-normal mb-2 font-semibold text-black">SEO Services</h3>
-            <p class="text-gray-500">This is a wider card with supporting text below as a natural content.</p>
           </div>
+
         </div>
       </div>
       <div class="p-3">
