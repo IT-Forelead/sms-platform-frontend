@@ -17,9 +17,9 @@
           <p class="text-2xl font-semibold m-0 p-0">{{ contact.phone }}</p>
           <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
         </div>
-        <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1 absolute top-1 right-1"></i>
-        <div :id="'cit-' + index" class="test absolute right-1 top-7 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
-          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+        <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1 absolute top-1 right-1 dropbtn"></i>
+        <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-7 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
             <li class="border-b border-dotted">
               <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
             </li>
@@ -57,8 +57,26 @@ const month = (index) => {
 onMounted(() => addContactInStore())
 
 function toggleDropDown(id) {
-  // $('.test-p').children('.test').addClass('hidden')
+  let dropdowns = document.getElementsByClassName('dropdown-content')
+  for (let i = 0; i < dropdowns.length; i++) {
+    var closeDropdown = dropdowns[i]
+    if (!closeDropdown.classList.contains('hidden')) {
+      closeDropdown.classList.add('hidden')
+    }
+  }
   $(`#cit-${id}`).toggleClass('hidden')
+}
+
+window.onclick = function (event) {
+  if (!event.target.matches('.dropbtn')) {
+    let dropdowns = document.getElementsByClassName('dropdown-content')
+    for (let i = 0; i < dropdowns.length; i++) {
+      var closeDropdown = dropdowns[i]
+      if (!closeDropdown.classList.contains('hidden')) {
+        closeDropdown.classList.add('hidden')
+      }
+    }
+  }
 }
 </script>
 <style scoped>

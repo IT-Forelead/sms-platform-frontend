@@ -93,7 +93,7 @@ const createContact = () => {
       birthday: birthday_.value,
       phone: phone_.value,
     }
-    store.dispatch('contacts/create', contactData).then(
+    store.dispatch('contactsModule/create', contactData).then(
       () => {
         notify.success({
           message: 'Kontakt muvaffaqiyatli yaratildi!',
