@@ -7,31 +7,168 @@
         <thead class="bg-gray-50">
           <tr class="text-md font-semibold tracking-wide text-left text-gray-900">
             <th scope="col" class="px-4 py-3">Kontakt</th>
-            <th scope="col" class="px-4 py-3">Sabab</th>
+            <th scope="col" class="px-4 py-3">Yuborilgan vaqti</th>
+            <th scope="col" class="px-4 py-3">Yuborish sababi</th>
             <th scope="col" class="px-4 py-3">SMS matni</th>
             <th scope="col" class="px-4 py-3">Statistika</th>
           </tr>
         </thead>
-
         <tbody class="divide-y divide-gray-200 bg-white">
           <tr class="text-gray-700">
             <td class="whitespace-nowrap px-4 py-3 text-md">
               <div class="flex items-center">
-                <img src="https://demos.creative-tim.com/notus-js/assets/img/team-1-800x800.jpg" alt="..." class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow" />
-                <img src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" alt="..." class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-5" />
-                <img src="https://demos.creative-tim.com/notus-js/assets/img/team-3-800x800.jpg" alt="..." class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-5" />
-                <img src="https://demos.creative-tim.com/notus-js/assets/img/team-4-470x470.png" alt="..." class="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-5" />
-                <div class="text-md ml-5 font-semibold">Jami 35 kontakt</div>
+                <div class="flex items-center justify-center bg-red-500 h-10 w-10 border border-gray-50 rounded-full">
+                  <div class="text-center text-md font-bold text-white">I</div>
+                </div>
+                <div class="flex items-center justify-center bg-sky-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">T</div>
+                </div>
+                <div class="flex items-center justify-center bg-orange-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">F</div>
+                </div>
+                <div class="flex items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">S</div>
+                </div>
+                <div class="text-md ml-4 font-semibold">Jami 35 kontakt</div>
               </div>
             </td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">12.02.2022</td>
             <td class="whitespace-nowrap px-4 py-3 text-md">Yangi yil</td>
-            <td class="whitespace-nowrap px-4 py-3 text-xs">$2,500 USD</td>
+            <td class="whitespace-nowrap px-4 py-3 text-xs">Assalomu alaykum [USER]! Sizni...</td>
             <td class="whitespace-nowrap px-6 py-3 text-xs align-middle">
               <div class="flex items-center">
                 <span class="mr-2">60%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
                     <div style="width: 60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="text-gray-700">
+            <td class="whitespace-nowrap px-4 py-3 text-md">
+              <div class="flex items-center">
+                <div class="flex items-center justify-center bg-red-500 h-10 w-10 border border-gray-50 rounded-full">
+                  <div class="text-center text-md font-bold text-white">I</div>
+                </div>
+                <div class="flex items-center justify-center bg-sky-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">T</div>
+                </div>
+                <div class="flex items-center justify-center bg-orange-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">F</div>
+                </div>
+                <div class="flex items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">S</div>
+                </div>
+                <div class="text-md ml-4 font-semibold">Jami 35 kontakt</div>
+              </div>
+            </td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">12.02.2022</td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">Yangi yil</td>
+            <td class="whitespace-nowrap px-4 py-3 text-xs">Assalomu alaykum [USER]! Sizni...</td>
+            <td class="whitespace-nowrap px-6 py-3 text-xs align-middle">
+              <div class="flex items-center">
+                <span class="mr-2">90%</span>
+                <div class="relative w-full">
+                  <div class="overflow-hidden h-2 text-xs flex rounded bg-teal-200">
+                    <div style="width: 90%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-teal-500"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="text-gray-700">
+            <td class="whitespace-nowrap px-4 py-3 text-md">
+              <div class="flex items-center">
+                <div class="flex items-center justify-center bg-red-500 h-10 w-10 border border-gray-50 rounded-full">
+                  <div class="text-center text-md font-bold text-white">I</div>
+                </div>
+                <div class="flex items-center justify-center bg-sky-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">T</div>
+                </div>
+                <div class="flex items-center justify-center bg-orange-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">F</div>
+                </div>
+                <div class="flex items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">S</div>
+                </div>
+                <div class="text-md ml-4 font-semibold">Jami 35 kontakt</div>
+              </div>
+            </td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">12.02.2022</td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">Yangi yil</td>
+            <td class="whitespace-nowrap px-4 py-3 text-xs">Assalomu alaykum [USER]! Sizni...</td>
+            <td class="whitespace-nowrap px-6 py-3 text-xs align-middle">
+              <div class="flex items-center">
+                <span class="mr-2">100%</span>
+                <div class="relative w-full">
+                  <div class="overflow-hidden h-2 text-xs flex rounded bg-emerald-500">
+                    <div style="width: 30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="text-gray-700">
+            <td class="whitespace-nowrap px-4 py-3 text-md">
+              <div class="flex items-center">
+                <div class="flex items-center justify-center bg-red-500 h-10 w-10 border border-gray-50 rounded-full">
+                  <div class="text-center text-md font-bold text-white">I</div>
+                </div>
+                <div class="flex items-center justify-center bg-sky-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">T</div>
+                </div>
+                <div class="flex items-center justify-center bg-orange-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">F</div>
+                </div>
+                <div class="flex items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">S</div>
+                </div>
+                <div class="text-md ml-4 font-semibold">Jami 35 kontakt</div>
+              </div>
+            </td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">12.02.2022</td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">Yangi yil</td>
+            <td class="whitespace-nowrap px-4 py-3 text-xs">Assalomu alaykum [USER]! Sizni...</td>
+            <td class="whitespace-nowrap px-6 py-3 text-xs align-middle">
+              <div class="flex items-center">
+                <span class="mr-2">73%</span>
+                <div class="relative w-full">
+                  <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                    <div style="width: 73%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"></div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr class="text-gray-700">
+            <td class="whitespace-nowrap px-4 py-3 text-md">
+              <div class="flex items-center">
+                <div class="flex items-center justify-center bg-red-500 h-10 w-10 border border-gray-50 rounded-full">
+                  <div class="text-center text-md font-bold text-white">I</div>
+                </div>
+                <div class="flex items-center justify-center bg-sky-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">T</div>
+                </div>
+                <div class="flex items-center justify-center bg-orange-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">F</div>
+                </div>
+                <div class="flex items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full -ml-5">
+                  <div class="text-center text-md font-bold text-white">S</div>
+                </div>
+                <div class="text-md ml-4 font-semibold">Jami 35 kontakt</div>
+              </div>
+            </td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">12.02.2022</td>
+            <td class="whitespace-nowrap px-4 py-3 text-md">Yangi yil</td>
+            <td class="whitespace-nowrap px-4 py-3 text-xs">Assalomu alaykum [USER]! Sizni...</td>
+            <td class="whitespace-nowrap px-6 py-3 text-xs align-middle">
+              <div class="flex items-center">
+                <span class="mr-2">100%</span>
+                <div class="relative w-full">
+                  <div class="overflow-hidden h-2 text-xs flex rounded bg-emerald-500">
+                    <div style="width: 30%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"></div>
                   </div>
                 </div>
               </div>
@@ -55,9 +192,8 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                    <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                    <div class="text-center text-md font-bold text-white">J</div>
                   </div>
                   <div>
                     <p class="font-semibold text-gray-900">+998937475995</p>
@@ -73,9 +209,8 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                    <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border-1 border-gray-200 rounded-full">
+                    <div class="text-center text-md font-bold text-white">K</div>
                   </div>
                   <div>
                     <p class="font-semibold text-gray-900">+998937475995</p>
@@ -91,9 +226,8 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                    <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                    <div class="text-center text-md font-bold text-white">S</div>
                   </div>
                   <div>
                     <p class="font-semibold text-gray-900">+998937475995</p>
