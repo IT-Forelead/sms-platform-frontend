@@ -13,8 +13,32 @@
             <input type="search" name="search" class="bg-white text-gray-500 py-1.5 text-lg rounded-lg pl-12 focus:outline-none outline-none border-0" placeholder="Sarlavha bo'yicha izlash..." autocomplete="off" />
           </div>
           <div class="flex">
-            <div class="bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-layer-group"></i> Bo'lim</div>
-            <div class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> Shablon turi</div>
+            <div class="relative">
+              <div id="filterByCategoryBtn" @click="toggleDropDownFilterByCategory()" class=" bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-layer-group"></i> Bo'lim</div>
+              <div id="filterByCategory" class="dropdown-content absolute right-2 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                  <li v-for="(templateCategory, index) in templateCategories" :key="index" class="border-b border-dotted">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-angle-right mr-1"></i> {{ templateCategory.name }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative">
+              <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> Shablon turi</div>
+              <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+                  <li class="border-b border-dotted">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
+                  </li>
+                  <li class="border-b border-dotted">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
+                  </li>
+                  <li class="border-b border-dotted">
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <div class="custom-height overflow-y-auto mt-3 px-1">
@@ -22,7 +46,7 @@
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
                 <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
-                <i class="fa-solid fa-trash-can text-gray-700 hover:text-red-600 mr-2"></i>
+                <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
               <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
@@ -44,7 +68,7 @@
             </div>
             <div class="w-1/2 mx-auto pt-3"><hr /></div>
             <div class="flex items-center justify-between mt-2">
-              <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.genderAccess }}</div>
+              <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.categoryName }}</div>
               <div class="flex-1"><hr class="w-2/5 mx-auto" /></div>
               <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-user-tag mr-1"></i> {{ changeGenderAccess(template.genderAccess) }}</div>
             </div>
@@ -199,6 +223,23 @@ function openActions(id) {
   x.parent('.actions').children('div').toggleClass('hidden')
 }
 
+function toggleDropDownFilterByCategory() {
+  $('#filterByCategory').toggleClass('hidden')
+}
+
+function toggleDropDownFilterByGender() {
+  $('#filterByGender').toggleClass('hidden')
+}
+
+$(document).click(function (event) {
+  if (!$(event.target).closest('#filterByCategoryBtn').length && !$(event.target).is('#filterByCategoryBtn')) {
+    $('#filterByCategory').addClass('hidden')
+  }
+  if (!$(event.target).closest('#filterByGenderBtn').length && !$(event.target).is('#filterByGenderBtn')) {
+    $('#filterByGender').addClass('hidden')
+  }
+})
+
 const store = useStore()
 
 const openModal = () => {
@@ -285,7 +326,7 @@ const createSMSTemplate = () => {
       templateCategoryId: templateCategoryId_.value,
       title: title_.value,
       text: text_.value,
-      genderAccess: access_.value,
+      gender: access_.value,
     }
     store.dispatch('templatesModule/create', templateData).then(
       () => {
@@ -307,6 +348,24 @@ const createSMSTemplate = () => {
       }
     )
   }
+}
+
+const deleteSMSTemplate = (id) => {
+  store.dispatch('templatesModule/delete', id).then(
+    () => {
+      notify.success({
+        message: "SMS shablon muvaffaqiyatli o'chirildi!",
+        position: 'bottomRight',
+      })
+      addSMSTemplateInStore()
+    },
+    (error) => {
+      notify.error({
+        message: "SMS shablonni o'chirishda xatolik yuz berdi!",
+        position: 'bottomRight',
+      })
+    }
+  )
 }
 
 onMounted(() => addSMSTemplateInStore(), addTemplateCategoryInStore())

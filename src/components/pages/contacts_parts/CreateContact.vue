@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-lg p-3 px-5 mt-3 max-content-h">
-    <h3 class="text-2xl font-extrabold mb-3">Create Contact</h3>
+    <h3 class="text-2xl font-extrabold mb-3">Kontakt yaratish</h3>
     <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
     <form @submit.prevent="createContact">
       <div class="mb-6">

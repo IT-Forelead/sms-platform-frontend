@@ -16,6 +16,12 @@ class SMSTemplateService {
       return response.data
     })
   }
+
+  deleteSMSTemplate(id) {
+    return axios.delete(API_URL + 'sms-template', { headers: authHeader(), data: `"${id}"` }).then((response) => {
+      return response.data
+    })
+  }
   
 }
 

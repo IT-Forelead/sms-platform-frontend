@@ -23,7 +23,18 @@ export const templatesModule = {
           return Promise.reject(error);
         }
       );
+    },
+    
+    delete({ commit }, id) {
+      return SMSTemplateService.deleteSMSTemplate(id).then(
+        template => {
+          return Promise.resolve(template);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
     }
-  },
+  }
 
 };

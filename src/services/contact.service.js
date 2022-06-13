@@ -17,7 +17,6 @@ class ContactService {
   }
 
   deleteContact(id) {
-    console.log(id)
     return axios.delete(API_URL + 'contact', { headers: authHeader(), data: `"${id}"` }).then((response) => {
       return response.data
     })
