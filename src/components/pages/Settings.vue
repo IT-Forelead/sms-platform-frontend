@@ -3,6 +3,40 @@
     <h3 class="text-3xl font-extrabold ml-2 mb-1">Settings</h3>
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="p-3">
+  <div class="bg-white rounded-lg p-3 px-5 mt-3 max-content-h">
+    <h3 class="text-2xl font-extrabold mb-3">Tug'ilgan kun tabrigi</h3>
+    <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+    <form>
+      <div class="mb-6">
+        <label for="all-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Barcha uchun</label>
+        <select id="all-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>SMS shablonni tanlang</option>
+          <option value="male">Tug'ilgan kuningiz bilan</option>
+          <option value="female">Happy birthday</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Erkaklar uchun</label>
+        <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>SMS shablonni tanlang</option>
+          <option value="male">Tug'ilgan kuningiz bilan</option>
+          <option value="female">Happy birthday</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ayollar uchun</label>
+        <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>SMS shablonni tanlang</option>
+          <option value="male">Tug'ilgan kuningiz bilan</option>
+          <option value="female">Happy birthday</option>
+        </select>
+      </div>
+      <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+      <div class="flex justify-end">
+        <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+      </div>
+    </form>
+  </div>
         <div class="bg-white rounded-lg p-3 px-5 my-3">
           <h3 class="text-2xl font-extrabold mb-3">Tizim sozlamalari</h3>
           <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
