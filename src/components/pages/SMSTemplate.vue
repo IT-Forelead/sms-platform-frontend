@@ -30,13 +30,13 @@
               <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
                   <li class="border-b border-dotted">
-                    <a href="#" @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
+                    <a @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
                   </li>
                   <li class="border-b border-dotted">
-                    <a href="#" @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
+                    <a @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
                   </li>
                   <li class="border-b border-dotted">
-                    <a href="#" @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
+                    <a @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
                   </li>
                 </ul>
               </div>
@@ -89,7 +89,9 @@
             <div class="mb-6">
               <div class="flex justify-between items-center">
                 <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
-                <i @click="openModal()" class="fa fa-plus p-1 bg-green-400 rounded text-white cursor-pointer hover:bg-green-500"></i>
+                <span @click="openModal()" class="p-1 px-2 bg-green-100 text-sm text-green-500 rounded cursor-pointer hover:bg-green-200">
+                  <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish
+                </span>
               </div>
               <select v-model="templateCategoryId_" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bo'limni tanlang</option>
@@ -119,88 +121,34 @@
         </div>
       </div>
     </div>
-    <div id="popup-modal" tabindex="-1" class="hidden cursor-pointer overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
-      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+
+    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
         <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
           <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </button>
-          <div class="p-5 pt-8">
-            <form @submit.prevent="createSMSTemplateCategory()">
+          <h3 class="text-2xl font-extrabold py-5 ml-5">Bo'lim boshqaruvi</h3>
+          <div class="px-5">
+            <form @submit.prevent="createTemplateCategory()">
               <div class="mb-6">
-                <label for="category-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim</label>
+                <label for="category-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim qo'shish</label>
                 <div class="flex items-center">
-                  <input type="text" v-model="category" id="category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
-                  <i class="fa fa-plus p-3 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2"></i>
+                  <input type="text" v-model="categoryName_" id="category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                  <button class="fa fa-plus p-3 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2"></button>
                 </div>
               </div>
             </form>
-            <div class="w-full mb-8 overflow-hidden rounded-lg">
-              <div class="w-full overflow-x-auto">
-                <table class="w-full divide-y divide-gray-300">
-                  <thead class="bg-gray-50">
-                    <tr class="text-md font-semibold tracking-wide text-left text-gray-900">
-                      <th scope="col" class="px-4 py-3">Kontakt</th>
-                      <th scope="col" class="px-4 py-3">Yuborilgan vaqti</th>
-                      <th scope="col" class="px-4 py-3">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-gray-200 bg-white">
-                    <tr class="text-gray-700">
-                      <td class="whitespace-nowrap px-4 py-3">
-                        <div class="flex items-center text-md">
-                          <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border-1 border-gray-200 rounded-full">
-                            <div class="text-center text-md font-bold text-white">J</div>
-                          </div>
-                          <div>
-                            <p class="font-semibold text-gray-900">+998937475995</p>
-                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-                      <td class="whitespace-nowrap px-4 py-3 text-sm">
-                        <span class="px-5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg">Yetkazildi</span>
-                      </td>
-                    </tr>
-                    <tr class="text-gray-700">
-                      <td class="whitespace-nowrap px-4 py-3">
-                        <div class="flex items-center text-md">
-                          <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border-1 border-gray-200 rounded-full">
-                            <div class="text-center text-md font-bold text-white">K</div>
-                          </div>
-                          <div>
-                            <p class="font-semibold text-gray-900">+998937475995</p>
-                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-                      <td class="whitespace-nowrap px-4 py-3 text-sm">
-                        <span class="px-5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-lg"> Yetkazilmadi </span>
-                      </td>
-                    </tr>
-                    <tr class="text-gray-700">
-                      <td class="whitespace-nowrap px-4 py-3">
-                        <div class="flex items-center text-md">
-                          <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border-1 border-gray-200 rounded-full">
-                            <div class="text-center text-md font-bold text-white">S</div>
-                          </div>
-                          <div>
-                            <p class="font-semibold text-gray-900">+998937475995</p>
-                            <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-                      <td class="whitespace-nowrap px-4 py-3 text-sm">
-                        <span class="px-5 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-lg"> Kutilmoqda </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <h3 class="text-md font-bold py-1">Bo'limlar ro'yhati</h3>
+            <ul class="pb-5">
+              <li v-for="(templateCategory, index) in templateCategories" :key="index" class="flex justify-between items-center py-2 px-1 border-b">
+                <span class="text-md"><i class="fa-solid fa-angles-right text-sm mr-2"></i>{{ templateCategory.name }}</span>
+                <div>
+                  <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3"></i>
+                  <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600"></i>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -263,6 +211,7 @@ const templateCategoryId_ = ref("Bo'limni tanlang")
 const title_ = ref('')
 const text_ = ref('')
 const access_ = ref('Kim uchunligini tanlang')
+const categoryName_ = ref('')
 
 const addSMSTemplateInStore = () => {
   templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
@@ -366,6 +315,36 @@ const createSMSTemplate = () => {
   }
 }
 
+const createTemplateCategory = () => {
+  if (categoryName_.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: "Iltimos, bo'lim nomini kiriting!",
+      position: 'bottomLeft',
+    })
+  } else {
+    const templateCategoryData = {
+      name: categoryName_.value
+    }
+    store.dispatch('templateCategoriesModule/create', templateCategoryData).then(
+      () => {
+        notify.success({
+          message: "Bo'lim muvaffaqiyatli yaratildi!",
+          position: 'bottomRight',
+        })
+        addTemplateCategoryInStore()
+        categoryName_.value = ''
+      },
+      (error) => {
+        notify.error({
+          message: "Bo'lim yaratishda xatolik yuz berdi!",
+          position: 'bottomRight',
+        })
+      }
+    )
+  }
+}
+
 const deleteSMSTemplate = (id) => {
   store.dispatch('templatesModule/delete', id).then(
     () => {
@@ -378,6 +357,24 @@ const deleteSMSTemplate = (id) => {
     (error) => {
       notify.error({
         message: "SMS shablonni o'chirishda xatolik yuz berdi!",
+        position: 'bottomRight',
+      })
+    }
+  )
+}
+
+const deleteTemplateCategory = (id) => {
+  store.dispatch('templateCategoriesModule/delete', id).then(
+    () => {
+      notify.success({
+        message: "Bo'lim muvaffaqiyatli o'chirildi!",
+        position: 'bottomRight',
+      })
+      addTemplateCategoryInStore()
+    },
+    (error) => {
+      notify.error({
+        message: "Bo'limni o'chirishda xatolik yuz berdi!",
         position: 'bottomRight',
       })
     }

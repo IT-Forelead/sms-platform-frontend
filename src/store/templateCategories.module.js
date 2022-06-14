@@ -1,6 +1,6 @@
 import TemplateCategoriesService from '../services/templateCategories.service';
 
-export const templateCategories = {
+export const templateCategoriesModule = {
   namespaced: true,
   actions: {
     get({ commit }) {

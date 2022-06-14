@@ -4,7 +4,7 @@ import { singleUser } from './user.module'
 import { contactsModule } from './contact.module'
 import { holidaysModule } from './holiday.module'
 import { templatesModule } from './template.module'
-import { templateCategories } from './templateCategories.module'
+import { templateCategoriesModule } from './templateCategories.module'
 
 const store = createStore({
   modules: {
@@ -12,7 +12,8 @@ const store = createStore({
     singleUser,
     contactsModule,
     holidaysModule,
-    templatesModule
+    templatesModule,
+    templateCategoriesModule
   },
   state() {
     return {
