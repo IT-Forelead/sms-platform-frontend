@@ -53,7 +53,7 @@
                 </svg>
               </div>
               <div class="flex flex-col ml-2">
-                <h3 class="mt-2 text-bold font-medium text-gray-800 truncate">{{ template.title }}</h3>
+                <h3 class="text-bold text-xl uppercase font-extrabold text-gray-800 truncate">{{ template.title }}</h3>
                 <p class="mt-2 text-base text-gray-600">{{ template.text }}</p>
               </div>
               <div class="flex flex-col justify-end">
