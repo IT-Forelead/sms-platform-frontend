@@ -132,7 +132,7 @@ const createHoliday = () => {
       () => {
         notify.success({
           message: 'Bayram muvaffaqiyatli yaratildi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
         addHolidayInStore()
         name_.value = ''
@@ -142,7 +142,7 @@ const createHoliday = () => {
       (error) => {
         notify.error({
           message: 'Bayram yaratishda xatolik yuz berdi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
       }
     )
@@ -154,14 +154,14 @@ const deleteHoliday = (id) => {
     () => {
       notify.success({
         message: "Bayram muvaffaqiyatli o'chirildi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
       addHolidayInStore()
     },
     (error) => {
       notify.error({
         message: "Bayramni o'chirishda xatolik yuz berdi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
     }
   )

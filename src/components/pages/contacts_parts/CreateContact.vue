@@ -109,7 +109,7 @@ const createContact = () => {
       () => {
         notify.success({
           message: 'Kontakt muvaffaqiyatli yaratildi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
         addContactsInStore()
         first_name.value = ''
@@ -121,7 +121,7 @@ const createContact = () => {
       (error) => {
         notify.error({
           message: 'Kontakt yaratishda xatolik yuz berdi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
       }
     )

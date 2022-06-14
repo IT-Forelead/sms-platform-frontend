@@ -14,18 +14,12 @@
           </div>
           <div class="flex">
             <div class="relative">
-              <div id="filterByCategoryBtn" @click="toggleDropDownFilterByCategory()" class="bg-white rounded-xl px-5 p-2 mx-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer">
-                <i class="fa fa-layer-group"></i> {{ sortByCategoryId === '' ? "Bo'lim" : templateCategories.map((t) => (t.id === sortByCategoryId ? t.name : null)).filter((d) => d !== null)[0] }} <i @click="clearCategorySort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByCategoryId !== '' }"></i>
-              </div>
-              <div id="filterByCategory" class="dropdown-content absolute right-2 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                  <li v-for="(templateCategory, index) in templateCategories" :key="index" class="border-b border-dotted">
-                    <a @click="sortByCategory(templateCategory.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"><i class="fa-solid fa-angle-right mr-1"></i>{{ templateCategory.name }}</a>
-                  </li>
-                </ul>
-              </div>
+              <select class="form-select appearance-none block w-full px-3 pr-7 rounded-lg py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="categories">
+                <option value="">Bo'lim bo'yicha</option>
+                <option v-for="(cat, idx) in templateCategories" :key="idx" :value="cat.id" @click="sortByCategory(cat.id)">{{ cat.name }}</option>
+              </select>
             </div>
-            <div class="relative">
+            <div class="relative pr-4">
               <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortByAccess === '' ? 'Shablon turi' : changeGenderAccess(sortByAccess) }} <i @click="clearAccessSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByAccess !== '' }"></i></div>
               <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
@@ -43,7 +37,7 @@
             </div>
           </div>
         </div>
-        <div class="custom-height overflow-y-auto mt-3 px-1">
+        <div class="custom-height overflow-y-auto mt-3 px-1 pr-4">
           <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
@@ -297,7 +291,7 @@ const createSMSTemplate = () => {
       () => {
         notify.success({
           message: 'SMS shablon muvaffaqiyatli yaratildi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
         addSMSTemplateInStore()
         templateCategoryId_.value = "Bo'limni tanlang"
@@ -308,7 +302,7 @@ const createSMSTemplate = () => {
       (error) => {
         notify.error({
           message: 'SMS shablon yaratishda xatolik yuz berdi!',
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
       }
     )
@@ -330,7 +324,7 @@ const createTemplateCategory = () => {
       () => {
         notify.success({
           message: "Bo'lim muvaffaqiyatli yaratildi!",
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
         addTemplateCategoryInStore()
         categoryName_.value = ''
@@ -338,7 +332,7 @@ const createTemplateCategory = () => {
       (error) => {
         notify.error({
           message: "Bo'lim yaratishda xatolik yuz berdi!",
-          position: 'bottomRight',
+          position: 'bottomLeft',
         })
       }
     )
@@ -350,14 +344,14 @@ const deleteSMSTemplate = (id) => {
     () => {
       notify.success({
         message: "SMS shablon muvaffaqiyatli o'chirildi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
       addSMSTemplateInStore()
     },
     (error) => {
       notify.error({
         message: "SMS shablonni o'chirishda xatolik yuz berdi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
     }
   )
@@ -368,14 +362,14 @@ const deleteTemplateCategory = (id) => {
     () => {
       notify.success({
         message: "Bo'lim muvaffaqiyatli o'chirildi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
       addTemplateCategoryInStore()
     },
     (error) => {
       notify.error({
         message: "Bo'limni o'chirishda xatolik yuz berdi!",
-        position: 'bottomRight',
+        position: 'bottomLeft',
       })
     }
   )
