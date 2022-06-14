@@ -6,7 +6,7 @@
         <Stats />
       </div>
       <div class="p-3">
-        <h3 class="text-3xl font-extrabold">Store Specific</h3>
+        <h3 class="text-3xl font-extrabold">SMS ma'lumotlari</h3>
         <RightSide />
       </div>
     </div>

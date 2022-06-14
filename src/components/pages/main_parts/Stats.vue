@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between items-center">
-    <h3 class="text-3xl font-extrabold">Sales Metrics</h3>
+    <h3 class="text-3xl font-extrabold">Raqamli statistika</h3>
   </div>
   <div class="grid grid-cols-4 grid-flow-row-2 auto-rows-max gap-5 mt-3">
     <div v-for="mitem in mitems" :key="mitem">
@@ -20,53 +20,29 @@ export default {
     return {
       mitems: [
         {
-          icon: 'fa-user',
+          icon: 'people-outline',
           value: '1,000',
-          title: 'Users',
+          title: 'Kontaktlar',
           change: '+1.5%',
         },
         {
-          icon: 'fa-shopping-cart',
+          icon: 'chatbox-ellipses-outline',
           value: '1,000',
-          title: 'Orders',
+          title: 'SMS shablonlar',
           change: '+1.5%',
         },
         {
-          icon: 'fa-shopping-bag',
+          icon: 'gift-outline',
           value: '1,000',
-          title: 'Products',
+          title: 'Bayramlar',
           change: '+1.5%',
         },
         {
-          icon: 'fa-shopping-basket',
+          icon: 'mail-outline',
           value: '1,000',
-          title: 'Sales',
+          title: "Jo'natilgan SMSlar",
           change: '+1.5%',
-        },
-        {
-          icon: 'fa-user',
-          value: '1,000',
-          title: 'Users',
-          change: '+1.5%',
-        },
-        {
-          icon: 'fa-shopping-cart',
-          value: '1,000',
-          title: 'Orders',
-          change: '+1.5%',
-        },
-        {
-          icon: 'fa-shopping-bag',
-          value: '1,000',
-          title: 'Products',
-          change: '+1.5%',
-        },
-        {
-          icon: 'fa-shopping-basket',
-          value: '1,000',
-          title: 'Sales',
-          change: '+1.5%',
-        },
+        }
       ],
     }
   },
