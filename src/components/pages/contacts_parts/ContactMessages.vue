@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white rounded-lg mt-3">
     <div class="bg-white px-7 py-5 flex items-center">
-      <div class="flex items-center justify-center bg-red-700 h-16 w-16 border-1 border-gray-200 rounded-full">
+      <div class="flex items-center justify-center bg-red-700 h-16 w-16 border border-gray-50 rounded-full">
         <div class="text-center text-white">
           <div class="text-xl font-bold">29</div>
           <div class="text-sm font-bold">DEK</div>

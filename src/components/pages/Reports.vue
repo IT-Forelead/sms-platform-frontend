@@ -192,7 +192,7 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                  <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border border-gray-50 rounded-full">
                     <div class="text-center text-md font-bold text-white">J</div>
                   </div>
                   <div>
@@ -209,7 +209,7 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border-1 border-gray-200 rounded-full">
+                  <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border border-gray-50 rounded-full">
                     <div class="text-center text-md font-bold text-white">K</div>
                   </div>
                   <div>
@@ -226,7 +226,7 @@
             <tr class="text-gray-700">
               <td class="whitespace-nowrap px-4 py-3">
                 <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border-1 border-gray-200 rounded-full">
+                  <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full">
                     <div class="text-center text-md font-bold text-white">S</div>
                   </div>
                   <div>

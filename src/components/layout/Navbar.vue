@@ -89,15 +89,15 @@
           <strong class="text-lg font-semibold ml-2 px-2 cursor-pointer text-zinc-900 hover:text-rose-500 capitalize">{{ name }}</strong>
           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </button>
-        <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44">
+        <div id="dropdownInformation" class="z-10 hidden bg-white rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+            <li class="border-b">
+              <router-link to="/profile" class="block text-md px-4 py-2 hover:bg-gray-100"><i class="fa fa-user mr-2"></i> Profil</router-link>
+            </li>
             <li>
-              <router-link to="/profile" class="block px-4 py-2 hover:bg-gray-100"><i class="fa fa-user"></i> Profil</router-link>
+              <a href="/login" @click="onLogout()" class="block text-md px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-sign-out mr-2"></i> Chiqish</a>
             </li>
           </ul>
-          <div class="py-1">
-            <a href="/login" @click="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-sign-out"></i> Chiqish</a>
-          </div>
         </div>
       </div>
     </div>
