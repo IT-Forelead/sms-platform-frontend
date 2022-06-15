@@ -75,26 +75,72 @@
           <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </button>
-          <h3 class="text-2xl font-extrabold py-5 ml-5">Tug'ilgan kun tabrigi</h3>
-
+          <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
           <div class="bg-white rounded-lg p-3 px-5 max-content-h">
             <form>
-              <div class="mb-6">
-                <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Erkaklar uchun</label>
-                <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>SMS shablonni tanlang</option>
-                  <option value="male">Tug'ilgan kuningiz bilan</option>
-                  <option value="female">Happy birthday</option>
-                </select>
+            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
               </div>
-              <div class="mb-6">
-                <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ayollar uchun</label>
-                <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option>SMS shablonni tanlang</option>
-                  <option value="male">Tug'ilgan kuningiz bilan</option>
-                  <option value="female">Happy birthday</option>
-                </select>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
               </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
+            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+            </div>
               <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
               <div class="flex justify-end items-center">
                 <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>

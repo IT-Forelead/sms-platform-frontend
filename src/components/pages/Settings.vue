@@ -44,21 +44,21 @@
               <div class="flex items-center border-b border-dashed py-1">
                 <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
                 <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-md font-semibold">Ayollar uchun TKT</div>
                   <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
                 </label>
               </div>
               <div class="flex items-center border-b border-dashed py-1">
                 <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
                 <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-md font-semibold">Ayollar uchun TKT</div>
                   <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
                 </label>
               </div>
               <div class="flex items-center border-b border-dashed py-1">
                 <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
                 <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-md font-semibold">Ayollar uchun TKT</div>
                   <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
                 </label>
               </div>
