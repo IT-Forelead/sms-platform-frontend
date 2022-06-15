@@ -3,25 +3,72 @@
     <h3 class="text-3xl font-extrabold ml-2 mb-1">Settings</h3>
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="p-3">
-        <div class="bg-white rounded-lg p-3 px-5 mt-3 max-content-h">
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
           <h3 class="text-2xl font-extrabold mb-3">Tug'ilgan kun tabrigi</h3>
-          <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+          <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
           <form>
-            <div class="mb-6">
-              <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Erkaklar uchun</label>
-              <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option>SMS shablonni tanlang</option>
-                <option value="male">Tug'ilgan kuningiz bilan</option>
-                <option value="female">Happy birthday</option>
-              </select>
+            <h3 class="text-lg font-semibold mb-2">Erkaklar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
             </div>
-            <div class="mb-6">
-              <label for="man-birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ayollar uchun</label>
-              <select id="man-birthday-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option>SMS shablonni tanlang</option>
-                <option value="male">Tug'ilgan kuningiz bilan</option>
-                <option value="female">Happy birthday</option>
-              </select>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
+            <h3 class="text-lg font-semibold mb-2">Ayollar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
+              <div class="flex items-center border-b border-dashed py-1">
+                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">Erkaklar uchun TKT</div>
+                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                </label>
+              </div>
             </div>
             <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
             <div class="flex justify-end">
