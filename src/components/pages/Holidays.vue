@@ -80,64 +80,22 @@
             <form>
             <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div class="flex items-center border-b border-dashed py-1">
+              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
                 <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
                 <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Erkaklar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
                 </label>
               </div>
             </div>
             <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
             <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
-                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
-                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
-                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
-                </label>
-              </div>
-              <div class="flex items-center border-b border-dashed py-1">
-                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
-                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">Ayollar uchun bayram tabrigi</div>
-                  <div class="text-sm">SMS matnida foydalanuvchining ismining o'rniga [USER] tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</div>
+              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
                 </label>
               </div>
             </div>
@@ -161,6 +119,7 @@ import { ref } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import holidayService from '../../services/holiday.service'
+import templateService from '../../services/template.service'
 import $ from 'jquery'
 
 function openActions(id) {
@@ -191,6 +150,18 @@ const addHolidayInStore = () => {
 
 const holidays = computed(() => {
   return store.state.holidays
+})
+
+const addSMSTemplateInStore = () => {
+  templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
+}
+
+const templatesForMan = computed(() => {
+  return store.state.templates.filter(e => e.genderAccess !== 'female')
+})
+
+const templatesForWoman = computed(() => {
+  return store.state.templates.filter(e => e.genderAccess !== 'male')
 })
 
 const createHoliday = () => {
@@ -257,7 +228,7 @@ const deleteHoliday = (id) => {
   )
 }
 
-onMounted(() => addHolidayInStore())
+onMounted(() => addHolidayInStore(), addSMSTemplateInStore())
 </script>
 
 <style scoped>
