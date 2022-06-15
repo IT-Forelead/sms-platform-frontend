@@ -17,6 +17,7 @@
         <MenuItem :menu="menu" />
       </li>
     </ul>
+    <div class="relative custom-top text-sm text-gray-400 text-center dark:text-gray-400">Copyright &copy; 2022 <a href="https://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br> All Rights Reserved.</div>
   </div>
 </template>
 
@@ -46,5 +47,8 @@ export default {
 .active {
   background-color: rgb(237 233 254);
   color: rgb(139 92 246);
+}
+.custom-top {
+  top: 49vh;
 }
 </style>
