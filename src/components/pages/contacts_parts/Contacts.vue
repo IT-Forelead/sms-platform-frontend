@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="ml-4">
-          <p class="text-2xl font-semibold m-0 p-0">{{ contact.phone }}</p>
+          <p class="text-2xl font-semibold m-0 p-0">{{ phoneStyle(contact.phone) }}</p>
           <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
         </div>
         <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1 absolute top-1 right-1 dropbtn"></i>
@@ -119,6 +119,10 @@ const phonePrefixColor = (phonePrefix) => {
     default:
       return 'bg-lime-500'
   }
+}
+
+const phoneStyle = (phone) => {
+  return `${phone.slice(0,4)} (${phone.slice(4,6)}) ${phone.slice(6,9)}-${phone.slice(9,11)}-${phone.slice(11,13)}`
 }
 
 const month = (index) => {
