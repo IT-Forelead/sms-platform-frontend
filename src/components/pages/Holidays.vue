@@ -8,7 +8,7 @@
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
                 <i @click="openModal()" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
-                <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
+                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
                 <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
               <i @click="openActions(holiday.id)" :id="'st-' + holiday.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
@@ -78,30 +78,79 @@
           <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
           <div class="bg-white rounded-lg p-3 px-5 max-content-h">
             <form>
-            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
-            <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">{{ template.title }}</div>
-                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
-                </label>
+              <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+              <div class="max-h-40 overflow-y-auto p-3 mb-6">
+                <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
+                  <input :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                  <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                    <div class="text-md font-semibold">{{ template.title }}</div>
+                    <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                  </label>
+                </div>
               </div>
-            </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
-            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
-            <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
-                  <div class="text-md font-semibold">{{ template.title }}</div>
-                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
-                </label>
+              <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
+              <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+              <div class="max-h-40 overflow-y-auto p-3 mb-6">
+                <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+                  <input :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                  <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                    <div class="text-md font-semibold">{{ template.title }}</div>
+                    <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                  </label>
+                </div>
               </div>
-            </div>
               <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
               <div class="flex justify-end items-center">
                 <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+                <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+        <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+          <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+          <h3 class="text-2xl font-extrabold py-5 ml-5">Bayramni taxrirlash</h3>
+          <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+            <form @submit.prevent="updateHoliday()">
+              <div class="mb-6">
+                <label for="edit-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
+                <input type="text" v-model="name_" id="edit-name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
+              </div>
+              <div class="mb-6">
+                <label for="edit-day-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
+                <select id="edit-day-input" v-model="day_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>Bayram kunini tanlang</option>
+                  <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
+                </select>
+              </div>
+              <div class="mb-6">
+                <label for="edit-month-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram oyi</label>
+                <select id="edit-month-input" v-model="month_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>Bayram oyini tanlang</option>
+                  <option value="january">Yanvar</option>
+                  <option value="february">Fevral</option>
+                  <option value="march">Mart</option>
+                  <option value="april">Aprel</option>
+                  <option value="may">May</option>
+                  <option value="june">Iyun</option>
+                  <option value="july">Iyul</option>
+                  <option value="august">Avgust</option>
+                  <option value="september">Sentabr</option>
+                  <option value="october">Oktyabr</option>
+                  <option value="november">Noyabr</option>
+                  <option value="december">Dekabr</option>
+                </select>
+              </div>
+              <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+              <div class="flex justify-end items-center">
+                <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
                 <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
               </div>
             </form>
@@ -122,6 +171,11 @@ import holidayService from '../../services/holiday.service'
 import templateService from '../../services/template.service'
 import $ from 'jquery'
 
+const selectedHolidayId = ref('')
+const name_ = ref('')
+const day_ = ref('Bayram kunini tanlang')
+const month_ = ref('Bayram oyini tanlang')
+
 function openActions(id) {
   let x = $(`#st-${id}`)
   x.toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
@@ -139,10 +193,21 @@ const closeModal = () => {
   $('#add-template-modal').addClass('hidden')
 }
 
-const templateCategoryId_ = ref("Bo'limni tanlang")
-const name_ = ref('')
-const day_ = ref('Bayram kunini tanlang')
-const month_ = ref('Bayram oyini tanlang')
+const openEditModal = (holiday) => {
+  $('#edit-modal').removeClass('hidden')
+  selectedHolidayId.value = holiday.id
+  name_.value = holiday.name
+  day_.value = holiday.day
+  month_.value = holiday.month
+}
+
+const closeEditModal = () => {
+  $('#edit-modal').addClass('hidden')
+  selectedHolidayId.value = ''
+  name_.value = ''
+  day_.value = 'Bayram kunini tanlang'
+  month_.value = 'Bayram oyini tanlang'
+}
 
 const addHolidayInStore = () => {
   holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
@@ -157,11 +222,11 @@ const addSMSTemplateInStore = () => {
 }
 
 const templatesForMan = computed(() => {
-  return store.state.templates.filter(e => e.genderAccess !== 'female')
+  return store.state.templates.filter((e) => e.genderAccess !== 'female')
 })
 
 const templatesForWoman = computed(() => {
-  return store.state.templates.filter(e => e.genderAccess !== 'male')
+  return store.state.templates.filter((e) => e.genderAccess !== 'male')
 })
 
 const createHoliday = () => {
@@ -222,6 +287,31 @@ const deleteHoliday = (id) => {
     (error) => {
       notify.error({
         message: "Bayramni o'chirishda xatolik yuz berdi!",
+        position: 'bottomLeft',
+      })
+    }
+  )
+}
+
+const updateHoliday = () => {
+  const holidayData = {
+    id: selectedHolidayId.value,
+    name: name_.value,
+    day: day_.value,
+    month: month_.value,
+  }
+  store.dispatch('holidaysModule/update', holidayData).then(
+    () => {
+      notify.success({
+        message: 'Bayram muvaffaqiyatli taxrirlandi!',
+        position: 'bottomLeft',
+      })
+      addHolidayInStore()
+      closeEditModal()
+    },
+    (error) => {
+      notify.error({
+        message: 'Bayramni taxrirlashda xatolik yuz berdi!',
         position: 'bottomLeft',
       })
     }

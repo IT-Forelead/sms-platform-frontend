@@ -41,6 +41,7 @@
               <p class="text-md text-gray-600">{{ holiday.name }} tabrigi uchun SMS shablon biriktiring!</p>
             </div>
           </div>
+          <div class="flex justify-center items-center bg-gray-50 text-gray-600 text-sm border-b py-1 cursor-pointer">Bildirishnomani yopish</div>
         </div>
         <div v-else class="flex justify-between flex-col items-center text-md border-b px-5 py-16">
           <div class="flex items-center justify-center bg-gray-200 h-16 w-16 rounded-full">
@@ -48,9 +49,7 @@
               <i class="fa-regular fa-bell fa-2x"></i>
             </div>
           </div>
-          <div>
-            <p class="text-lg text-gray-600 mt-10 ">Bildirishnomalar mavjud emas!</p>
-          </div>
+          <p class="text-lg text-gray-600 mt-10 ">Bildirishnomalar mavjud emas!</p>
         </div>
       </div>
       <div class="border-l-2 pl-3 flex items-center">
@@ -152,7 +151,7 @@ function autoLogout() {
       checkLogin(false)
       router.go('/login')
     }
-  }, 3000)
+  }, 1000)
 }
 
 onMounted(() => addUserInStore(), autoLogout(), addHolidayInStore())

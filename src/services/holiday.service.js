@@ -16,6 +16,12 @@ class HolidayService {
     })
   }
 
+  updateHoliday(data) {
+    return axios.put(API_URL + 'holiday', { ...data }, { headers: authHeader() }).then((response) => {
+      return response.data
+    })
+  }
+
   deleteHoliday(id) {
     return axios.delete(API_URL + 'holiday', { headers: authHeader(), data: `"${id}"` }).then((response) => {
       return response.data

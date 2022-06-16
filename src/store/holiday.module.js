@@ -25,6 +25,17 @@ export const holidaysModule = {
       );
     },
     
+    update({ commit }, holidayData) {
+      return HolidayService.updateHoliday(holidayData).then(
+        holiday => {
+          return Promise.resolve(holiday);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+    
     delete({ commit }, id) {
       return HolidayService.deleteHoliday(id).then(
         holiday => {

@@ -4,7 +4,6 @@ import router from './router'
 import store from './store/index'
 import './index.css'
 import 'flowbite'
-import VueMask from 'v-mask'
 import { VueMaskDirective } from 'v-mask';
 
 const vMaskV2 = VueMaskDirective;
