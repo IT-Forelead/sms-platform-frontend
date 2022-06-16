@@ -23,13 +23,13 @@
               <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortByAccess === '' ? 'Shablon turi' : changeGenderAccess(sortByAccess) }} <i @click="clearAccessSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByAccess !== '' }"></i></div>
               <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                  <li class="border-b border-dotted">
+                  <li class="border-b border-dotted cursor-pointer">
                     <a @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
                   </li>
-                  <li class="border-b border-dotted">
+                  <li class="border-b border-dotted cursor-pointer">
                     <a @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
                   </li>
-                  <li class="border-b border-dotted">
+                  <li class="border-b border-dotted cursor-pointer">
                     <a @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
                   </li>
                 </ul>
@@ -41,8 +41,8 @@
           <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
-                <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
-                <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600 mr-2"></i>
+                <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
+                <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
               <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
@@ -136,8 +136,8 @@
               <li v-for="(templateCategory, index) in templateCategories" :key="index" class="flex justify-between items-center py-2 px-1 border-b">
                 <span class="text-md"><i class="fa-solid fa-angles-right text-sm mr-2"></i>{{ templateCategory.name }}</span>
                 <div>
-                  <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3"></i>
-                  <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600"></i>
+                  <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
+                  <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
                 </div>
               </li>
             </ul>

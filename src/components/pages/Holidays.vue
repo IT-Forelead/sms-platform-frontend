@@ -8,8 +8,8 @@
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
                 <i @click="openModal()" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
-                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2"></i>
-                <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can text-gray-700 hover:text-red-600 mr-2"></i>
+                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
+                <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
               <i @click="openActions(holiday.id)" :id="'st-' + holiday.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>

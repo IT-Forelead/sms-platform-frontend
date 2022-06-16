@@ -38,7 +38,7 @@
           <p class="text-2xl font-semibold m-0 p-0">{{ phoneStyle(contact.phone) }}</p>
           <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
         </div>
-        <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1 absolute top-1 right-1 dropbtn"></i>
+        <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1.5 px-3 absolute hover:bg-gray-200 top-1 right-1 dropbtn shadow rounded-full"></i>
         <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-0 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
             <li class="border-b border-dotted">
