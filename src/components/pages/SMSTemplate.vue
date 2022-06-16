@@ -14,9 +14,9 @@
           </div>
           <div class="flex">
             <div class="relative">
-              <select class="form-select appearance-none block w-full px-3 pr-7 rounded-lg py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="categories">
+              <select v-model="sortByCategoryId" class="form-select appearance-none block w-full px-3 pr-7 rounded-lg py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="categories">
                 <option value="">Bo'lim bo'yicha</option>
-                <option v-for="(cat, idx) in templateCategories" :key="idx" :value="cat.id" @click="sortByCategory(cat.id)">{{ cat.name }}</option>
+                <option v-for="(cat, idx) in templateCategories" :key="idx" :value="cat.id">{{ cat.name }}</option>
               </select>
             </div>
             <div class="relative pr-4">
@@ -83,9 +83,7 @@
             <div class="mb-6">
               <div class="flex justify-between items-center">
                 <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
-                <span @click="openModal()" class="p-1 px-2 bg-green-100 text-sm text-green-500 rounded cursor-pointer hover:bg-green-200">
-                  <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish
-                </span>
+                <span @click="openModal()" class="p-1 px-2 bg-green-100 text-sm text-green-500 rounded cursor-pointer hover:bg-green-200"> <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish </span>
               </div>
               <select v-model="templateCategoryId_" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bo'limni tanlang</option>
@@ -163,8 +161,10 @@ const search = ref('')
 const sortByCategoryId = ref('')
 const sortByAccess = ref('')
 
-const sortByCategory = (selectedId) => (sortByCategoryId.value = selectedId)
-const sortByAccessFunc = (access) => (sortByAccess.value = access)
+const sortByAccessFunc = (access) => {
+  sortByAccess.value = access
+  toggleDropDownFilterByGender()
+}
 const clearAccessSort = () => (sortByAccess.value = '')
 const clearCategorySort = () => (sortByCategoryId.value = '')
 
@@ -175,22 +175,9 @@ function openActions(id) {
   x.parent('.actions').children('div').toggleClass('hidden')
 }
 
-function toggleDropDownFilterByCategory() {
-  $('#filterByCategory').toggleClass('hidden')
-}
-
 function toggleDropDownFilterByGender() {
-  $('#filterByGender').removeClass('hidden')
+  $('#filterByGender').toggleClass('hidden')
 }
-
-$(document).click(function (event) {
-  if (!$(event.target).closest('#filterByCategoryBtn').length && !$(event.target).is('#filterByCategoryBtn')) {
-    $('#filterByCategory').addClass('hidden')
-  }
-  if (!$(event.target).closest('#filterByGenderBtn').length && !$(event.target).is('#filterByGenderBtn')) {
-    $('#filterByGender').addClass('hidden')
-  }
-})
 
 const store = useStore()
 
@@ -216,7 +203,13 @@ const addTemplateCategoryInStore = () => {
 }
 
 const filteredTemplates = computed(() => {
-  if (sortByCategoryId.value !== '') {
+  if (sortByCategoryId.value !== '' && sortByAccess.value !== '') {
+    return store.state.templates
+      .filter((temp) => temp.templateCategoryId === sortByCategoryId.value)
+      .filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
+      .filter((temp) => temp.genderAccess === sortByAccess.value)
+      .filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
+  } else if (sortByCategoryId.value !== '') {
     return store.state.templates.filter((temp) => temp.templateCategoryId === sortByCategoryId.value).filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
   } else if (sortByAccess.value !== '') {
     return store.state.templates.filter((temp) => temp.genderAccess === sortByAccess.value).filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
@@ -318,7 +311,7 @@ const createTemplateCategory = () => {
     })
   } else {
     const templateCategoryData = {
-      name: categoryName_.value
+      name: categoryName_.value,
     }
     store.dispatch('templateCategoriesModule/create', templateCategoryData).then(
       () => {
