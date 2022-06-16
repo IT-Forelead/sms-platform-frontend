@@ -58,6 +58,7 @@ const contacts = computed(() => {
 const addContactsInStore = () => {
   ContactService.getContacts().then((data) => store.commit('setContacts', data))
 }
+
 const createContact = () => {
   phone_.value = phone_.value.replace(')', '').replace('(', '').replace(' ', '').replace(' ', '').replace('-', '').replace('-', '')
   console.log(phone_.value);

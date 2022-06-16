@@ -17,62 +17,41 @@
           <path d="M13 19C13 19 12.5 21 10 21C7.5 21 7 19 7 19" stroke="#222628" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M10 1V2" stroke="#222628" stroke-width="1.4" stroke-linecap="round" />
         </svg>
-        <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full animate-ping"></div>
-        <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
+        <div v-show="showBadge">
+          <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full animate-ping"></div>
+          <div class="absolute top-0.5 right-0 p-1.5 bg-rose-500 rounded-full"></div>
+        </div>
       </button>
       <div id="dropdownNotification" class="hidden bg-white rounded shadow w-96">
-        <div class="flex justify-between items-center text-md border-b px-5 py-3">
-          <div class="flex mr-3 items-center px-1">
-            <div class="relative mr-3 bottom-1.5">
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full animate-ping"></div>
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full"></div>
-            </div>
-            <div class="flex items-center justify-center bg-gray-200 h-10 w-10 rounded-full">
-              <div class="text-center text-lg pt-1 font-bold text-gray-600">
-                <i class="fa-regular fa-bookmark"></i>
+        <div v-if="showBadge">
+          <div v-for="(holiday, index) in holidays" :key="index" class="flex justify-between items-center text-md border-b px-5 py-3">
+            <div class="flex mr-3 items-center px-1">
+              <div class="relative mr-3 bottom-1.5">
+                <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full animate-ping"></div>
+                <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full"></div>
               </div>
+              <div class="flex items-center justify-center bg-gray-200 h-10 w-10 rounded-full">
+                <div class="text-center text-lg pt-1 font-bold text-gray-600">
+                  <i class="fa-regular fa-bookmark"></i>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900">Bildirishnoma</p>
+              <p class="text-md text-gray-600">{{ holiday.name }} tabrigi uchun SMS shablon biriktiring!</p>
+            </div>
+          </div>
+        </div>
+        <div v-else class="flex justify-between flex-col items-center text-md border-b px-5 py-16">
+          <div class="flex items-center justify-center bg-gray-200 h-16 w-16 rounded-full">
+            <div class="text-center text-lg pt-1 font-bold text-gray-400">
+              <i class="fa-regular fa-bell fa-2x"></i>
             </div>
           </div>
           <div>
-            <p class="font-semibold text-gray-900">Bildirishnoma</p>
-            <p class="text-md text-gray-600">Tug'ilgan kun tabrigi uchun SMS shablon biriktiring!</p>
+            <p class="text-lg text-gray-600 mt-10 ">Bildirishnomalar mavjud emas!</p>
           </div>
         </div>
-        <div class="flex justify-between items-center text-md border-b px-5 py-3">
-          <div class="flex mr-3 items-center px-1">
-            <div class="relative mr-3 bottom-1.5">
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full animate-ping"></div>
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full"></div>
-            </div>
-            <div class="flex items-center justify-center bg-gray-200 h-10 w-10 rounded-full">
-              <div class="text-center text-lg pt-1 font-bold text-gray-600">
-                <i class="fa-regular fa-bookmark"></i>
-              </div>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold text-gray-900">Bildirishnoma</p>
-            <p class="text-md text-gray-600">Tug'ilgan kun tabrigi uchun SMS shablon biriktiring!</p>
-          </div>
-        </div>
-        <div class="flex justify-between items-center text-md border-b px-5 py-3">
-          <div class="flex mr-3 items-center px-1">
-            <div class="relative mr-3 bottom-1.5">
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full animate-ping"></div>
-              <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full"></div>
-            </div>
-            <div class="flex items-center justify-center bg-gray-200 h-10 w-10 rounded-full">
-              <div class="text-center text-lg font-bold text-gray-600">
-                <i class="fa-regular fa-bookmark"></i>
-              </div>
-            </div>
-          </div>
-          <div>
-            <p class="font-semibold text-gray-900">Bildirishnoma</p>
-            <p class="text-md text-gray-600">Tug'ilgan kun tabrigi uchun SMS shablon biriktiring!</p>
-          </div>
-        </div>
-        <div class="flex justify-center items-center bg-gray-50 text-gray-600 text-sm border-b py-1 cursor-pointer">Bildirishnomani yopish</div>
       </div>
       <div class="border-l-2 pl-3 flex items-center">
         <button id="dropdownBtn" @click="toggleDropDown()" class="text-center inline-flex items-center" type="button">
@@ -107,10 +86,11 @@
 <script setup>
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
-import userService from '../../services/user.service'
-import $ from 'jquery'
-import authService from '../../services/auth.service'
 import { useRouter } from 'vue-router'
+import userService from '../../services/user.service'
+import authService from '../../services/auth.service'
+import holidayService from '../../services/holiday.service'
+import $ from 'jquery'
 
 const store = useStore()
 const router = useRouter()
@@ -131,6 +111,18 @@ const addUserInStore = () => {
 
 const name = computed(() => {
   return store.state.user.name
+})
+
+const showBadge = computed(() => {
+  return store.state.holidays.filter((e) => e?.smsWomenId === null || e?.smsMenId === null).length > 0
+})
+
+const addHolidayInStore = () => {
+  holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
+}
+
+const holidays = computed(() => {
+  return store.state.holidays.filter((e) => e?.smsWomenId === null || e?.smsMenId === null)
 })
 
 function toggleDropDown() {
@@ -163,7 +155,7 @@ function autoLogout() {
   }, 3000)
 }
 
-onMounted(() => addUserInStore(), autoLogout())
+onMounted(() => addUserInStore(), autoLogout(), addHolidayInStore())
 </script>
 
 <style scoped>
