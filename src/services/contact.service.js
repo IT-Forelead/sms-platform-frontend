@@ -16,6 +16,12 @@ class ContactService {
     })
   }
 
+  updateContact(data) {
+    return axios.put(API_URL + 'contact', { ...data }, { headers: authHeader() }).then((response) => {
+      return response.data
+    })
+  }
+
   deleteContact(id) {
     return axios.delete(API_URL + 'contact', { headers: authHeader(), data: `"${id}"` }).then((response) => {
       return response.data

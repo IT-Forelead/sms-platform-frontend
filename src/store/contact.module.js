@@ -25,6 +25,17 @@ export const contactsModule = {
       );
     },
     
+    update({ commit }, contactData) {
+      return ContactService.updateContact(contactData).then(
+        contact => {
+          return Promise.resolve(contact);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+    
     delete({ commit }, id) {
       return ContactService.deleteContact(id).then(
         contact => {

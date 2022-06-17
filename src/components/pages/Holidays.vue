@@ -294,28 +294,48 @@ const deleteHoliday = (id) => {
 }
 
 const updateHoliday = () => {
-  const holidayData = {
-    id: selectedHolidayId.value,
-    name: name_.value,
-    day: day_.value,
-    month: month_.value,
-  }
-  store.dispatch('holidaysModule/update', holidayData).then(
-    () => {
-      notify.success({
-        message: 'Bayram muvaffaqiyatli taxrirlandi!',
-        position: 'bottomLeft',
-      })
-      addHolidayInStore()
-      closeEditModal()
-    },
-    (error) => {
-      notify.error({
-        message: 'Bayramni taxrirlashda xatolik yuz berdi!',
-        position: 'bottomLeft',
-      })
+  if (name_.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, bayram nomini kiriting!',
+      position: 'bottomLeft',
+    })
+  } else if (day_.value === 'Bayram kunini tanlang') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, bayram kunini tanlang!',
+      position: 'bottomLeft',
+    })
+  } else if (month_.value === 'Bayram oyini tanlang') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, bayram oyini tanlang!',
+      position: 'bottomLeft',
+    })
+  } else {
+    const holidayData = {
+      id: selectedHolidayId.value,
+      name: name_.value,
+      day: day_.value,
+      month: month_.value,
     }
-  )
+    store.dispatch('holidaysModule/update', holidayData).then(
+      () => {
+        notify.success({
+          message: 'Bayram muvaffaqiyatli taxrirlandi!',
+          position: 'bottomLeft',
+        })
+        addHolidayInStore()
+        closeEditModal()
+      },
+      (error) => {
+        notify.error({
+          message: 'Bayramni taxrirlashda xatolik yuz berdi!',
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
 }
 
 onMounted(() => addHolidayInStore(), addSMSTemplateInStore())

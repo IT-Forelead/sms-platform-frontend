@@ -61,7 +61,6 @@ const addContactsInStore = () => {
 
 const createContact = () => {
   phone_.value = phone_.value.replace(')', '').replace('(', '').replace(' ', '').replace(' ', '').replace('-', '').replace('-', '')
-  console.log(phone_.value);
   if (contacts.value.filter(i => i.phone === phone_.value)[0]) {
     notify.warning({
       title: 'Diqqat!',

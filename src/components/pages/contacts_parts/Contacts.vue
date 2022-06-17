@@ -42,12 +42,56 @@
         <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-0 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
             <li class="border-b border-dotted">
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
+              <a @click="openEditModal(contact)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
             </li>
             <li>
-              <a href="#" @click="deleteContact(contact.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
+              <a @click="deleteContact(contact.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <h3 class="text-2xl font-extrabold py-5 ml-5">Kontaktni taxrirlash</h3>
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+          <form @submit.prevent="updateContact()">
+            <div class="mb-6">
+              <label for="first-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Familiyasi</label>
+              <input type="text" id="first-name-input" v-model="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
+            </div>
+            <div class="mb-6">
+              <label for="last-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ismi</label>
+              <input type="text" id="last-name-input" v-model="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
+            </div>
+            <div class="mb-6">
+              <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Jinsi</label>
+              <select id="gender-input" v-model="gender_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option>Jinsni tanlang</option>
+                <option value="male">Erkak</option>
+                <option value="female">Ayol</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Tug'ilgan kuni</label>
+              <input type="date" id="birthday-input" v-model="birthday_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+            <div class="mb-6">
+              <label for="phone-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Telefon raqami</label>
+              <input type="text" id="phone-input" v-mask="'+### (##) ###-##-##'" v-model="phone_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+998 (99) 123-45-67" />
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <div class="flex justify-end items-center">
+              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -65,6 +109,31 @@ import contactService from '../../../services/contact.service'
 const search = ref('')
 const store = useStore()
 const sortBy = ref('')
+const selectedContactId = ref('')
+const first_name = ref('')
+const last_name = ref('')
+const gender_ = ref('Jinsni tanlang')
+const birthday_ = ref('')
+const phone_ = ref('')
+
+const openEditModal = (contact) => {
+  $('#edit-modal').removeClass('hidden')
+  selectedContactId.value = contact.id
+  first_name.value = contact.firstName
+  last_name.value = contact.lastName
+  gender_.value = contact.gender
+  birthday_.value = contact.birthday
+  phone_.value = contact.phone
+}
+
+const closeEditModal = () => {
+  $('#edit-modal').addClass('hidden')
+  first_name.value = ref('')
+  last_name.value = ref('')
+  gender_.value = ref('Jinsni tanlang')
+  birthday_.value = ref('')
+  phone_.value = ref('')
+}
 
 const sortByFunc = (sort) => {
   toggleDropDownFilterBy()
@@ -122,7 +191,7 @@ const phonePrefixColor = (phonePrefix) => {
 }
 
 const phoneStyle = (phone) => {
-  return `${phone.slice(0,4)} (${phone.slice(4,6)}) ${phone.slice(6,9)}-${phone.slice(9,11)}-${phone.slice(11,13)}`
+  return `${phone.slice(0, 4)} (${phone.slice(4, 6)}) ${phone.slice(6, 9)}-${phone.slice(9, 11)}-${phone.slice(11, 13)}`
 }
 
 const month = (index) => {
@@ -175,6 +244,72 @@ const deleteContact = (id) => {
       })
     }
   )
+}
+
+const updateContact = () => {
+  phone_.value = phone_.value.replace(')', '').replace('(', '').replace(' ', '').replace(' ', '').replace('-', '').replace('-', '')
+  if (contacts.value.filter((i) => i.phone === phone_.value)[0]) {
+    notify.warning({
+      title: 'Diqqat!',
+      message: `Bu <strong style="color: #000;">${phone_.value}</strong> kontakt allaqachon bazada mavjud!`,
+      position: 'bottomLeft',
+    })
+  } else if (last_name.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, familyani kiriting!',
+      position: 'bottomLeft',
+    })
+  } else if (last_name.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, ismni kiriting!',
+      position: 'bottomLeft',
+    })
+  } else if (gender_.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, jinsni tanlang!',
+      position: 'bottomLeft',
+    })
+  } else if (birthday_.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: "Iltimos, tug'ilgan kunni kiriting!",
+      position: 'bottomLeft',
+    })
+  } else if (phone_.value === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, telefon raqamni kiriting!',
+      position: 'bottomLeft',
+    })
+  } else {
+    const contactData = {
+      id: selectedContactId.value,
+      firstName: first_name.value,
+      lastName: last_name.value,
+      gender: gender_.value,
+      birthday: birthday_.value,
+      phone: phone_.value,
+    }
+    store.dispatch('contactsModule/update', contactData).then(
+      () => {
+        notify.success({
+          message: 'Kontakt muvaffaqiyatli taxrirlandi!',
+          position: 'bottomLeft',
+        })
+        addContactsInStore()
+        closeEditModal()
+      },
+      (error) => {
+        notify.error({
+          message: 'Kontaktni taxrirlashda xatolik yuz berdi!',
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
 }
 </script>
 
