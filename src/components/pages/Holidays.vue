@@ -7,7 +7,7 @@
           <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
-                <i @click="openModal()" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
+                <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
                 <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
                 <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
@@ -77,11 +77,11 @@
           </button>
           <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
           <div class="bg-white rounded-lg p-3 px-5 max-content-h">
-            <form>
+            <form @submit.prevent="updateSMSIdsInHoliday()">
               <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
               <div class="max-h-40 overflow-y-auto p-3 mb-6">
                 <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
-                  <input :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                  <input v-model="editSMSIdsInHolidayParam.smsMenId" :value="template.id" :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
                   <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                     <div class="text-md font-semibold">{{ template.title }}</div>
                     <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
@@ -92,7 +92,7 @@
               <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
               <div class="max-h-40 overflow-y-auto p-3 mb-6">
                 <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
-                  <input :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                  <input v-model="editSMSIdsInHolidayParam.smsWomenId" :value="template.id" :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
                   <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                     <div class="text-md font-semibold">{{ template.title }}</div>
                     <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
@@ -185,6 +185,12 @@ const editHolidayParam = reactive({
   month: 'Bayram oyini tanlang',
 })
 
+const editSMSIdsInHolidayParam = reactive({
+  id: '',
+  smsWomenId: '',
+  smsMenId: ''
+})
+
 function openActions(id) {
   let x = $(`#st-${id}`)
   x.toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
@@ -192,12 +198,18 @@ function openActions(id) {
   x.parent('.actions').children('div').toggleClass('hidden')
 }
 
-const openModal = () => {
+const openModal = (holiday) => {
   $('#add-template-modal').removeClass('hidden')
+  editSMSIdsInHolidayParam.id = holiday.id
+  editSMSIdsInHolidayParam.smsWomenId = holiday.smsWomenId
+  editSMSIdsInHolidayParam.smsMenId = holiday.smsMenId
 }
 
 const closeModal = () => {
   $('#add-template-modal').addClass('hidden')
+  editSMSIdsInHolidayParam.id = ''
+  editSMSIdsInHolidayParam.smsWomenId = ''
+  editSMSIdsInHolidayParam.smsMenId = ''
 }
 
 const openEditModal = (holiday) => {
@@ -327,6 +339,39 @@ const updateHoliday = () => {
       (error) => {
         notify.error({
           message: 'Bayramni taxrirlashda xatolik yuz berdi!',
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
+}
+
+const updateSMSIdsInHoliday = () => {
+  if (editSMSIdsInHolidayParam.smsWomenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Ayollar uchun SMS shablon tanlang!',
+      position: 'bottomLeft',
+    })
+  } else if (editSMSIdsInHolidayParam.smsMenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Erkaklar uchun SMS shablonni tanlang!',
+      position: 'bottomLeft',
+    })
+  } else {
+    store.dispatch('holidaysModule/updateSMSIds', editSMSIdsInHolidayParam).then(
+      () => {
+        notify.success({
+          message: 'Bayram uchun SMS shablon muvaffaqiyatli biriktirildi!',
+          position: 'bottomLeft',
+        })
+        addHolidayInStore()
+        closeModal()
+      },
+      (error) => {
+        notify.error({
+          message: 'Bayram uchun SMS shablonni biriktirishda xatolik yuz berdi!',
           position: 'bottomLeft',
         })
       }
