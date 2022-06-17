@@ -11,8 +11,13 @@ class SMSTemplateService {
   }
 
   createSMSTemplate(data) {
-    console.log(data);
     return axios.post(API_URL + 'sms-template', {...data}, { headers: authHeader() }).then((response) => {
+      return response.data
+    })
+  }
+
+  updateSMSTemplate(data) {
+    return axios.put(API_URL + 'sms-template', { ...data }, { headers: authHeader() }).then((response) => {
       return response.data
     })
   }

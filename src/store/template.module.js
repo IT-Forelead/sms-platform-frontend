@@ -25,6 +25,17 @@ export const templatesModule = {
       );
     },
     
+    update({ commit }, templateData) {
+      return SMSTemplateService.updateSMSTemplate(templateData).then(
+        template => {
+          return Promise.resolve(template);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+    
     delete({ commit }, id) {
       return SMSTemplateService.deleteSMSTemplate(id).then(
         template => {

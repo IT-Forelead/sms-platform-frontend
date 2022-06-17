@@ -11,7 +11,6 @@ class TemplateCategoriesService {
   }
 
   createTemplateCategory(data) {
-    console.log(data);
     return axios.post(API_URL + 'template-category', {...data}, { headers: authHeader() }).then((response) => {
       return response.data
     })

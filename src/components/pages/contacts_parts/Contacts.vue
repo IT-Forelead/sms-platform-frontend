@@ -64,15 +64,15 @@
           <form @submit.prevent="updateContact()">
             <div class="mb-6">
               <label for="first-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Familiyasi</label>
-              <input type="text" id="first-name-input" v-model="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
+              <input type="text" id="first-name-input" v-model="editContactParam.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
             </div>
             <div class="mb-6">
               <label for="last-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ismi</label>
-              <input type="text" id="last-name-input" v-model="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
+              <input type="text" id="last-name-input" v-model="editContactParam.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Jinsi</label>
-              <select id="gender-input" v-model="gender_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="editContactParam.gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option>Jinsni tanlang</option>
                 <option value="male">Erkak</option>
                 <option value="female">Ayol</option>
@@ -80,11 +80,11 @@
             </div>
             <div class="mb-6">
               <label for="birthday-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Tug'ilgan kuni</label>
-              <input type="date" id="birthday-input" v-model="birthday_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="date" id="birthday-input" v-model="editContactParam.birthday" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="mb-6">
               <label for="phone-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Telefon raqami</label>
-              <input type="text" id="phone-input" v-mask="'+### (##) ###-##-##'" v-model="phone_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+998 (99) 123-45-67" />
+              <input type="text" id="phone-input" v-mask="'+### (##) ###-##-##'" v-model="editContactParam.phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+998 (99) 123-45-67" />
             </div>
             <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
             <div class="flex justify-end items-center">
@@ -99,40 +99,45 @@
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
 import $ from 'jquery'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import contactService from '../../../services/contact.service'
 
-const search = ref('')
 const store = useStore()
+
+const search = ref('')
 const sortBy = ref('')
-const selectedContactId = ref('')
-const first_name = ref('')
-const last_name = ref('')
-const gender_ = ref('Jinsni tanlang')
-const birthday_ = ref('')
-const phone_ = ref('')
+
+const editContactParam = reactive({
+  id: '',
+  firstName: '',
+  lastName: '',
+  gender: 'Jinsni tanlang',
+  birthday: '',
+  phone: '',
+})
 
 const openEditModal = (contact) => {
   $('#edit-modal').removeClass('hidden')
-  selectedContactId.value = contact.id
-  first_name.value = contact.firstName
-  last_name.value = contact.lastName
-  gender_.value = contact.gender
-  birthday_.value = contact.birthday
-  phone_.value = contact.phone
+  editContactParam.id = contact.id
+  editContactParam.firstName = contact.firstName
+  editContactParam.lastName = contact.lastName
+  editContactParam.gender = contact.gender
+  editContactParam.birthday = contact.birthday
+  editContactParam.phone = contact.phone
 }
 
 const closeEditModal = () => {
   $('#edit-modal').addClass('hidden')
-  first_name.value = ref('')
-  last_name.value = ref('')
-  gender_.value = ref('Jinsni tanlang')
-  birthday_.value = ref('')
-  phone_.value = ref('')
+  editContactParam.id = ''
+  editContactParam.firstName = ''
+  editContactParam.lastName = ''
+  editContactParam.gender = 'Jinsni tanlang'
+  editContactParam.birthday = ''
+  editContactParam.phone = ''
 }
 
 const sortByFunc = (sort) => {
@@ -247,53 +252,45 @@ const deleteContact = (id) => {
 }
 
 const updateContact = () => {
-  phone_.value = phone_.value.replace(')', '').replace('(', '').replace(' ', '').replace(' ', '').replace('-', '').replace('-', '')
-  if (contacts.value.filter((i) => i.phone === phone_.value)[0]) {
+  editContactParam.phone = editContactParam.phone.replace(')', '').replace('(', '').replace(' ', '').replace(' ', '').replace('-', '').replace('-', '')
+  if (contacts.value.filter((i) => i.phone === editContactParam.phone)[0]) {
     notify.warning({
       title: 'Diqqat!',
-      message: `Bu <strong style="color: #000;">${phone_.value}</strong> kontakt allaqachon bazada mavjud!`,
+      message: `Bu <strong style="color: #000;">${editContactParam.phone}</strong> kontakt allaqachon bazada mavjud!`,
       position: 'bottomLeft',
     })
-  } else if (last_name.value === '') {
+  } else if (editContactParam.firstName === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, familyani kiriting!',
       position: 'bottomLeft',
     })
-  } else if (last_name.value === '') {
+  } else if (editContactParam.lastName === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, ismni kiriting!',
       position: 'bottomLeft',
     })
-  } else if (gender_.value === '') {
+  } else if (editContactParam.gender === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, jinsni tanlang!',
       position: 'bottomLeft',
     })
-  } else if (birthday_.value === '') {
+  } else if (editContactParam.birthday === '') {
     notify.warning({
       title: 'Diqqat!',
       message: "Iltimos, tug'ilgan kunni kiriting!",
       position: 'bottomLeft',
     })
-  } else if (phone_.value === '') {
+  } else if (editContactParam.phone === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, telefon raqamni kiriting!',
       position: 'bottomLeft',
     })
   } else {
-    const contactData = {
-      id: selectedContactId.value,
-      firstName: first_name.value,
-      lastName: last_name.value,
-      gender: gender_.value,
-      birthday: birthday_.value,
-      phone: phone_.value,
-    }
-    store.dispatch('contactsModule/update', contactData).then(
+    store.dispatch('contactsModule/update', editContactParam).then(
       () => {
         notify.success({
           message: 'Kontakt muvaffaqiyatli taxrirlandi!',
@@ -316,5 +313,8 @@ const updateContact = () => {
 <style scoped>
 .custom-height {
   height: 75vh;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>

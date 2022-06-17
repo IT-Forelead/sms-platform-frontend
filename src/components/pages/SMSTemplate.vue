@@ -41,7 +41,7 @@
           <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
             <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center hidden">
-                <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
+                <i @click="openEditModal(template)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
                 <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
               <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
@@ -75,24 +75,24 @@
         <div class="bg-white rounded-lg p-3 px-5">
           <h3 class="text-2xl font-extrabold mb-3">SMS shablon yaratish</h3>
           <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-          <form @submit.prevent="createSMSTemplate">
+          <form @submit.prevent="createSMSTemplate()">
             <div class="mb-6">
               <label for="title-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
-              <input type="text" v-model="title_" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
+              <input type="text" v-model="createSMSTemplateParam.title" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
             </div>
             <div class="mb-6">
               <div class="flex justify-between items-center">
                 <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
                 <span @click="openModal()" class="p-1 px-2 bg-green-100 text-sm text-green-500 rounded cursor-pointer hover:bg-green-200"> <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish </span>
               </div>
-              <select v-model="templateCategoryId_" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select v-model="createSMSTemplateParam.templateCategoryId" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bo'limni tanlang</option>
                 <option v-for="(templateCategory, index) in templateCategories" :key="index" :value="templateCategory.id">{{ templateCategory.name }}</option>
               </select>
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
-              <select id="gender-input" v-model="access_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="createSMSTemplateParam.gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Kim uchunligini tanlang</option>
                 <option value="all">Barcha uchun</option>
                 <option value="male">Erkaklar uchun</option>
@@ -101,7 +101,7 @@
             </div>
             <div class="mb-6">
               <label for="text-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
-              <textarea id="text-input" v-model="text_" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="SMS matnini kiriting..."></textarea>
+              <textarea id="text-input" v-model="createSMSTemplateParam.text" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="SMS matnini kiriting..."></textarea>
               <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
             </div>
             <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
@@ -146,10 +146,55 @@
       </div>
     </div>
   </div>
+
+  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <h3 class="text-2xl font-extrabold py-5 ml-5">SMS shablonni taxrirlash</h3>
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+          <form @submit.prevent="updateSMSTemplate()">
+            <div class="mb-6">
+              <label for="title-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
+              <input type="text" v-model="editSMSTemplateParam.title" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
+            </div>
+            <div class="mb-6">
+              <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
+              <select v-model="editSMSTemplateParam.templateCategoryId" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Bo'limni tanlang</option>
+                <option v-for="(templateCategory, index) in templateCategories" :key="index" :value="templateCategory.id">{{ templateCategory.name }}</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
+              <select id="gender-input" v-model="editSMSTemplateParam.gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Kim uchunligini tanlang</option>
+                <option value="all">Barcha uchun</option>
+                <option value="male">Erkaklar uchun</option>
+                <option value="female">Ayollar uchun</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="text-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
+              <textarea id="text-input" v-model="editSMSTemplateParam.text" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="SMS matnini kiriting..."></textarea>
+              <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <div class="flex justify-end items-center">
+              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
@@ -157,16 +202,35 @@ import templateService from '../../services/template.service'
 import templateCategoryService from '../../services/templateCategories.service'
 import $ from 'jquery'
 
+const store = useStore()
+
 const search = ref('')
 const sortByCategoryId = ref('')
 const sortByAccess = ref('')
+const categoryName_ = ref('')
+
+const clearAccessSort = () => (sortByAccess.value = '')
+const clearCategorySort = () => (sortByCategoryId.value = '')
+
+const createSMSTemplateParam = reactive({
+  templateCategoryId: "Bo'limni tanlang",
+  title: '',
+  text: '',
+  gender: 'Kim uchunligini tanlang',
+})
+
+const editSMSTemplateParam = reactive({
+  id: '',
+  templateCategoryId: "Bo'limni tanlang",
+  title: '',
+  text: '',
+  gender: 'Kim uchunligini tanlang',
+})
 
 const sortByAccessFunc = (access) => {
   sortByAccess.value = access
   toggleDropDownFilterByGender()
 }
-const clearAccessSort = () => (sortByAccess.value = '')
-const clearCategorySort = () => (sortByCategoryId.value = '')
 
 function openActions(id) {
   let x = $(`#st-${id}`)
@@ -179,8 +243,6 @@ function toggleDropDownFilterByGender() {
   $('#filterByGender').toggleClass('hidden')
 }
 
-const store = useStore()
-
 const openModal = () => {
   $('#popup-modal').removeClass('hidden')
 }
@@ -188,11 +250,23 @@ const closeModal = () => {
   $('#popup-modal').addClass('hidden')
 }
 
-const templateCategoryId_ = ref("Bo'limni tanlang")
-const title_ = ref('')
-const text_ = ref('')
-const access_ = ref('Kim uchunligini tanlang')
-const categoryName_ = ref('')
+const openEditModal = (template) => {
+  $('#edit-modal').removeClass('hidden')
+  editSMSTemplateParam.id = template.id
+  editSMSTemplateParam.templateCategoryId = template.templateCategoryId
+  editSMSTemplateParam.title = template.title
+  editSMSTemplateParam.text = template.text
+  editSMSTemplateParam.gender = template.genderAccess
+}
+
+const closeEditModal = () => {
+  $('#edit-modal').addClass('hidden')
+  editSMSTemplateParam.id = ''
+  editSMSTemplateParam.templateCategoryId = "Bo'limni tanlang"
+  editSMSTemplateParam.title = ''
+  editSMSTemplateParam.text = ''
+  editSMSTemplateParam.gender = 'Kim uchunligini tanlang'
+}
 
 const addSMSTemplateInStore = () => {
   templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
@@ -249,52 +323,91 @@ const genderAccessColor = (access) => {
 }
 
 const createSMSTemplate = () => {
-  if (templateCategoryId_.value === "Bo'limni tanlang") {
+  if (createSMSTemplateParam.templateCategoryId === "Bo'limni tanlang") {
     notify.warning({
       title: 'Diqqat!',
       message: "Iltimos, bo'limni tanlang!",
       position: 'bottomLeft',
     })
-  } else if (title_.value === '') {
+  } else if (createSMSTemplateParam.title === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, sarlavhani kiriting!',
       position: 'bottomLeft',
     })
-  } else if (text_.value === '') {
+  } else if (createSMSTemplateParam.text === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, matnni kiriting!',
       position: 'bottomLeft',
     })
-  } else if (access_.value === '') {
+  } else if (createSMSTemplateParam.gender === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, kim uchunligini tanlang!',
       position: 'bottomLeft',
     })
   } else {
-    const templateData = {
-      templateCategoryId: templateCategoryId_.value,
-      title: title_.value,
-      text: text_.value,
-      gender: access_.value,
-    }
-    store.dispatch('templatesModule/create', templateData).then(
+    store.dispatch('templatesModule/create', createSMSTemplateParam).then(
       () => {
         notify.success({
           message: 'SMS shablon muvaffaqiyatli yaratildi!',
           position: 'bottomLeft',
         })
         addSMSTemplateInStore()
-        templateCategoryId_.value = "Bo'limni tanlang"
-        title_.value = ''
-        text_.value = ''
-        access_.value = 'Kim uchunligini tanlang'
+        createSMSTemplateParam.templateCategoryId = "Bo'limni tanlang"
+        createSMSTemplateParam.title = ''
+        createSMSTemplateParam.text = ''
+        createSMSTemplateParam.gender = 'Kim uchunligini tanlang'
       },
       (error) => {
         notify.error({
           message: 'SMS shablon yaratishda xatolik yuz berdi!',
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
+}
+
+const updateSMSTemplate = () => {
+  if (editSMSTemplateParam.templateCategoryId === "Bo'limni tanlang") {
+    notify.warning({
+      title: 'Diqqat!',
+      message: "Iltimos, bo'limni tanlang!",
+      position: 'bottomLeft',
+    })
+  } else if (editSMSTemplateParam.title === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, sarlavhani kiriting!',
+      position: 'bottomLeft',
+    })
+  } else if (editSMSTemplateParam.text === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, matnni kiriting!',
+      position: 'bottomLeft',
+    })
+  } else if (editSMSTemplateParam.gender === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, kim uchunligini tanlang!',
+      position: 'bottomLeft',
+    })
+  } else {
+    store.dispatch('templatesModule/update', editSMSTemplateParam).then(
+      () => {
+        notify.success({
+          message: 'SMS shablon muvaffaqiyatli taxrirlandi!',
+          position: 'bottomLeft',
+        })
+        addSMSTemplateInStore()
+        closeEditModal()
+      },
+      (error) => {
+        notify.error({
+          message: 'SMS shablonni taxrirlashda xatolik yuz berdi!',
           position: 'bottomLeft',
         })
       }
@@ -358,6 +471,7 @@ const deleteTemplateCategory = (id) => {
         position: 'bottomLeft',
       })
       addTemplateCategoryInStore()
+      addSMSTemplateInStore()
     },
     (error) => {
       notify.error({

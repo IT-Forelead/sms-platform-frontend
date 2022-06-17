@@ -29,21 +29,21 @@
         <div class="bg-white rounded-lg p-3 px-5">
           <h3 class="text-2xl font-extrabold mb-3">Bayram qo'shish</h3>
           <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-          <form @submit.prevent="createHoliday">
+          <form @submit.prevent="createHoliday()">
             <div class="mb-6">
               <label for="name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
-              <input type="text" v-model="name_" id="name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
+              <input type="text" v-model="createHolidayParam.name" id="name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
-              <select id="gender-input" v-model="day_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="createHolidayParam.day" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bayram kunini tanlang</option>
                 <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
               </select>
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram oyi</label>
-              <select id="gender-input" v-model="month_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="createHolidayParam.month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bayram oyini tanlang</option>
                 <option value="january">Yanvar</option>
                 <option value="february">Fevral</option>
@@ -109,52 +109,52 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
-      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-        <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-          <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-          <h3 class="text-2xl font-extrabold py-5 ml-5">Bayramni taxrirlash</h3>
-          <div class="bg-white rounded-lg p-3 px-5 max-content-h">
-            <form @submit.prevent="updateHoliday()">
-              <div class="mb-6">
-                <label for="edit-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
-                <input type="text" v-model="name_" id="edit-name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
-              </div>
-              <div class="mb-6">
-                <label for="edit-day-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
-                <select id="edit-day-input" v-model="day_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected>Bayram kunini tanlang</option>
-                  <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
-                </select>
-              </div>
-              <div class="mb-6">
-                <label for="edit-month-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram oyi</label>
-                <select id="edit-month-input" v-model="month_" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected>Bayram oyini tanlang</option>
-                  <option value="january">Yanvar</option>
-                  <option value="february">Fevral</option>
-                  <option value="march">Mart</option>
-                  <option value="april">Aprel</option>
-                  <option value="may">May</option>
-                  <option value="june">Iyun</option>
-                  <option value="july">Iyul</option>
-                  <option value="august">Avgust</option>
-                  <option value="september">Sentabr</option>
-                  <option value="october">Oktyabr</option>
-                  <option value="november">Noyabr</option>
-                  <option value="december">Dekabr</option>
-                </select>
-              </div>
-              <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-              <div class="flex justify-end items-center">
-                <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
-                <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
-              </div>
-            </form>
-          </div>
+  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <h3 class="text-2xl font-extrabold py-5 ml-5">Bayramni taxrirlash</h3>
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+          <form @submit.prevent="updateHoliday()">
+            <div class="mb-6">
+              <label for="edit-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
+              <input type="text" v-model="editHolidayParam.name" id="edit-name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
+            </div>
+            <div class="mb-6">
+              <label for="edit-day-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
+              <select id="edit-day-input" v-model="editHolidayParam.day" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Bayram kunini tanlang</option>
+                <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="edit-month-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram oyi</label>
+              <select id="edit-month-input" v-model="editHolidayParam.month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Bayram oyini tanlang</option>
+                <option value="january">Yanvar</option>
+                <option value="february">Fevral</option>
+                <option value="march">Mart</option>
+                <option value="april">Aprel</option>
+                <option value="may">May</option>
+                <option value="june">Iyun</option>
+                <option value="july">Iyul</option>
+                <option value="august">Avgust</option>
+                <option value="september">Sentabr</option>
+                <option value="october">Oktyabr</option>
+                <option value="november">Noyabr</option>
+                <option value="december">Dekabr</option>
+              </select>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <div class="flex justify-end items-center">
+              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -162,19 +162,28 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import holidayService from '../../services/holiday.service'
 import templateService from '../../services/template.service'
 import $ from 'jquery'
 
-const selectedHolidayId = ref('')
-const name_ = ref('')
-const day_ = ref('Bayram kunini tanlang')
-const month_ = ref('Bayram oyini tanlang')
+const store = useStore()
+
+const createHolidayParam = reactive({
+  name: '',
+  day: 'Bayram kunini tanlang',
+  month: 'Bayram oyini tanlang'
+})
+
+const editHolidayParam = reactive({
+  id: '',
+  name: '',
+  day: 'Bayram kunini tanlang',
+  month: 'Bayram oyini tanlang',
+})
 
 function openActions(id) {
   let x = $(`#st-${id}`)
@@ -182,8 +191,6 @@ function openActions(id) {
   x.parent('.actions').toggleClass('w-11').toggleClass('w-32').toggleClass('shadow').toggleClass('right-1')
   x.parent('.actions').children('div').toggleClass('hidden')
 }
-
-const store = useStore()
 
 const openModal = () => {
   $('#add-template-modal').removeClass('hidden')
@@ -195,18 +202,18 @@ const closeModal = () => {
 
 const openEditModal = (holiday) => {
   $('#edit-modal').removeClass('hidden')
-  selectedHolidayId.value = holiday.id
-  name_.value = holiday.name
-  day_.value = holiday.day
-  month_.value = holiday.month
+  editHolidayParam.id = holiday.id
+  editHolidayParam.name = holiday.name
+  editHolidayParam.day = holiday.day
+  editHolidayParam.month = holiday.month
 }
 
 const closeEditModal = () => {
   $('#edit-modal').addClass('hidden')
-  selectedHolidayId.value = ''
-  name_.value = ''
-  day_.value = 'Bayram kunini tanlang'
-  month_.value = 'Bayram oyini tanlang'
+  editHolidayParam.id = ''
+  editHolidayParam.name = ''
+  editHolidayParam.day = 'Bayram kunini tanlang'
+  editHolidayParam.month = 'Bayram oyini tanlang'
 }
 
 const addHolidayInStore = () => {
@@ -230,40 +237,35 @@ const templatesForWoman = computed(() => {
 })
 
 const createHoliday = () => {
-  if (name_.value === '') {
+  if (createHolidayParam.name === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram nomini kiriting!',
       position: 'bottomLeft',
     })
-  } else if (day_.value === 'Bayram kunini tanlang') {
+  } else if (createHolidayParam.day === 'Bayram kunini tanlang') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram kunini tanlang!',
       position: 'bottomLeft',
     })
-  } else if (month_.value === 'Bayram oyini tanlang') {
+  } else if (createHolidayParam.month === 'Bayram oyini tanlang') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram oyini tanlang!',
       position: 'bottomLeft',
     })
   } else {
-    const holidayData = {
-      name: name_.value,
-      day: day_.value,
-      month: month_.value,
-    }
-    store.dispatch('holidaysModule/create', holidayData).then(
+    store.dispatch('holidaysModule/create', createHolidayParam).then(
       () => {
         notify.success({
           message: 'Bayram muvaffaqiyatli yaratildi!',
           position: 'bottomLeft',
         })
         addHolidayInStore()
-        name_.value = ''
-        day_.value = 'Bayram kunini tanlang'
-        month_.value = 'Bayram oyini tanlang'
+        createHolidayParam.name = ''
+        createHolidayParam.day = 'Bayram kunini tanlang'
+        createHolidayParam.month = 'Bayram oyini tanlang'
       },
       (error) => {
         notify.error({
@@ -294,32 +296,26 @@ const deleteHoliday = (id) => {
 }
 
 const updateHoliday = () => {
-  if (name_.value === '') {
+  if (editHolidayParam.name === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram nomini kiriting!',
       position: 'bottomLeft',
     })
-  } else if (day_.value === 'Bayram kunini tanlang') {
+  } else if (editHolidayParam.day === 'Bayram kunini tanlang') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram kunini tanlang!',
       position: 'bottomLeft',
     })
-  } else if (month_.value === 'Bayram oyini tanlang') {
+  } else if (editHolidayParam.month === 'Bayram oyini tanlang') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, bayram oyini tanlang!',
       position: 'bottomLeft',
     })
   } else {
-    const holidayData = {
-      id: selectedHolidayId.value,
-      name: name_.value,
-      day: day_.value,
-      month: month_.value,
-    }
-    store.dispatch('holidaysModule/update', holidayData).then(
+    store.dispatch('holidaysModule/update', editHolidayParam).then(
       () => {
         notify.success({
           message: 'Bayram muvaffaqiyatli taxrirlandi!',
