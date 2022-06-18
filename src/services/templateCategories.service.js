@@ -16,6 +16,12 @@ class TemplateCategoriesService {
     })
   }
 
+  updateTemplateCategory(data) {
+    return axios.put(API_URL + 'template-category', { ...data }, { headers: authHeader() }).then((response) => {
+      return response.data
+    })
+  }
+
   deleteTemplateCategory(id) {
     return axios.delete(API_URL + 'template-category', { headers: authHeader(), data: `"${id}"` }).then((response) => {
       return response.data

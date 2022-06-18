@@ -22,7 +22,8 @@ const store = createStore({
       currentPage: '',
       contacts: [],
       holidays: [],
-      templates: []
+      templates: [],
+      templateCategories: []
     }
   },
   mutations: {
@@ -49,4 +50,5 @@ const store = createStore({
     }
   },
 })
+
 export default store

@@ -133,11 +133,25 @@
             </form>
             <h3 class="text-md font-bold py-1">Bo'limlar ro'yhati</h3>
             <ul class="pb-5">
-              <li v-for="(templateCategory, index) in templateCategories" :key="index" class="flex justify-between items-center py-2 px-1 border-b">
-                <span class="text-md"><i class="fa-solid fa-angles-right text-sm mr-2"></i>{{ templateCategory.name }}</span>
-                <div>
-                  <i class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
-                  <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
+              <li v-for="(templateCategory, index) in templateCategories" :key="index">
+                <div class="flex justify-between items-center py-2 px-1 border-b" :id="'f-' + templateCategory.id">
+                  <div class="text-md">
+                    <i class="fa-solid fa-angles-right text-sm mr-2"></i>
+                    {{ templateCategory.name }}
+                  </div>
+                  <div>
+                    <i @click="editTemplateCategory(templateCategory)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
+                    <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
+                  </div>
+                </div>
+                <div class="py-2 border-b hidden" :id="'s-' + templateCategory.id">
+                  <form @submit.prevent="updateTemplateCategory()" class="flex items-center ">
+                    <input type="text" v-model="editTemplateCategoryParam.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                    <button class="p-2 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2">Saqlash</button>
+                    <button @click="closeEditCategory(templateCategory.id)" type="button" class="ml-3 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                  </form>
                 </div>
               </li>
             </ul>
@@ -227,6 +241,11 @@ const editSMSTemplateParam = reactive({
   gender: 'Kim uchunligini tanlang',
 })
 
+const editTemplateCategoryParam = reactive({
+  id: '',
+  name: '',
+})
+
 const sortByAccessFunc = (access) => {
   sortByAccess.value = access
   toggleDropDownFilterByGender()
@@ -268,6 +287,26 @@ const closeEditModal = () => {
   editSMSTemplateParam.gender = 'Kim uchunligini tanlang'
 }
 
+const editTemplateCategory = (category) => {
+  store.state.templateCategories
+    .filter((c) => c.id !== category.id)
+    .map((a) => {
+      $(`#s-${a.id}`).addClass('hidden')
+      $(`#f-${a.id}`).removeClass('hidden')
+    })
+  $(`#f-${category.id}`).addClass('hidden')
+  $(`#s-${category.id}`).removeClass('hidden')
+  editTemplateCategoryParam.id = category.id
+  editTemplateCategoryParam.name = category.name
+}
+
+const closeEditCategory = (category) => {
+  $(`#f-${category}`).removeClass('hidden')
+  $(`#s-${category}`).addClass('hidden')
+  editTemplateCategoryParam.id = ''
+  editTemplateCategoryParam.name = ''
+}
+
 const addSMSTemplateInStore = () => {
   templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
 }
@@ -275,6 +314,10 @@ const addSMSTemplateInStore = () => {
 const addTemplateCategoryInStore = () => {
   templateCategoryService.getTemplateCategories().then((data) => store.commit('setTemplateCategory', data))
 }
+
+const templateCategories = computed(() => {
+  return store.state.templateCategories
+})
 
 const filteredTemplates = computed(() => {
   if (sortByCategoryId.value !== '' && sortByAccess.value !== '') {
@@ -290,10 +333,6 @@ const filteredTemplates = computed(() => {
   } else {
     return store.state.templates.filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
   }
-})
-
-const templateCategories = computed(() => {
-  return store.state.templateCategories
 })
 
 const changeGenderAccess = (access) => {
@@ -408,6 +447,33 @@ const updateSMSTemplate = () => {
       (error) => {
         notify.error({
           message: 'SMS shablonni taxrirlashda xatolik yuz berdi!',
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
+}
+
+const updateTemplateCategory = () => {
+  if (editTemplateCategoryParam.name === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: "Iltimos, bo'lim nomini kiriting!",
+      position: 'bottomLeft',
+    })
+  } else {
+    store.dispatch('templateCategoriesModule/update', editTemplateCategoryParam).then(
+      () => {
+        notify.success({
+          message: "Bo'lim muvaffaqiyatli taxrirlandi!",
+          position: 'bottomLeft',
+        })
+        addTemplateCategoryInStore()
+        closeEditCategory(editTemplateCategoryParam.id)
+      },
+      (_) => {
+        notify.error({
+          message: "Bo'limni taxrirlashda xatolik yuz berdi!",
           position: 'bottomLeft',
         })
       }

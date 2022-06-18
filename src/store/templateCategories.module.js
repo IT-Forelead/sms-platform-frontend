@@ -25,6 +25,17 @@ export const templateCategoriesModule = {
       );
     },
     
+    update({ commit }, tmplCatData) {
+      return TemplateCategoriesService.updateTemplateCategory(tmplCatData).then(
+        templateCategory => {
+          return Promise.resolve(templateCategory);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+    
     delete({ commit }, id) {
       return TemplateCategoriesService.deleteTemplateCategory(id).then(
         templateCategory => {
