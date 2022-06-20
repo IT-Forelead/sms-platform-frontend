@@ -6,12 +6,12 @@
         <div class="bg-white rounded-lg p-3 px-5 max-content-h">
           <h3 class="text-2xl font-extrabold mb-3">Tug'ilgan kun tabrigi</h3>
           <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
-          <form>
+          <form @submit.prevent="updateSMSTemplateOfBirthday()">
             <h3 class="text-lg font-semibold mb-2">Erkaklar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
               <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
-                <input id="man-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
-                <label for="man-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                <input v-model="editSMSIdsOfBirthdayParam.smsMenId" :value="template.id" :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="man" />
+                <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300">
                   <div class="text-md font-semibold">{{ template.title }}</div>
                   <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
                 </label>
@@ -21,8 +21,8 @@
             <h3 class="text-lg font-semibold mb-2">Ayollar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
               <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
-                <input id="woman-birthday-input" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
-                <label for="woman-birthday-input" class="block font-medium text-gray-900 dark:text-gray-300">
+                <input v-model="editSMSIdsOfBirthdayParam.smsWomenId" :value="template.id" :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="woman" />
+                <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300">
                   <div class="text-md font-semibold">{{ template.title }}</div>
                   <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
                 </label>
@@ -74,23 +74,64 @@
 
 
 <script setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, reactive } from 'vue'
 import { useStore } from 'vuex'
+import notify from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
 import templateService from '../../services/template.service'
 
 const store = useStore()
+
+const editSMSIdsOfBirthdayParam = reactive({
+  smsWomenId: '',
+  smsMenId: '',
+})
 
 const addSMSTemplateInStore = () => {
   templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
 }
 
 const templatesForMan = computed(() => {
-  return store.state.templates.filter(e => e.genderAccess !== 'female')
+  return store.state.templates.filter((e) => e.genderAccess !== 'female')
 })
 
 const templatesForWoman = computed(() => {
-  return store.state.templates.filter(e => e.genderAccess !== 'male')
+  return store.state.templates.filter((e) => e.genderAccess !== 'male')
 })
+
+const updateSMSTemplateOfBirthday = () => {
+  if (editSMSIdsOfBirthdayParam.smsWomenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Ayollar uchun SMS shablon tanlang!',
+      position: 'bottomLeft',
+    })
+  } else if (editSMSIdsOfBirthdayParam.smsMenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Erkaklar uchun SMS shablonni tanlang!',
+      position: 'bottomLeft',
+    })
+  } else {
+    store.dispatch('settingsModule/updateSMSIds', editSMSIdsOfBirthdayParam).then(
+      () => {
+        notify.success({
+          message: "Tug'ilgan kun uchun SMS shablon muvaffaqiyatli biriktirildi!",
+          position: 'bottomLeft',
+        })
+        addSMSTemplateInStore()
+        editSMSIdsOfBirthdayParam.smsWomenId = ''
+        editSMSIdsOfBirthdayParam.smsMenId = ''
+      },
+      (_) => {
+        notify.error({
+          message: "Tug'ilgan kun uchun SMS shablonni biriktirishda xatolik yuz berdi!",
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
+}
 
 onMounted(() => addSMSTemplateInStore())
 </script>
