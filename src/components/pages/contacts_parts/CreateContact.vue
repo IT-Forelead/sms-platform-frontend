@@ -5,11 +5,11 @@
     <form @submit.prevent="createContact()">
       <div class="mb-6">
         <label for="first-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Familiyasi</label>
-        <input type="text" id="first-name-input" v-model="createContactParam.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
+        <input type="text" id="first-name-input" v-model="createContactParam.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
       </div>
       <div class="mb-6">
         <label for="last-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ismi</label>
-        <input type="text" id="last-name-input" v-model="createContactParam.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
+        <input type="text" id="last-name-input" v-model="createContactParam.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
       </div>
       <div class="mb-6">
         <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Jinsi</label>
@@ -69,13 +69,13 @@ const createContact = () => {
       message: `Bu <strong style="color: #000;">${createContactParam.phone}</strong> kontakt allaqachon bazada mavjud!`,
       position: 'bottomLeft',
     })
-  } else if (createContactParam.firstName === '') {
+  } else if (createContactParam.lastName === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, familyani kiriting!',
       position: 'bottomLeft',
     })
-  } else if (createContactParam.lastName === '') {
+  } else if (createContactParam.firstName === '') {
     notify.warning({
       title: 'Diqqat!',
       message: 'Iltimos, ismni kiriting!',
