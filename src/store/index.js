@@ -5,6 +5,7 @@ import { contactsModule } from './contact.module'
 import { holidaysModule } from './holiday.module'
 import { templatesModule } from './template.module'
 import { templateCategoriesModule } from './templateCategories.module'
+import { messagesModule } from './message.module'
 import { settingsModule } from './setting.module'
 
 const store = createStore({
@@ -15,6 +16,7 @@ const store = createStore({
     holidaysModule,
     templatesModule,
     templateCategoriesModule,
+    messagesModule,
     settingsModule
   },
   state() {
@@ -26,6 +28,7 @@ const store = createStore({
       holidays: [],
       templates: [],
       templateCategories: [],
+      messages: [],
       settings: []
     }
   },
@@ -50,6 +53,9 @@ const store = createStore({
     },
     setTemplateCategory(state, data) {
       state.templateCategories = data
+    },
+    setMessage(state, data) {
+      state.messages = data
     },
     setSetting(state, data) {
       state.settings = data

@@ -15,7 +15,7 @@ export const settingsModule = {
     },
     
     update({ commit },settingData) {
-      return SettingService.update(settingData).then(
+      return SettingService.updateSettings(settingData).then(
         setting => {
           return Promise.resolve(setting);
         },

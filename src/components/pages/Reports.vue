@@ -2,6 +2,8 @@
   <div class="px-3">
     <h3 class="text-3xl font-extrabold mb-3 ml-2">Bayramlar</h3>
 
+
+<!-- Bu komentariyani o'chirib tashlamang keyinchalik shunday ko'rinishda chiqaramiz.
     <div class="w-full mb-8 overflow-hidden rounded-lg">
       <table class="w-full divide-y divide-gray-300">
         <thead class="bg-gray-50">
@@ -178,71 +180,106 @@
       </table>
     </div>
 
+    -->
+
     <div class="w-full mb-8 overflow-hidden rounded-lg">
       <div class="w-full overflow-x-auto">
-        <table class="w-full divide-y divide-gray-300">
-          <thead class="bg-gray-50">
-            <tr class="text-md font-semibold tracking-wide text-left text-gray-900">
-              <th scope="col" class="px-4 py-3">Kontakt</th>
-              <th scope="col" class="px-4 py-3">Yuborilgan vaqti</th>
-              <th scope="col" class="px-4 py-3">Status</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200 bg-white">
-            <tr class="text-gray-700">
-              <td class="whitespace-nowrap px-4 py-3">
-                <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-rose-500 h-10 w-10 border border-gray-50 rounded-full">
-                    <div class="text-center text-md font-bold text-white">J</div>
+        <div v-if="showMessages">
+          <table class="w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr class="text-md font-semibold tracking-wide text-left text-gray-900">
+                <th scope="col" class="px-4 py-3">Kontakt</th>
+                <th scope="col" class="px-4 py-3">Yuborilgan vaqti</th>
+                <th scope="col" class="px-4 py-3">SMS matni</th>
+                <th scope="col" class="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <tr v-for="(message, index) in messages" :key="index" class="text-gray-700">
+                <td class="whitespace-nowrap px-4 py-3">
+                  <div class="flex items-center text-md">
+                    <div :class="phonePrefixColor(Number(message.contact.phone.slice(4, 6)))" class="flex mr-3 items-center justify-center h-10 w-10 border border-gray-50 rounded-full">
+                      <div class="text-center text-md font-bold text-white">{{ message.contact.firstName.slice(0,1) }}</div>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">{{ phoneStyle(message.contact.phone) }}</p>
+                      <p class="text-sm text-gray-600">{{ message.contact.firstName + ' ' + message.contact.lastName }}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p class="font-semibold text-gray-900">+998937475995</p>
-                    <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                  </div>
-                </div>
-              </td>
-              <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-              <td class="whitespace-nowrap px-4 py-3 text-sm">
-                <span class="px-5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg">Yetkazildi</span>
-              </td>
-            </tr>
-            <tr class="text-gray-700">
-              <td class="whitespace-nowrap px-4 py-3">
-                <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-sky-700 h-10 w-10 border border-gray-50 rounded-full">
-                    <div class="text-center text-md font-bold text-white">K</div>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-gray-900">+998937475995</p>
-                    <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                  </div>
-                </div>
-              </td>
-              <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-              <td class="whitespace-nowrap px-4 py-3 text-sm">
-                <span class="px-5 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-lg"> Yetkazilmadi </span>
-              </td>
-            </tr>
-            <tr class="text-gray-700">
-              <td class="whitespace-nowrap px-4 py-3">
-                <div class="flex items-center text-md">
-                  <div class="flex mr-3 items-center justify-center bg-yellow-500 h-10 w-10 border border-gray-50 rounded-full">
-                    <div class="text-center text-md font-bold text-white">S</div>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-gray-900">+998937475995</p>
-                    <p class="text-sm text-gray-600">Jumaniyozov Surojiddin</p>
-                  </div>
-                </div>
-              </td>
-              <td class="whitespace-nowrap px-4 py-3 text-md">12.06.2022</td>
-              <td class="whitespace-nowrap px-4 py-3 text-sm">
-                <span class="px-5 py-1 font-semibold leading-tight text-orange-700 bg-gray-100 rounded-lg"> Kutilmoqda </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </td>
+                <td class="whitespace-nowrap px-4 py-3 text-md">{{ message.message.sentDate }}</td>
+                <td class="whitespace-nowrap px-4 py-3 text-md">{{ message.template.text.slice(0,25) + '...'}}</td>
+                <td class="whitespace-nowrap px-4 py-3 text-sm">
+                  <span class="px-5 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg">{{ deliveryStatusTranslate(message.message.deliveryStatus) }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div v-else class="rounded-lg text-lg bg-white px-5 py-10">
+          <h3 class="text-center text-red-700">Yuborilgan SMSlar mavjud emas!</h3>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
+import messageService from '../../services/message.service'
+
+const store = useStore()
+
+const addMessageInStore = () => {
+  messageService.getMessages().then((data) => store.commit('setMessage', data))
+}
+
+const messages = computed(() => {
+  return store.state.messages
+})
+
+const showMessages = computed(() => {
+  return store.state.messages.length > 0
+})
+
+const phonePrefixColor = (phonePrefix) => {
+  switch (phonePrefix) {
+    case 93 || 94:
+      return 'bg-sky-500'
+    case 97 || 88:
+      return 'bg-red-500'
+    case 90 || 91:
+      return 'bg-yellow-300'
+    case 95 || 98:
+      return 'bg-green-500'
+    case 99:
+      return 'bg-blue-500'
+    case 33:
+      return 'bg-yellow-400'
+    default:
+      return 'bg-lime-500'
+  }
+}
+
+const deliveryStatusTranslate = (status) => {
+  switch (status) {
+    case 'sent':
+      return 'Yuborildi'
+    case 'delivered':
+      return 'Yetkazildi'
+    case 'failed':
+      return 'Yetkazilmadi'
+    case 'unknown':
+      return "Noma'lum"
+    default:
+      return ''
+  }
+}
+
+const phoneStyle = (phone) => {
+  return `${phone.slice(0, 4)} (${phone.slice(4, 6)}) ${phone.slice(6, 9)}-${phone.slice(9, 11)}-${phone.slice(11, 13)}`
+}
+
+onMounted(() => addMessageInStore())
+</script>

@@ -27,28 +27,33 @@
       </div>
     </div>
     <div class="mt-3 pr-3 rounded-lg relative custom-height overflow-y-auto">
-      <div v-for="(contact, index) in contacts" :key="index" class="relative bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4, 6)))">
-          <div class="text-center text-white">
-            <div class="text-xl font-bold">{{ contact.birthday.slice(8, 10) }}</div>
-            <div class="text-sm font-bold">{{ month(contact.birthday.slice(5, 7)) }}</div>
+      <div v-if="showContent">
+        <div v-for="(contact, index) in contacts" :key="index" class="relative bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
+          <div class="flex items-center justify-center h-16 w-16 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4, 6)))">
+            <div class="text-center text-white">
+              <div class="text-xl font-bold">{{ contact.birthday.slice(8, 10) }}</div>
+              <div class="text-sm font-bold">{{ month(contact.birthday.slice(5, 7)) }}</div>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="text-2xl font-semibold m-0 p-0">{{ phoneStyle(contact.phone) }}</p>
+            <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
+          </div>
+          <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1.5 px-3 absolute hover:bg-gray-200 top-1 right-1 dropbtn shadow rounded-full"></i>
+          <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-0 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+              <li class="border-b border-dotted">
+                <a @click="openEditModal(contact)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
+              </li>
+              <li>
+                <a @click="deleteContact(contact.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="ml-4">
-          <p class="text-2xl font-semibold m-0 p-0">{{ phoneStyle(contact.phone) }}</p>
-          <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
-        </div>
-        <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1.5 px-3 absolute hover:bg-gray-200 top-1 right-1 dropbtn shadow rounded-full"></i>
-        <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-0 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
-          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-            <li class="border-b border-dotted">
-              <a @click="openEditModal(contact)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
-            </li>
-            <li>
-              <a @click="deleteContact(contact.id)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-trash mr-1"></i> O'chirish</a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div v-else class="rounded-lg text-lg bg-white px-5 py-10">
+        <h3 class="text-center text-red-700">Kontaktlar mavjud emas!</h3>
       </div>
     </div>
   </div>
@@ -163,6 +168,10 @@ const contacts = computed(() => {
   }
 })
 
+const showContent = computed(() => {
+  return store.state.contacts.length > 0
+})
+
 const changeSort = (sort) => {
   switch (sort) {
     case 'soFarBirthday':
@@ -203,8 +212,6 @@ const month = (index) => {
   const months = ['', 'YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
   return months[Number(index)]
 }
-
-onMounted(() => addContactInStore())
 
 function toggleDropDown(id) {
   let dropdowns = document.getElementsByClassName('dropdown-content')
@@ -308,6 +315,8 @@ const updateContact = () => {
     )
   }
 }
+
+onMounted(() => addContactInStore())
 </script>
 
 <style scoped>

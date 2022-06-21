@@ -38,37 +38,42 @@
           </div>
         </div>
         <div class="custom-height overflow-y-auto mt-3 px-1 pr-4">
-          <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
-            <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
-              <div class="flex justify-center items-center hidden">
-                <i @click="openEditModal(template)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
-                <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
+          <div v-if="showContent">
+            <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
+              <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+                <div class="flex justify-center items-center hidden">
+                  <i @click="openEditModal(template)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
+                  <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
+                </div>
+                <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
               </div>
-              <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
-            </div>
-            <div class="flex text-gray-400">
-              <div class="flex items-start">
-                <svg class="w-10 h-10 fill-current sm:block text-wave-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
-                  <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
-                </svg>
+              <div class="flex text-gray-400">
+                <div class="flex items-start">
+                  <svg class="w-10 h-10 fill-current sm:block text-wave-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                    <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col ml-2">
+                  <h3 class="text-bold text-xl uppercase font-extrabold text-gray-800 truncate">{{ template.title }}</h3>
+                  <p class="mt-2 text-base text-gray-600">{{ template.text }}</p>
+                </div>
+                <div class="flex flex-col justify-end">
+                  <svg class="mt-16 w-10 h-10 fill-current sm:block text-wave-500 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                    <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
+                  </svg>
+                </div>
               </div>
-              <div class="flex flex-col ml-2">
-                <h3 class="text-bold text-xl uppercase font-extrabold text-gray-800 truncate">{{ template.title }}</h3>
-                <p class="mt-2 text-base text-gray-600">{{ template.text }}</p>
+              <div class="w-1/2 mx-auto pt-3"><hr /></div>
+              <div class="flex items-center justify-between mt-2">
+                <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.categoryName }}</div>
+                <div class="flex-1"><hr class="w-2/5 mx-auto" /></div>
+                <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-user-tag mr-1"></i> {{ changeGenderAccess(template.genderAccess) }}</div>
               </div>
-              <div class="flex flex-col justify-end">
-                <svg class="mt-16 w-10 h-10 fill-current sm:block text-wave-500 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
-                  <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
-                </svg>
-              </div>
-            </div>
-            <div class="w-1/2 mx-auto pt-3"><hr /></div>
-            <div class="flex items-center justify-between mt-2">
-              <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.categoryName }}</div>
-              <div class="flex-1"><hr class="w-2/5 mx-auto" /></div>
-              <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-user-tag mr-1"></i> {{ changeGenderAccess(template.genderAccess) }}</div>
-            </div>
-          </blockquote>
+            </blockquote>
+          </div>
+          <div v-else class="rounded-lg text-lg bg-white px-5 py-10">
+            <h3 class="text-center text-red-700">SMS shablonlar mavjud emas!</h3>
+          </div>
         </div>
       </div>
       <div class="p-3">
@@ -132,29 +137,34 @@
               </div>
             </form>
             <h3 class="text-md font-bold py-1">Bo'limlar ro'yhati</h3>
-            <ul class="pb-5">
-              <li v-for="(templateCategory, index) in templateCategories" :key="index">
-                <div class="flex justify-between items-center py-2 px-1 border-b" :id="'f-' + templateCategory.id">
-                  <div class="text-md">
-                    <i class="fa-solid fa-angles-right text-sm mr-2"></i>
-                    {{ templateCategory.name }}
+            <div v-if="showCategoryContent">
+              <ul class="pb-5">
+                <li v-for="(templateCategory, index) in templateCategories" :key="index">
+                  <div class="flex justify-between items-center py-2 px-1 border-b" :id="'f-' + templateCategory.id">
+                    <div class="text-md">
+                      <i class="fa-solid fa-angles-right text-sm mr-2"></i>
+                      {{ templateCategory.name }}
+                    </div>
+                    <div>
+                      <i @click="editTemplateCategory(templateCategory)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
+                      <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
+                    </div>
                   </div>
-                  <div>
-                    <i @click="editTemplateCategory(templateCategory)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
-                    <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
+                  <div class="py-2 border-b hidden" :id="'s-' + templateCategory.id">
+                    <form @submit.prevent="updateTemplateCategory()" class="flex items-center">
+                      <input type="text" v-model="editTemplateCategoryParam.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                      <button class="p-2 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2">Saqlash</button>
+                      <button @click="closeEditCategory(templateCategory.id)" type="button" class="ml-3 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                      </button>
+                    </form>
                   </div>
-                </div>
-                <div class="py-2 border-b hidden" :id="'s-' + templateCategory.id">
-                  <form @submit.prevent="updateTemplateCategory()" class="flex items-center ">
-                    <input type="text" v-model="editTemplateCategoryParam.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
-                    <button class="p-2 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2">Saqlash</button>
-                    <button @click="closeEditCategory(templateCategory.id)" type="button" class="ml-3 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                  </form>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
+            <div v-else class="text-lg bg-white px-5 py-3 pb-5">
+              <h3 class="text-center text-red-700">Bo'limlar mavjud emas!</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -311,14 +321,6 @@ const addSMSTemplateInStore = () => {
   templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
 }
 
-const addTemplateCategoryInStore = () => {
-  templateCategoryService.getTemplateCategories().then((data) => store.commit('setTemplateCategory', data))
-}
-
-const templateCategories = computed(() => {
-  return store.state.templateCategories
-})
-
 const filteredTemplates = computed(() => {
   if (sortByCategoryId.value !== '' && sortByAccess.value !== '') {
     return store.state.templates
@@ -333,6 +335,22 @@ const filteredTemplates = computed(() => {
   } else {
     return store.state.templates.filter((temp) => temp.title.toLowerCase().includes(search.value.toLowerCase()))
   }
+})
+
+const showContent = computed(() => {
+  return store.state.templates.length > 0
+})
+
+const addTemplateCategoryInStore = () => {
+  templateCategoryService.getTemplateCategories().then((data) => store.commit('setTemplateCategory', data))
+}
+
+const templateCategories = computed(() => {
+  return store.state.templateCategories
+})
+
+const showCategoryContent = computed(() => {
+  return store.state.templateCategories.length > 0
 })
 
 const changeGenderAccess = (access) => {
