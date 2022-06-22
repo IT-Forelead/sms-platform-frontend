@@ -1,9 +1,6 @@
 <template>
   <div class="px-3">
     <h3 class="text-3xl font-extrabold mb-3 ml-2">Bayramlar</h3>
-
-
-<!-- Bu komentariyani o'chirib tashlamang keyinchalik shunday ko'rinishda chiqaramiz.
     <div class="w-full mb-8 overflow-hidden rounded-lg">
       <table class="w-full divide-y divide-gray-300">
         <thead class="bg-gray-50">
@@ -180,7 +177,6 @@
       </table>
     </div>
 
-    -->
 
     <div class="w-full mb-8 overflow-hidden rounded-lg">
       <div class="w-full overflow-x-auto">

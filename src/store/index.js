@@ -12,24 +12,24 @@ const store = createStore({
   modules: {
     auth,
     singleUser,
+    settingsModule,
     contactsModule,
     holidaysModule,
     templatesModule,
     templateCategoriesModule,
     messagesModule,
-    settingsModule
   },
   state() {
     return {
       isLogin: false,
       user: {},
+      settings: {},
       currentPage: '',
       contacts: [],
       holidays: [],
       templates: [],
       templateCategories: [],
       messages: [],
-      settings: []
     }
   },
   mutations: {
@@ -38,6 +38,9 @@ const store = createStore({
     },
     setUser(state, data) {
       state.user = data
+    },
+    setSetting(state, data) {
+      state.settings = data
     },
     setSelectedPage(state, page) {
       state.currentPage = page
@@ -56,9 +59,6 @@ const store = createStore({
     },
     setMessage(state, data) {
       state.messages = data
-    },
-    setSetting(state, data) {
-      state.settings = data
     }
   },
 })

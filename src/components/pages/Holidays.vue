@@ -4,29 +4,42 @@
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="custom-height overflow-y-auto mt-3 px-1">
         <div class="grid grid-cols-2 gap-2">
-          <div v-if="showContent">
-            <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
-              <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
-                <div class="flex justify-center items-center hidden">
-                  <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
-                  <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
-                  <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
-                </div>
-                <i @click="openActions(holiday.id)" :id="'st-' + holiday.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+          <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+            <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+              <div v-show="isShowModal.birthdayAction" class="flex justify-center items-center">
+                <i @click="openAddTempToBirtdayModal(settings)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
+                <i class="fa-solid fa-circle-info cursor-pointer text-gray-700 hover:text-blue-600"></i>
               </div>
-              <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
-                <div class="text-center -mt-10 mb-2">
-                  <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
-                    <i class="fa-solid fa-gift"></i>
-                  </div>
+              <i @click="showBirthdayActionFunction()" id="birthday-action" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+            </div>
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+              <div class="text-center -mt-10 mb-2">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                  <i class="fa-solid fa-cake-candles"></i>
                 </div>
-                <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">{{ holiday.name }}</h3>
-                <p class="text-gray-500 mb-1 py-1 text-center">{{ holiday.day }} - {{ holiday.month }}</p>
               </div>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Tug'ilgan kunlar</h3>
+              <p class="text-gray-500 mb-1 py-1 text-center">Kontaktlarning tug'ilgan kunlari</p>
             </div>
           </div>
-          <div v-else class="col-span-2 rounded-lg text-lg bg-white px-5 py-10">
-            <h3 class="text-center text-red-700">Bayramlar mavjud emas!</h3>
+          <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+            <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+              <div class="flex justify-center items-center hidden">
+                <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
+                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
+                <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
+              </div>
+              <i @click="openActions(holiday.id)" :id="'st-' + holiday.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+            </div>
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+              <div class="text-center -mt-10 mb-2">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+              </div>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">{{ holiday.name }}</h3>
+              <p class="text-gray-500 mb-1 py-1 text-center">{{ holiday.day }} - {{ holiday.month }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -73,50 +86,91 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div id="add-template-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
-      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-        <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-          <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-          <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
-          <div class="bg-white rounded-lg p-3 px-5 max-content-h">
-            <form @submit.prevent="updateSMSIdsInHoliday()">
-              <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
-              <div class="max-h-40 overflow-y-auto p-3 mb-6">
-                <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
-                  <input v-model="editSMSIdsInHolidayParam.smsMenId" :value="template.id" :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
-                  <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
-                    <div class="text-md font-semibold">{{ template.title }}</div>
-                    <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
-                  </label>
-                </div>
+  <div v-show="isShowModal.addTemplate" id="add-template-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+        <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+          <form @submit.prevent="updateSMSIdsInHoliday()">
+            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
+                <input v-model="editSMSIdsInHolidayParam.smsMenId" :value="template.id" :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
+                <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                </label>
               </div>
-              <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
-              <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
-              <div class="max-h-40 overflow-y-auto p-3 mb-6">
-                <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
-                  <input v-model="editSMSIdsInHolidayParam.smsWomenId" :value="template.id" :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
-                  <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
-                    <div class="text-md font-semibold">{{ template.title }}</div>
-                    <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
-                  </label>
-                </div>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
+            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+                <input v-model="editSMSIdsInHolidayParam.smsWomenId" :value="template.id" :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
+                <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                </label>
               </div>
-              <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-              <div class="flex justify-end items-center">
-                <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
-                <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <div class="flex justify-end items-center">
+              <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+  <div v-show="isShowModal.addTempToBirthday" id="add-temp-birthday-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
+        <button type="button" @click="closeAddTempToBirtdayModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <h3 class="text-2xl font-extrabold py-5 ml-5">Tug'ilgan kun tabrigi</h3>
+        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+          <form @submit.prevent="updateSMSTemplateOfBirthday()">
+            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
+                <input v-model="editSMSIdsOfBirthdayParam.smsMenId" :value="template.id" :id="'man-radio' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
+                <label :for="'man-radio' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                </label>
+              </div>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
+            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+            <div class="max-h-40 overflow-y-auto p-3 mb-6">
+              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+                <input v-model="editSMSIdsOfBirthdayParam.smsWomenId" :value="template.id" :id="'woman-radio' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
+                <label :for="'woman-radio' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
+                  <div class="text-md font-semibold">{{ template.title }}</div>
+                  <div class="text-sm">{{ template.text.length > 180 ? template.text.slice(0, 180) + '...' : template.text }}</div>
+                </label>
+              </div>
+            </div>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <div class="flex justify-end items-center">
+              <button type="button" @click="closeAddTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-show="isShowModal.editHoliday" id="edit-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
       <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
         <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
@@ -172,10 +226,18 @@ import { useStore } from 'vuex'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import holidayService from '../../services/holiday.service'
+import settingService from '../../services/setting.service'
 import templateService from '../../services/template.service'
 import $ from 'jquery'
 
 const store = useStore()
+
+const isShowModal = reactive({
+  addTemplate: false,
+  editHoliday: false,
+  addTempToBirthday: false,
+  birthdayAction: false,
+})
 
 const createHolidayParam = reactive({
   name: '',
@@ -196,6 +258,17 @@ const editSMSIdsInHolidayParam = reactive({
   smsMenId: '',
 })
 
+const editSMSIdsOfBirthdayParam = reactive({
+  smsWomenId: '',
+  smsMenId: '',
+})
+
+function showBirthdayActionFunction() {
+  isShowModal.birthdayAction = !isShowModal.birthdayAction
+  $('#birthday-action').toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
+  $('#birthday-action').parent('.actions').toggleClass('w-11').toggleClass('w-24').toggleClass('shadow').toggleClass('right-1')
+}
+
 function openActions(id) {
   let x = $(`#st-${id}`)
   x.toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
@@ -204,21 +277,34 @@ function openActions(id) {
 }
 
 const openModal = (holiday) => {
-  $('#add-template-modal').removeClass('hidden')
+  isShowModal.addTemplate = true
   editSMSIdsInHolidayParam.id = holiday.id
   editSMSIdsInHolidayParam.smsWomenId = holiday.smsWomenId
   editSMSIdsInHolidayParam.smsMenId = holiday.smsMenId
 }
 
 const closeModal = () => {
-  $('#add-template-modal').addClass('hidden')
+  isShowModal.addTemplate = false
   editSMSIdsInHolidayParam.id = ''
   editSMSIdsInHolidayParam.smsWomenId = ''
   editSMSIdsInHolidayParam.smsMenId = ''
 }
 
+const openAddTempToBirtdayModal = (setting) => {
+  console.log(setting);
+  isShowModal.addTempToBirthday = true
+  editSMSIdsOfBirthdayParam.smsWomenId = setting.smsWomenId
+  editSMSIdsOfBirthdayParam.smsMenId = setting.smsMenId
+}
+
+const closeAddTempToBirtdayModal = () => {
+  isShowModal.addTempToBirthday = false
+  editSMSIdsOfBirthdayParam.smsWomenId = ''
+  editSMSIdsOfBirthdayParam.smsMenId = ''
+}
+
 const openEditModal = (holiday) => {
-  $('#edit-modal').removeClass('hidden')
+  isShowModal.editHoliday = true
   editHolidayParam.id = holiday.id
   editHolidayParam.name = holiday.name
   editHolidayParam.day = holiday.day
@@ -226,12 +312,20 @@ const openEditModal = (holiday) => {
 }
 
 const closeEditModal = () => {
-  $('#edit-modal').addClass('hidden')
+  isShowModal.editHoliday = false
   editHolidayParam.id = ''
   editHolidayParam.name = ''
   editHolidayParam.day = 'Bayram kunini tanlang'
   editHolidayParam.month = 'Bayram oyini tanlang'
 }
+
+const addSettingInStore = () => {
+  settingService.getSettings().then((data) => store.commit('setSetting', data))
+}
+
+const settings = computed(() => {
+  return store.state.settings
+})
 
 const addHolidayInStore = () => {
   holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
@@ -255,6 +349,14 @@ const templatesForMan = computed(() => {
 
 const templatesForWoman = computed(() => {
   return store.state.templates.filter((e) => e.genderAccess !== 'male')
+})
+
+const showContentForMan = computed(() => {
+  return store.state.templates.filter((e) => e.genderAccess !== 'female').length > 0
+})
+
+const showContentForWoman = computed(() => {
+  return store.state.templates.filter((e) => e.genderAccess !== 'male').length > 0
 })
 
 const createHoliday = () => {
@@ -355,6 +457,39 @@ const updateHoliday = () => {
   }
 }
 
+const updateSMSTemplateOfBirthday = () => {
+  if (editSMSIdsOfBirthdayParam.smsWomenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Ayollar uchun SMS shablon tanlang!',
+      position: 'bottomLeft',
+    })
+  } else if (editSMSIdsOfBirthdayParam.smsMenId === '') {
+    notify.warning({
+      title: 'Diqqat!',
+      message: 'Iltimos, Erkaklar uchun SMS shablonni tanlang!',
+      position: 'bottomLeft',
+    })
+  } else {
+    store.dispatch('settingsModule/updateSMSIds', editSMSIdsOfBirthdayParam).then(
+      () => {
+        notify.success({
+          message: "Tug'ilgan kun uchun SMS shablon muvaffaqiyatli biriktirildi!",
+          position: 'bottomLeft',
+        })
+        addSettingInStore()
+        closeAddTempToBirtdayModal()
+      },
+      (_) => {
+        notify.error({
+          message: "Tug'ilgan kun uchun SMS shablonni biriktirishda xatolik yuz berdi!",
+          position: 'bottomLeft',
+        })
+      }
+    )
+  }
+}
+
 const updateSMSIdsInHoliday = () => {
   if (editSMSIdsInHolidayParam.smsWomenId === '') {
     notify.warning({
@@ -388,7 +523,7 @@ const updateSMSIdsInHoliday = () => {
   }
 }
 
-onMounted(() => addHolidayInStore(), addSMSTemplateInStore())
+onMounted(() => addSettingInStore(), addHolidayInStore(), addSMSTemplateInStore())
 </script>
 
 <style scoped>
