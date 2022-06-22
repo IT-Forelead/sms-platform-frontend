@@ -3,5 +3,6 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: 'class',
   plugins: [require('tw-elements/dist/plugin'), require('flowbite/plugin')],
 }
