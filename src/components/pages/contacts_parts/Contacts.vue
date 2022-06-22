@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+  <div v-show="isShowModal" id="edit-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
       <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
         <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
@@ -69,11 +69,11 @@
           <form @submit.prevent="updateContact()">
             <div class="mb-6">
               <label for="first-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Familiyasi</label>
-              <input type="text" id="first-name-input" v-model="editContactParam.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
+              <input type="text" id="first-name-input" v-model="editContactParam.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Familiyani kiriting..." />
             </div>
             <div class="mb-6">
               <label for="last-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Ismi</label>
-              <input type="text" id="last-name-input" v-model="editContactParam.lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
+              <input type="text" id="last-name-input" v-model="editContactParam.firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ismni kiriting..." />
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Jinsi</label>
@@ -115,6 +115,7 @@ const store = useStore()
 
 const search = ref('')
 const sortBy = ref('')
+const isShowModal = ref(false)
 
 const editContactParam = reactive({
   id: '',
@@ -126,7 +127,7 @@ const editContactParam = reactive({
 })
 
 const openEditModal = (contact) => {
-  $('#edit-modal').removeClass('hidden')
+  isShowModal.value = true
   editContactParam.id = contact.id
   editContactParam.firstName = contact.firstName
   editContactParam.lastName = contact.lastName
@@ -136,7 +137,7 @@ const openEditModal = (contact) => {
 }
 
 const closeEditModal = () => {
-  $('#edit-modal').addClass('hidden')
+  isShowModal.value = false
   editContactParam.id = ''
   editContactParam.firstName = ''
   editContactParam.lastName = ''
