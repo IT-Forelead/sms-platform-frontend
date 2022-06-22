@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+    <div v-show="isShowModal.addCategory" id="popup-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
       <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
         <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
           <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
@@ -171,7 +171,7 @@
     </div>
   </div>
 
-  <div id="edit-modal" tabindex="-1" class="hidden overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
+  <div v-show="isShowModal.editTemplate" id="edit-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
       <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
         <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
@@ -236,6 +236,11 @@ const categoryName_ = ref('')
 const clearAccessSort = () => (sortByAccess.value = '')
 const clearCategorySort = () => (sortByCategoryId.value = '')
 
+const isShowModal = reactive({
+  addCategory: false,
+  editTemplate: false
+})
+
 const createSMSTemplateParam = reactive({
   templateCategoryId: "Bo'limni tanlang",
   title: '',
@@ -273,14 +278,14 @@ function toggleDropDownFilterByGender() {
 }
 
 const openModal = () => {
-  $('#popup-modal').removeClass('hidden')
+  isShowModal.addCategory = true
 }
 const closeModal = () => {
-  $('#popup-modal').addClass('hidden')
+  isShowModal.addCategory = false
 }
 
 const openEditModal = (template) => {
-  $('#edit-modal').removeClass('hidden')
+  isShowModal.editTemplate = true
   editSMSTemplateParam.id = template.id
   editSMSTemplateParam.templateCategoryId = template.templateCategoryId
   editSMSTemplateParam.title = template.title
@@ -289,7 +294,7 @@ const openEditModal = (template) => {
 }
 
 const closeEditModal = () => {
-  $('#edit-modal').addClass('hidden')
+  isShowModal.editTemplate = false
   editSMSTemplateParam.id = ''
   editSMSTemplateParam.templateCategoryId = "Bo'limni tanlang"
   editSMSTemplateParam.title = ''
