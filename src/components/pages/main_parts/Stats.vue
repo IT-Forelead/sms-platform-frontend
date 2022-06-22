@@ -1,53 +1,75 @@
 <template>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center mt-10">
     <h3 class="text-3xl font-extrabold">Raqamli statistika</h3>
   </div>
-  <div class="grid grid-cols-4 grid-flow-row-2 auto-rows-max gap-5 mt-3">
-    <div v-for="mitem in mitems" :key="mitem">
-      <CardChildren :item="mitem" />
+  <div class="grid grid-cols-4 grid-flow-row-2 auto-rows-max gap-5 mt-5">
+    <div v-for="item in mitems" :key="item" class="flex items-center justify-center flex-col bg-white rounded-xl p-5 pt-10">
+      <div class="flex items-center justify-center bg-teal-100 rounded-xl px-4 p-3 text-gray-500 text-3xl">
+        <ion-icon :name="item.icon"></ion-icon>
+      </div>
+      <h1 class="text-2xl font-bold pt-2">{{ item.value }}</h1>
+      <span>{{ item.title }}</span>
+      <hr class="my-3 mt-5 w-full"/>
+      <hr class="w-1/2"/>
     </div>
   </div>
 </template>
 
-<script>
-import CardChildren from './CardChildren.vue'
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import contactService from '../../../services/contact.service'
+import templateService from '../../../services/template.service'
+import holidayService from '../../../services/holiday.service'
+import messageService from '../../../services/message.service'
 
-export default {
-  components: {
-    CardChildren,
-  },
-  data() {
-    return {
-      mitems: [
-        {
-          icon: 'people-outline',
-          value: '1,000',
-          title: 'Kontaktlar',
-          change: '+1.5%',
-        },
-        {
-          icon: 'chatbox-ellipses-outline',
-          value: '1,000',
-          title: 'SMS shablonlar',
-          change: '+1.5%',
-        },
-        {
-          icon: 'gift-outline',
-          value: '1,000',
-          title: 'Bayramlar',
-          change: '+1.5%',
-        },
-        {
-          icon: 'mail-outline',
-          value: '1,000',
-          title: "Jo'natilgan SMSlar",
-          change: '+1.5%',
-        }
-      ],
-    }
-  },
+const store = useStore()
+
+const addContactInStore = () => {
+  contactService.getContacts().then((data) => store.commit('setContacts', data))
 }
-</script>
 
-<style>
-</style>
+const addSMSTemplateInStore = () => {
+  templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
+}
+
+const addHolidayInStore = () => {
+  holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
+}
+
+const addMessageInStore = () => {
+  messageService.getMessages().then((data) => store.commit('setMessage', data))
+}
+
+const mitems = computed(() => {
+  return [
+    {
+      icon: 'people-outline',
+      value: store.state.contacts.length,
+      title: 'Kontaktlar',
+    },
+    {
+      icon: 'chatbox-ellipses-outline',
+      value: store.state.templates.length,
+      title: 'SMS shablonlar',
+    },
+    {
+      icon: 'gift-outline',
+      value: store.state.holidays.length,
+      title: 'Bayramlar',
+    },
+    {
+      icon: 'mail-outline',
+      value: store.state.messages.length,
+      title: "Jo'natilgan SMSlar",
+    },
+  ]
+})
+
+onMounted(() => {
+  addContactInStore(),
+  addSMSTemplateInStore(),
+  addHolidayInStore(),
+  addMessageInStore()
+})
+</script>
