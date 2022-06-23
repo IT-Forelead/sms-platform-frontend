@@ -108,7 +108,7 @@
             <div class="mb-6">
               <label for="text-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
               <textarea id="text-input" v-model="createSMSTemplateParam.text" rows="4" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="SMS matnini kiriting..."></textarea>
-              <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
+              <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining familyasi o'rniga <strong class="text-black">[LASTNAME]</strong> ismining o'rniga <strong class="text-black">[FIRSTNAME]</strong> tegini ishlatib keting. Tizim [FIRSTNAME] va [LASTNAME] o'rniga avtomatik tarzda mos ravishda kontaktning ism va familyasini joylab SMSni jo'natadi.</p>
             </div>
             <hr class="bottom-1 mb-6 border-dotted border-gray-200" />
             <div class="flex justify-end">
@@ -204,7 +204,7 @@
             <div class="mb-6">
               <label for="text-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
               <textarea id="text-input" v-model="editSMSTemplateParam.text" rows="4" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="SMS matnini kiriting..."></textarea>
-              <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
+              <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining familyasi o'rniga <strong class="text-black">[LASTNAME]</strong> ismining o'rniga <strong class="text-black">[FIRSTNAME]</strong> tegini ishlatib keting. Tizim [FIRSTNAME] va [LASTNAME] o'rniga avtomatik tarzda mos ravishda kontaktning ism va familyasini joylab SMSni jo'natadi.</p>
             </div>
             <hr class="bottom-1 mb-6 border-dotted border-gray-200" />
             <div class="flex items-center justify-end">

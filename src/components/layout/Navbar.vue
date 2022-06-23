@@ -24,6 +24,23 @@
       </button>
       <div id="dropdownNotification" class="hidden bg-white rounded shadow w-96">
         <div v-if="showBadge">
+          <div v-if="settings" class="flex justify-between items-center text-md border-b px-5 py-3">
+            <div class="flex mr-3 items-center px-1">
+              <div class="relative mr-3 bottom-1.5">
+                <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full animate-ping"></div>
+                <div class="absolute top-0 right-0 p-1.5 bg-blue-500 rounded-full"></div>
+              </div>
+              <div class="flex items-center justify-center bg-gray-200 h-10 w-10 rounded-full">
+                <div class="text-center text-lg pt-1 font-bold text-gray-600">
+                  <i class="fa-regular fa-bookmark"></i>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900">Bildirishnoma</p>
+              <p class="text-md text-gray-600">Tug'ilgan kun tabrigi uchun SMS shablon biriktiring!</p>
+            </div>
+          </div>
           <div v-for="(holiday, index) in holidays" :key="index" class="flex justify-between items-center text-md border-b px-5 py-3">
             <div class="flex mr-3 items-center px-1">
               <div class="relative mr-3 bottom-1.5">
@@ -89,6 +106,7 @@ import { useRouter } from 'vue-router'
 import userService from '../../services/user.service'
 import authService from '../../services/auth.service'
 import holidayService from '../../services/holiday.service'
+import settingService from '../../services/setting.service'
 import $ from 'jquery'
 
 const store = useStore()
@@ -113,7 +131,7 @@ const name = computed(() => {
 })
 
 const showBadge = computed(() => {
-  return store.state.holidays.filter((e) => e?.smsWomenId === null || e?.smsMenId === null).length > 0
+  return store.state.holidays.filter((e) => e?.smsWomenId === null || e?.smsMenId === null).length > 0 || store.state.settings?.smsWomenId === null || store.state.settings?.smsMenId === null
 })
 
 const addHolidayInStore = () => {
@@ -122,6 +140,14 @@ const addHolidayInStore = () => {
 
 const holidays = computed(() => {
   return store.state.holidays.filter((e) => e?.smsWomenId === null || e?.smsMenId === null)
+})
+
+const addSettingInStore = () => {
+  settingService.getSettings().then((data) => store.commit('setSetting', data))
+}
+
+const settings = computed(() => {
+  return store.state.settings?.smsWomenId === null || store.state.settings?.smsMenId === null
 })
 
 function toggleDropDown() {
@@ -154,7 +180,7 @@ function autoLogout() {
   }, 1000)
 }
 
-onMounted(() => addUserInStore(), autoLogout(), addHolidayInStore())
+onMounted(() => addUserInStore(), autoLogout(), addHolidayInStore(), addSettingInStore())
 </script>
 
 <style scoped>
