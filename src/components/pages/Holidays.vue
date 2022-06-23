@@ -5,12 +5,13 @@
       <div class="custom-height overflow-y-auto mt-3 px-1">
         <div class="grid grid-cols-2 gap-2">
           <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
-            <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
-              <div v-show="isShowModal.birthdayAction" class="flex justify-center items-center">
+            <div x-data="{open: false}" class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+              <div x-show="open" x-on:click.outside="open = false" class="flex justify-center items-center">
                 <i @click="openAddTempToBirtdayModal(settings)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
                 <i @click="openInfoTempToBirtdayModal()" class="fa-solid fa-circle-info cursor-pointer text-gray-700 hover:text-blue-600"></i>
               </div>
-              <i @click="showBirthdayActionFunction()" id="birthday-action" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+              <i x-show="!open" x-on:click="open = true" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+              <i x-show="open" x-on:click="open = false" class="fa-solid fa-times py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
             <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
               <div class="text-center -mt-10 mb-2">
@@ -23,13 +24,14 @@
             </div>
           </div>
           <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
-            <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
-              <div class="flex justify-center items-center hidden">
+            <div x-data="{open: false}" class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
+              <div class="flex justify-center items-center" x-show="open" x-on:click.outside="open = false">
                 <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
                 <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
                 <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
               </div>
-              <i @click="openActions(holiday.id)" :id="'st-' + holiday.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+              <i x-show="!open" x-on:click="open = true" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+              <i x-show="open" x-on:click="open = false" class="fa-solid fa-times py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
             <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
               <div class="text-center -mt-10 mb-2">
@@ -249,7 +251,6 @@ import 'izitoast/dist/css/iziToast.min.css'
 import holidayService from '../../services/holiday.service'
 import settingService from '../../services/setting.service'
 import templateService from '../../services/template.service'
-import $ from 'jquery'
 
 const store = useStore()
 
@@ -257,8 +258,7 @@ const isShowModal = reactive({
   addTemplate: false,
   editHoliday: false,
   addTempToBirthday: false,
-  infoTempToBirthday: false,
-  birthdayAction: false,
+  infoTempToBirthday: false
 })
 
 const createHolidayParam = reactive({
@@ -284,19 +284,6 @@ const editSMSIdsOfBirthdayParam = reactive({
   smsWomenId: '',
   smsMenId: '',
 })
-
-function showBirthdayActionFunction() {
-  isShowModal.birthdayAction = !isShowModal.birthdayAction
-  $('#birthday-action').toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
-  $('#birthday-action').parent('.actions').toggleClass('w-11').toggleClass('w-24').toggleClass('shadow').toggleClass('right-1')
-}
-
-function openActions(id) {
-  let x = $(`#st-${id}`)
-  x.toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
-  x.parent('.actions').toggleClass('w-11').toggleClass('w-32').toggleClass('shadow').toggleClass('right-1')
-  x.parent('.actions').children('div').toggleClass('hidden')
-}
 
 const openModal = (holiday) => {
   isShowModal.addTemplate = true
@@ -561,5 +548,8 @@ onMounted(() => addSettingInStore(), addHolidayInStore(), addSMSTemplateInStore(
 }
 .overlay {
   background-color: rgba(0, 0, 0, 0.4);
+}
+.d-none {
+  display: none;
 }
 </style>
