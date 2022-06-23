@@ -3,12 +3,8 @@
     <div class="p-2 pl-10 mt-3 ml-3">
       <router-link class="cursor-pointer" to="/">
         <div class="flex items-center">
-          <div class="shrink-0">
-            <img src="../../assets/logo.png" class="w-16" alt="#"/>
-          </div>
-          <div class="grow ml-3">
-            <h2 class="font-semibold text-2xl text-zinc-900">IT-Forelead</h2>
-          </div>
+          <img src="../../assets/images/logo.png" class="shrink-0 w-14" alt="#" />
+          <h2 class="grow ml-3 font-semibold text-2xl text-zinc-900">IT-Forelead</h2>
         </div>
       </router-link>
     </div>
@@ -17,7 +13,10 @@
         <MenuItem :menu="menu" />
       </li>
     </ul>
-    <div class="relative custom-top text-sm text-gray-400 text-center dark:text-gray-400">Copyright &copy; 2022 <a href="https://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br> All Rights Reserved.</div>
+    <div class="relative custom-top text-sm text-gray-400 text-center dark:text-gray-400">
+      Copyright &copy; 2022 <a href="https://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br />
+      All Rights Reserved.
+    </div>
   </div>
 </template>
 

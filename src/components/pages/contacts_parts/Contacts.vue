@@ -146,7 +146,6 @@ const closeEditModal = () => {
 }
 
 const sortByFunc = (sort) => {
-  toggleDropDownFilterBy()
   sortBy.value = sort
 }
 
