@@ -9,18 +9,18 @@
         </span>
         <input v-model="search" type="search" name="search" class="bg-white text-gray-500 py-1.5 text-lg rounded-lg pl-12 focus:outline-none outline-none border-0" placeholder="Raqam bo'yicha izlash..." autocomplete="off" />
       </div>
-      <div class="relative pr-3">
-        <div id="filterByBtn" @click="toggleDropDownFilterBy()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortBy === '' ? 'Saralash' : changeSort(sortBy) }} <i @click="clearSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortBy !== '' }"></i></div>
-        <div id="filterBy" class="dropdown-content-for absolute hidden right-0 top-12 z-10 bg-white border divide-y divide-gray-100 rounded shadow w-44">
+      <div class="relative pr-3" x-data="{sort: false}">
+        <div x-on:click="sort = true" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortBy === '' ? 'Saralash' : changeSort(sortBy) }} <i @click="clearSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortBy !== '' }"></i></div>
+        <div x-show="sort" x-on:click.outside="sort = false" class="dropdown absolute right-0 top-12 z-10 bg-white border divide-y divide-gray-100 rounded shadow w-44">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-            <li class="border-b border-dotted">
-              <a @click="sortByFunc('soFarBirthday')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-users mr-1"></i> Tug'ilgan kun</a>
+            <li class="border-b border-dotted cursor-pointer">
+              <a x-on:click="sort = false" @click="sortByFunc('soFarBirthday')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-users mr-1"></i> Tug'ilgan kun</a>
             </li>
-            <li class="border-b border-dotted">
-              <a @click="sortByFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar</a>
+            <li class="border-b border-dotted cursor-pointer">
+              <a x-on:click="sort = false" @click="sortByFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar</a>
             </li>
-            <li class="border-b border-dotted">
-              <a @click="sortByFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar</a>
+            <li class="border-b border-dotted cursor-pointer">
+              <a x-on:click="sort = false" @click="sortByFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar</a>
             </li>
           </ul>
         </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="mt-3 pr-3 rounded-lg relative custom-height overflow-y-auto">
       <div v-if="showContent">
-        <div v-for="(contact, index) in contacts" :key="index" class="relative bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
+        <div x-data="{open: false}" v-for="(contact, index) in contacts" :key="index" class="relative bg-white px-5 py-2 my-2 flex items-center rounded-lg cursor-pointer hover:text-violet-700 hover:bg-violet-100">
           <div class="flex items-center justify-center h-16 w-16 rounded-full" :class="phonePrefixColor(Number(contact.phone.slice(4, 6)))">
             <div class="text-center text-white">
               <div class="text-xl font-bold">{{ contact.birthday.slice(8, 10) }}</div>
@@ -39,8 +39,8 @@
             <p class="text-2xl font-semibold m-0 p-0">{{ phoneStyle(contact.phone) }}</p>
             <p class="text-lg text-gray-500 -mt-0.5 font-semibold">{{ contact.firstName + ' ' + contact.lastName }}</p>
           </div>
-          <i @click="toggleDropDown(index)" class="fa-solid fa-ellipsis-vertical p-1.5 px-3 absolute hover:bg-gray-200 top-1 right-1 dropbtn shadow rounded-full"></i>
-          <div :id="'cit-' + index" class="dropdown-content absolute right-1 top-0 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+          <i x-on:click="open = true" class="fa-solid fa-ellipsis-vertical p-1.5 px-3 absolute hover:bg-violet-400 hover:shadow hover:text-white top-1 right-1 rounded-full"></i>
+          <div x-show="open" x-on:click.outside="open = false" class="dropdown-content-for-edit-contact absolute right-1 top-8 z-10 bg-white border divide-y divide-gray-100 rounded shadow w-44">
             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
               <li class="border-b border-dotted">
                 <a @click="openEditModal(contact)" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-user-pen mr-1"></i> Taxrirlash</a>
@@ -106,7 +106,6 @@
 <script setup>
 import { onMounted, computed, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import $ from 'jquery'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import contactService from '../../../services/contact.service'
@@ -152,10 +151,6 @@ const sortByFunc = (sort) => {
 }
 
 const clearSort = () => (sortBy.value = '')
-
-function toggleDropDownFilterBy() {
-  $('#filterBy').toggleClass('hidden')
-}
 
 const addContactInStore = () => {
   contactService.getContacts().then((data) => store.commit('setContacts', data))
@@ -212,29 +207,6 @@ const phoneStyle = (phone) => {
 const month = (index) => {
   const months = ['', 'YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
   return months[Number(index)]
-}
-
-function toggleDropDown(id) {
-  let dropdowns = document.getElementsByClassName('dropdown-content')
-  for (let i = 0; i < dropdowns.length; i++) {
-    var closeDropdown = dropdowns[i]
-    if (!closeDropdown.classList.contains('hidden')) {
-      closeDropdown.classList.add('hidden')
-    }
-  }
-  $(`#cit-${id}`).toggleClass('hidden')
-}
-
-window.onclick = function (event) {
-  if (!event.target.matches('.dropbtn')) {
-    let dropdowns = document.getElementsByClassName('dropdown-content')
-    for (let i = 0; i < dropdowns.length; i++) {
-      var closeDropdown = dropdowns[i]
-      if (!closeDropdown.classList.contains('hidden')) {
-        closeDropdown.classList.add('hidden')
-      }
-    }
-  }
 }
 
 const addContactsInStore = () => {

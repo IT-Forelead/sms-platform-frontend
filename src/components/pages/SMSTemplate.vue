@@ -1,103 +1,104 @@
 <template>
   <div class="px-3">
-    <h3 class="text-3xl font-extrabold mb-3 ml-2">SMS shablonlar</h3>
-    <div class="grid grid-cols-2 gap-1 mb-5">
+    <h3 class="mb-3 ml-2 text-3xl font-extrabold">SMS shablonlar</h3>
+    <div class="mb-5 grid grid-cols-2 gap-1">
       <div class="p-3">
         <div class="flex items-center justify-between">
           <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex pl-1 items-center">
-              <button type="submit" class="p-3 focus:outline-none focus:shadow-outline">
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500 w-5 h-5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <span class="absolute inset-y-0 left-0 flex items-center pl-1">
+              <button type="submit" class="focus:shadow-outline p-3 focus:outline-none">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="h-5 w-5 text-gray-500"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </button>
             </span>
-            <input v-model="search" type="search" name="search" class="bg-white text-gray-500 py-1.5 text-lg rounded-lg pl-12 focus:outline-none outline-none border-0" placeholder="Sarlavha bo'yicha izlash..." autocomplete="off" />
+            <input v-model="search" type="search" name="search" class="rounded-lg border-0 bg-white py-1.5 pl-12 text-lg text-gray-500 outline-none focus:outline-none" placeholder="Sarlavha bo'yicha izlash..." autocomplete="off" />
           </div>
           <div class="flex">
             <div class="relative">
-              <select v-model="sortByCategoryId" class="form-select appearance-none block w-full px-3 pr-7 rounded-lg py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="categories">
+              <select v-model="sortByCategoryId" class="form-select m-0 block w-full appearance-none rounded-lg border-0 bg-white bg-clip-padding px-3 py-2 pr-7 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none" id="categories">
                 <option value="">Bo'lim bo'yicha</option>
                 <option v-for="(cat, idx) in templateCategories" :key="idx" :value="cat.id">{{ cat.name }}</option>
               </select>
             </div>
-            <div class="relative pr-4">
-              <div id="filterByGenderBtn" @click="toggleDropDownFilterByGender()" class="bg-white rounded-xl px-5 p-2 ml-3 text-gray-500 font-semibold hover:bg-gray-200 cursor-pointer"><i class="fa fa-filter"></i> {{ sortByAccess === '' ? 'Shablon turi' : changeGenderAccess(sortByAccess) }} <i @click="clearAccessSort()" class="hover:text-red-500 ml-1 cursor-pointer fa" :class="{ 'fa-times': sortByAccess !== '' }"></i></div>
-              <div id="filterByGender" class="dropdown-content absolute right-0 top-12 z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow w-44">
+            <div class="relative pr-4" x-data="{open: false}">
+              <div x-on:click="open = true" class="ml-3 cursor-pointer rounded-xl bg-white p-2 px-5 font-semibold text-gray-500 hover:bg-gray-200"><i class="fa fa-filter"></i> {{ sortByAccess === '' ? 'Shablon turi' : changeGenderAccess(sortByAccess) }} <i @click="clearAccessSort()" class="fa ml-1 cursor-pointer hover:text-red-500" :class="{ 'fa-times': sortByAccess !== '' }"></i></div>
+              <div x-show="open" x-on:click.outside="open = false" class="dropdown absolute right-0 top-12 z-10 w-44 divide-y divide-gray-100 rounded border bg-white shadow">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                  <li class="border-b border-dotted cursor-pointer">
-                    <a @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
+                  <li class="cursor-pointer border-b border-dotted">
+                    <a x-on:click="open = false" @click="sortByAccessFunc('all')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars-and-venus mr-1"></i> Barcha uchun</a>
                   </li>
-                  <li class="border-b border-dotted cursor-pointer">
-                    <a @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
+                  <li class="cursor-pointer border-b border-dotted">
+                    <a x-on:click="open = false" @click="sortByAccessFunc('male')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-mars mr-1"></i> Erkaklar uchun</a>
                   </li>
-                  <li class="border-b border-dotted cursor-pointer">
-                    <a @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
+                  <li class="cursor-pointer border-b border-dotted">
+                    <a x-on:click="open = false" @click="sortByAccessFunc('female')" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-venus mr-1"></i> Ayollar uchun</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div class="custom-height overflow-y-auto mt-3 px-1 pr-4">
+        <div class="custom-height mt-3 overflow-y-auto px-1 pr-4">
           <div v-if="showContent">
-            <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="flex flex-col w-full p-6 my-5 border-l-4 bg-white rounded-lg shadow relative" :class="genderAccessColor(template.genderAccess)">
-              <div class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
-                <div class="flex justify-center items-center hidden">
-                  <i @click="openEditModal(template)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-2 cursor-pointer"></i>
-                  <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
+            <blockquote v-for="(template, index) in filteredTemplates" :key="index" class="relative my-5 flex w-full flex-col rounded-lg border-l-4 bg-white p-6 shadow" :class="genderAccessColor(template.genderAccess)">
+              <div x-data="{open: false}" class="actions absolute right-0 top-2 flex w-11 cursor-pointer items-center justify-end rounded-full px-1">
+                <div x-show="open" x-on:click.outside="open = false" class="flex items-center justify-center">
+                  <i @click="openEditModal(template)" class="fa-solid fa-feather-pointed mr-2 cursor-pointer text-gray-700 hover:text-blue-600"></i>
+                  <i @click="deleteSMSTemplate(template.id)" class="fa-solid fa-trash-can mr-2 cursor-pointer text-gray-700 hover:text-red-600"></i>
                 </div>
-                <i @click="openActions(template.id)" :id="'st-' + template.id" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
+                <i x-show="!open" x-on:click="open = true" class="fa-solid fa-ellipsis-vertical rounded-full py-2.5 px-4 hover:shadow"></i>
+                <i x-show="open" x-on:click="open = false" class="fa-solid fa-times rounded-full py-2.5 px-4 hover:shadow"></i>
               </div>
               <div class="flex text-gray-400">
                 <div class="flex items-start">
-                  <svg class="w-10 h-10 fill-current sm:block text-wave-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                  <svg class="text-wave-500 h-10 w-10 fill-current sm:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
                     <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
                   </svg>
                 </div>
-                <div class="flex flex-col ml-2">
-                  <h3 class="text-bold text-xl uppercase font-extrabold text-gray-800 truncate">{{ template.title }}</h3>
+                <div class="ml-2 flex flex-col">
+                  <h3 class="text-bold truncate text-xl font-extrabold uppercase text-gray-800">{{ template.title }}</h3>
                   <p class="mt-2 text-base text-gray-600">{{ template.text }}</p>
                 </div>
                 <div class="flex flex-col justify-end">
-                  <svg class="mt-16 w-10 h-10 fill-current sm:block text-wave-500 rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
+                  <svg class="text-wave-500 mt-16 h-10 w-10 rotate-180 fill-current sm:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125">
                     <path d="M30.7 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2C12.7 83.1 5 72.6 5 61.5c0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S30.7 31.6 30.7 42zM82.4 42c0 6.1 12.6 7 12.6 22 0 11-7.9 19.2-18.9 19.2-11.8 0-19.5-10.5-19.5-21.6 0-19.2 18-44.6 29.2-44.6 2.8 0 7.9 2 7.9 5.4S82.4 31.6 82.4 42z"></path>
                   </svg>
                 </div>
               </div>
-              <div class="w-1/2 mx-auto pt-3"><hr /></div>
-              <div class="flex items-center justify-between mt-2">
-                <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.categoryName }}</div>
-                <div class="flex-1"><hr class="w-2/5 mx-auto" /></div>
-                <div class="mt-1 text-sm text-gray-500 truncate"><i class="fa-solid fa-user-tag mr-1"></i> {{ changeGenderAccess(template.genderAccess) }}</div>
+              <div class="mx-auto w-1/2 pt-3"><hr /></div>
+              <div class="mt-2 flex items-center justify-between">
+                <div class="mt-1 truncate text-sm text-gray-500"><i class="fa-solid fa-layer-group mr-1"></i> {{ template.categoryName }}</div>
+                <div class="flex-1"><hr class="mx-auto w-2/5" /></div>
+                <div class="mt-1 truncate text-sm text-gray-500"><i class="fa-solid fa-user-tag mr-1"></i> {{ changeGenderAccess(template.genderAccess) }}</div>
               </div>
             </blockquote>
           </div>
-          <div v-else class="rounded-lg text-lg bg-white px-5 py-10">
+          <div v-else class="rounded-lg bg-white px-5 py-10 text-lg">
             <h3 class="text-center text-red-700">SMS shablonlar mavjud emas!</h3>
           </div>
         </div>
       </div>
       <div class="p-3">
-        <div class="bg-white rounded-lg p-3 px-5">
-          <h3 class="text-2xl font-extrabold mb-3">SMS shablon yaratish</h3>
-          <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+        <div class="rounded-lg bg-white p-3 px-5">
+          <h3 class="mb-3 text-2xl font-extrabold">SMS shablon yaratish</h3>
+          <hr class="bottom-1 mb-6 border-dotted border-gray-200" />
           <form @submit.prevent="createSMSTemplate()">
             <div class="mb-6">
-              <label for="title-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
-              <input type="text" v-model="createSMSTemplateParam.title" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
+              <label for="title-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
+              <input type="text" v-model="createSMSTemplateParam.title" id="title-input" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="Sarlavhani kiriting..." />
             </div>
             <div class="mb-6">
-              <div class="flex justify-between items-center">
-                <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
-                <span @click="openModal()" class="p-1 px-2 bg-green-100 text-sm text-green-500 rounded cursor-pointer hover:bg-green-200"> <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish </span>
+              <div class="flex items-center justify-between">
+                <label for="category-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
+                <span @click="openModal()" class="cursor-pointer rounded bg-green-100 p-1 px-2 text-sm text-green-500 hover:bg-green-200"> <i class="fa fa-plus mr-1"></i> Bo'lim qo'shish </span>
               </div>
-              <select v-model="createSMSTemplateParam.templateCategoryId" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select v-model="createSMSTemplateParam.templateCategoryId" id="category-input" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                 <option selected>Bo'limni tanlang</option>
                 <option v-for="(templateCategory, index) in templateCategories" :key="index" :value="templateCategory.id">{{ templateCategory.name }}</option>
               </select>
             </div>
             <div class="mb-6">
-              <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
-              <select id="gender-input" v-model="createSMSTemplateParam.gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <label for="gender-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
+              <select id="gender-input" v-model="createSMSTemplateParam.gender" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                 <option selected>Kim uchunligini tanlang</option>
                 <option value="all">Barcha uchun</option>
                 <option value="male">Erkaklar uchun</option>
@@ -105,64 +106,64 @@
               </select>
             </div>
             <div class="mb-6">
-              <label for="text-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
-              <textarea id="text-input" v-model="createSMSTemplateParam.text" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="SMS matnini kiriting..."></textarea>
+              <label for="text-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
+              <textarea id="text-input" v-model="createSMSTemplateParam.text" rows="4" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="SMS matnini kiriting..."></textarea>
               <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <hr class="bottom-1 mb-6 border-dotted border-gray-200" />
             <div class="flex justify-end">
-              <input type="reset" id="reset-form" class="mx-1 bg-blue-200 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Tozalash" />
-              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Jo'natish</button>
+              <input type="reset" id="reset-form" class="mx-1 w-full rounded-lg bg-blue-200 px-5 py-2.5 text-center text-sm font-medium hover:bg-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto" value="Tozalash" />
+              <button type="submit" class="mx-1 w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto">Jo'natish</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 
-    <div v-show="isShowModal.addCategory" id="popup-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
-      <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-        <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-          <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+    <div v-show="isShowModal.addCategory" id="popup-modal" tabindex="-1" class="overlay fixed top-0 right-0 left-0 z-40 flex h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0 md:h-full">
+      <div class="relative h-full w-full max-w-2xl p-4 text-gray-800 md:h-auto">
+        <div class="relative z-50 rounded-lg bg-white shadow-lg dark:bg-gray-700">
+          <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </button>
-          <h3 class="text-2xl font-extrabold py-5 ml-5">Bo'lim boshqaruvi</h3>
+          <h3 class="ml-5 py-5 text-2xl font-extrabold">Bo'lim boshqaruvi</h3>
           <div class="px-5">
             <form @submit.prevent="createTemplateCategory()">
               <div class="mb-6">
-                <label for="category-name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim qo'shish</label>
+                <label for="category-name" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Bo'lim qo'shish</label>
                 <div class="flex items-center">
-                  <input type="text" v-model="categoryName_" id="category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
-                  <button class="fa fa-plus p-3 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2"></button>
+                  <input type="text" v-model="categoryName_" id="category-name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                  <button class="fa fa-plus ml-2 cursor-pointer rounded-md bg-green-400 p-3 text-white hover:bg-green-500"></button>
                 </div>
               </div>
             </form>
-            <h3 class="text-md font-bold py-1">Bo'limlar ro'yhati</h3>
+            <h3 class="text-md py-1 font-bold">Bo'limlar ro'yhati</h3>
             <div v-if="showCategoryContent">
               <ul class="pb-5">
                 <li v-for="(templateCategory, index) in templateCategories" :key="index">
-                  <div class="flex justify-between items-center py-2 px-1 border-b" :id="'f-' + templateCategory.id">
+                  <div class="flex items-center justify-between border-b py-2 px-1" :id="'f-' + templateCategory.id">
                     <div class="text-md">
-                      <i class="fa-solid fa-angles-right text-sm mr-2"></i>
+                      <i class="fa-solid fa-angles-right mr-2 text-sm"></i>
                       {{ templateCategory.name }}
                     </div>
                     <div>
-                      <i @click="editTemplateCategory(templateCategory)" class="fa-solid fa-feather-pointed text-gray-700 hover:text-blue-600 mr-3 cursor-pointer"></i>
+                      <i @click="editTemplateCategory(templateCategory)" class="fa-solid fa-feather-pointed mr-3 cursor-pointer text-gray-700 hover:text-blue-600"></i>
                       <i @click="deleteTemplateCategory(templateCategory.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600"></i>
                     </div>
                   </div>
-                  <div class="py-2 border-b hidden" :id="'s-' + templateCategory.id">
+                  <div class="hidden border-b py-2" :id="'s-' + templateCategory.id">
                     <form @submit.prevent="updateTemplateCategory()" class="flex items-center">
-                      <input type="text" v-model="editTemplateCategoryParam.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bo'lim nomini kiriting..." />
-                      <button class="p-2 bg-green-400 hover:bg-green-500 cursor-pointer text-white rounded-md ml-2">Saqlash</button>
-                      <button @click="closeEditCategory(templateCategory.id)" type="button" class="ml-3 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                      <input type="text" v-model="editTemplateCategoryParam.name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="Bo'lim nomini kiriting..." />
+                      <button class="ml-2 cursor-pointer rounded-md bg-green-400 p-2 text-white hover:bg-green-500">Saqlash</button>
+                      <button @click="closeEditCategory(templateCategory.id)" type="button" class="ml-3 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                       </button>
                     </form>
                   </div>
                 </li>
               </ul>
             </div>
-            <div v-else class="text-lg bg-white px-5 py-3 pb-5">
+            <div v-else class="bg-white px-5 py-3 pb-5 text-lg">
               <h3 class="text-center text-red-700">Bo'limlar mavjud emas!</h3>
             </div>
           </div>
@@ -171,29 +172,29 @@
     </div>
   </div>
 
-  <div v-show="isShowModal.editTemplate" id="edit-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  <div v-show="isShowModal.editTemplate" id="edit-modal" tabindex="-1" class="overlay fixed top-0 right-0 left-0 z-40 flex h-modal w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0 md:h-full">
+    <div class="relative h-full w-full max-w-2xl p-4 text-gray-800 md:h-auto">
+      <div class="relative z-50 rounded-lg bg-white shadow-lg dark:bg-gray-700">
+        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <h3 class="text-2xl font-extrabold py-5 ml-5">SMS shablonni taxrirlash</h3>
-        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+        <h3 class="ml-5 py-5 text-2xl font-extrabold">SMS shablonni taxrirlash</h3>
+        <div class="max-content-h rounded-lg bg-white p-3 px-5">
           <form @submit.prevent="updateSMSTemplate()">
             <div class="mb-6">
-              <label for="title-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
-              <input type="text" v-model="editSMSTemplateParam.title" id="title-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sarlavhani kiriting..." />
+              <label for="title-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Sarlavha</label>
+              <input type="text" v-model="editSMSTemplateParam.title" id="title-input" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="Sarlavhani kiriting..." />
             </div>
             <div class="mb-6">
-              <label for="category-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
-              <select v-model="editSMSTemplateParam.templateCategoryId" id="category-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <label for="category-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Bo'limi</label>
+              <select v-model="editSMSTemplateParam.templateCategoryId" id="category-input" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                 <option selected>Bo'limni tanlang</option>
                 <option v-for="(templateCategory, index) in templateCategories" :key="index" :value="templateCategory.id">{{ templateCategory.name }}</option>
               </select>
             </div>
             <div class="mb-6">
-              <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
-              <select id="gender-input" v-model="editSMSTemplateParam.gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <label for="gender-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">Kim uchun</label>
+              <select id="gender-input" v-model="editSMSTemplateParam.gender" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                 <option selected>Kim uchunligini tanlang</option>
                 <option value="all">Barcha uchun</option>
                 <option value="male">Erkaklar uchun</option>
@@ -201,14 +202,14 @@
               </select>
             </div>
             <div class="mb-6">
-              <label for="text-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
-              <textarea id="text-input" v-model="editSMSTemplateParam.text" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="SMS matnini kiriting..."></textarea>
+              <label for="text-input" class="mb-2 block text-lg font-medium text-gray-900 dark:text-gray-300">SMS matni</label>
+              <textarea id="text-input" v-model="editSMSTemplateParam.text" rows="4" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="SMS matnini kiriting..."></textarea>
               <p class="mt-5 text-sm text-gray-500">SMS matnida foydalanuvchining ismining o'rniga <strong class="text-black">[USER]</strong> tegini ishlatib keting. Tizim [USER] o'rniga avtomatik tarzda kontakt nomini joylab SMSni jo'natadi.</p>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-            <div class="flex justify-end items-center">
-              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
-              <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
+            <hr class="bottom-1 mb-6 border-dotted border-gray-200" />
+            <div class="flex items-center justify-end">
+              <button type="button" @click="closeEditModal()" class="mr-3 w-full rounded-lg bg-gray-400 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="submit" class="mx-1 w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto">Saqlash</button>
             </div>
           </form>
         </div>
@@ -238,7 +239,7 @@ const clearCategorySort = () => (sortByCategoryId.value = '')
 
 const isShowModal = reactive({
   addCategory: false,
-  editTemplate: false
+  editTemplate: false,
 })
 
 const createSMSTemplateParam = reactive({
@@ -263,18 +264,6 @@ const editTemplateCategoryParam = reactive({
 
 const sortByAccessFunc = (access) => {
   sortByAccess.value = access
-  toggleDropDownFilterByGender()
-}
-
-function openActions(id) {
-  let x = $(`#st-${id}`)
-  x.toggleClass('fa-ellipsis-vertical').toggleClass('fa-times')
-  x.parent('.actions').toggleClass('w-11').toggleClass('w-28').toggleClass('shadow').toggleClass('right-1')
-  x.parent('.actions').children('div').toggleClass('hidden')
-}
-
-function toggleDropDownFilterByGender() {
-  $('#filterByGender').toggleClass('hidden')
 }
 
 const openModal = () => {
