@@ -1,6 +1,6 @@
 <template>
   <div class="px-3">
-    <div class="grid grid-cols-3 gap-4 px-3 mb-5">
+    <div class="mb-5 grid grid-cols-3 gap-4 px-3">
       <div class="col-span-2 p-3">
         <FilterByDate />
         <Stats />
