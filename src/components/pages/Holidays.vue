@@ -178,16 +178,14 @@
         </button>
         <h3 class="text-2xl font-extrabold py-5 ml-5">Tug'ilgan kun tabrigi</h3>
         <div class="bg-white rounded-lg p-3 px-5 max-content-h">
-            <div class="text-center overflow-y-auto text-9xl text-gray-300">
-              <ion-icon name="information-circle-outline"></ion-icon>
-            </div>
-            <div class="overflow-y-auto p-2 mb-6">
-              Tug'ilgan kun tabrigi har bir kontaktning tug'ilgan kunida SMS tabrik jo'natadi. Buning uchun tug'ilgan kun tabrigi uchun SMS shablon biriktirib qoyishingiz kerak va sozlamalardan tug'ilgan kun uchun avto tabriklashni yoqib qo'yishingiz lozim.
-            </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
-            <div class="flex justify-end items-center">
-              <button type="button" @click="closeInfoTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
-            </div>
+          <div class="text-center overflow-y-auto text-9xl text-gray-300">
+            <ion-icon name="information-circle-outline"></ion-icon>
+          </div>
+          <div class="overflow-y-auto p-2 mb-6">Tug'ilgan kun tabrigi har bir kontaktning tug'ilgan kunida SMS tabrik jo'natadi. Buning uchun tug'ilgan kun tabrigi uchun SMS shablon biriktirib qoyishingiz kerak va sozlamalardan tug'ilgan kun uchun avto tabriklashni yoqib qo'yishingiz lozim.</div>
+          <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+          <div class="flex justify-end items-center">
+            <button type="button" @click="closeInfoTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+          </div>
         </div>
       </div>
     </div>
@@ -260,31 +258,31 @@ const isShowModal = reactive({
   editHoliday: false,
   addTempToBirthday: false,
   infoTempToBirthday: false,
-  birthdayAction: false
+  birthdayAction: false,
 })
 
 const createHolidayParam = reactive({
   name: '',
   day: 'Bayram kunini tanlang',
-  month: 'Bayram oyini tanlang'
+  month: 'Bayram oyini tanlang',
 })
 
 const editHolidayParam = reactive({
   id: '',
   name: '',
   day: 'Bayram kunini tanlang',
-  month: 'Bayram oyini tanlang'
+  month: 'Bayram oyini tanlang',
 })
 
 const editSMSIdsInHolidayParam = reactive({
   id: '',
   smsWomenId: '',
-  smsMenId: ''
+  smsMenId: '',
 })
 
 const editSMSIdsOfBirthdayParam = reactive({
   smsWomenId: '',
-  smsMenId: ''
+  smsMenId: '',
 })
 
 function showBirthdayActionFunction() {
@@ -562,6 +560,6 @@ onMounted(() => addSettingInStore(), addHolidayInStore(), addSMSTemplateInStore(
   height: 75vh;
 }
 .overlay {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

@@ -325,6 +325,6 @@ onMounted(() => addContactInStore())
   height: 75vh;
 }
 .overlay {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>
