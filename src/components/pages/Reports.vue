@@ -380,7 +380,14 @@ const store = useStore()
 const showModal = ref(false)
 
 const addMessageInStore = () => {
-  messageService.getMessages().then((data) => store.commit('setMessage', data))
+  store.dispatch('messagesModule/get').then(
+    (data) => {
+      store.commit('setMessage', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Xabarlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const messages = computed(() => {

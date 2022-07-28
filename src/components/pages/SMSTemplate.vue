@@ -312,7 +312,14 @@ const closeEditCategory = (category) => {
 }
 
 const addSMSTemplateInStore = () => {
-  templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
+  store.dispatch('templatesModule/get').then(
+    (data) => {
+      store.commit('setSMSTemplate', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'SMS shablonlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const filteredTemplates = computed(() => {
@@ -336,7 +343,14 @@ const showContent = computed(() => {
 })
 
 const addTemplateCategoryInStore = () => {
-  templateCategoryService.getTemplateCategories().then((data) => store.commit('setTemplateCategory', data))
+  store.dispatch('templateCategoriesModule/get').then(
+    (data) => {
+      store.commit('setTemplateCategory', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Bo\'limlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const templateCategories = computed(() => {

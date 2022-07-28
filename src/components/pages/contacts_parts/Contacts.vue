@@ -152,7 +152,14 @@ const sortByFunc = (sort) => {
 const clearSort = () => (sortBy.value = '')
 
 const addContactInStore = () => {
-  contactService.getContacts().then((data) => store.commit('setContacts', data))
+  store.dispatch('contactsModule/get').then(
+    (data) => {
+      store.commit('setContacts', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Kontaktlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const contacts = computed(() => {

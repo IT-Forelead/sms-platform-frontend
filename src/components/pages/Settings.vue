@@ -65,7 +65,14 @@ const autoSendBirthdayVal = ref(false)
 const darkThemeVal = ref(false)
 
 const addSettingInStore = () => {
-  settingService.getSettings().then((data) => store.commit('setSetting', data))
+  store.dispatch('settingsModule/get').then(
+    (data) => {
+      store.commit('setSetting', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Sozlamalarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const settings = computed(() => {

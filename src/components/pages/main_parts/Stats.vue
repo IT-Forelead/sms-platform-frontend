@@ -26,19 +26,47 @@ import messageService from '../../../services/message.service'
 const store = useStore()
 
 const addContactInStore = () => {
-  contactService.getContacts().then((data) => store.commit('setContacts', data))
+  store.dispatch('contactsModule/get').then(
+    (data) => {
+      store.commit('setContacts', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Kontaktlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const addSMSTemplateInStore = () => {
-  templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
+  store.dispatch('templatesModule/get').then(
+    (data) => {
+      store.commit('setSMSTemplate', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'SMS shablonlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const addHolidayInStore = () => {
-  holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
+  store.dispatch('holidaysModule/get').then(
+    (data) => {
+      store.commit('setHolidays', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Bayramlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const addMessageInStore = () => {
-  messageService.getMessages().then((data) => store.commit('setMessage', data))
+  store.dispatch('messagesModule/get').then(
+    (data) => {
+      store.commit('setMessage', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Xabarlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const mitems = computed(() => {

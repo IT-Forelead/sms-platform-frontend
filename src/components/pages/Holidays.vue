@@ -336,7 +336,14 @@ const closeEditModal = () => {
 }
 
 const addSettingInStore = () => {
-  settingService.getSettings().then((data) => store.commit('setSetting', data))
+  store.dispatch('settingsModule/get').then(
+    (data) => {
+      store.commit('setSetting', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Sozlamalarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const settings = computed(() => {
@@ -344,7 +351,14 @@ const settings = computed(() => {
 })
 
 const addHolidayInStore = () => {
-  holidayService.getHolidays().then((data) => store.commit('setHolidays', data))
+  store.dispatch('holidaysModule/get').then(
+    (data) => {
+      store.commit('setHolidays', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'Bayramlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const holidays = computed(() => {
@@ -356,7 +370,14 @@ const showContent = computed(() => {
 })
 
 const addSMSTemplateInStore = () => {
-  templateService.getSMSTemplates().then((data) => store.commit('setSMSTemplate', data))
+  store.dispatch('templatesModule/get').then(
+    (data) => {
+      store.commit('setSMSTemplate', data)
+    },
+    (error) => {
+      forbiddenChecker(error, 'SMS shablonlarni olishda xatolik yuz berdi!')
+    }
+  )
 }
 
 const templatesForMan = computed(() => {
