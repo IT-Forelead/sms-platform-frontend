@@ -89,6 +89,25 @@
             <li class="border-b">
               <router-link to="/profile" class="block text-md px-4 py-2 hover:bg-gray-100"><i class="fa fa-user mr-2"></i> Profil</router-link>
             </li>
+            <li class="flex items-center justify-between px-3 py-2 border-b hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600">
+              <div class="flex items-center">
+                <BulbOffIcon v-if="isDark" class="w-6 h-6 mr-2" />
+                <BulbOnIcon v-else class="w-6 h-6 mr-2" />
+                Tungi rejim
+              </div>
+              <label v-if="isLight" for="checked-toggle-off" class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" id="checked-toggle-off" class="sr-only peer" />
+                <div @click="toggleDark()"
+                  class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700">
+                </div>
+              </label>
+              <label v-else for="checked-toggle-on" class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" id="checked-toggle-on" class="sr-only peer" checked />
+                <div @click="toggleDark()"
+                  class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-0.5 after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-gray-700">
+                </div>
+              </label>
+            </li>
             <li>
               <a href="/login" @click="onLogout()" class="block text-md px-4 py-2 text-gray-700 hover:bg-gray-100"><i class="fa fa-sign-out mr-2"></i> Chiqish</a>
             </li>
@@ -100,9 +119,12 @@
 </template>
 
 <script setup>
+import BulbOnIcon from '../../assets/icons/BulbOnIcon.vue'
+import BulbOffIcon from '../../assets/icons/BulbOffIcon.vue'
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { useDark, useToggle } from '@vueuse/core'
 import userService from '../../services/user.service'
 import authService from '../../services/auth.service'
 import holidayService from '../../services/holiday.service'
@@ -111,6 +133,14 @@ import $ from 'jquery'
 
 const store = useStore()
 const router = useRouter()
+
+// Dark & Light mode
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+
+const isLight = computed(() => {
+  return localStorage.getItem('vueuse-color-scheme') === 'light'
+})
 
 function checkLogin(data) {
   store.commit('setLogin', data)
