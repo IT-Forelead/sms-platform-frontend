@@ -4,7 +4,7 @@
       <router-link class="cursor-pointer" to="/">
         <div class="flex items-center">
           <img src="../../assets/images/logo.png" class="shrink-0 w-14" alt="#" />
-          <h2 class="grow ml-3 font-semibold text-2xl text-zinc-900">IT-Forelead</h2>
+          <h2 class="grow ml-3 font-semibold text-2xl text-zinc-900 dark:text-gray-300">IT-Forelead</h2>
         </div>
       </router-link>
     </div>
