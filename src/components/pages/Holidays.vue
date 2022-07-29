@@ -1,69 +1,69 @@
 <template>
   <div class="px-3">
-    <h3 class="text-3xl font-extrabold mb-3 ml-2">Bayramlar</h3>
+    <h3 class="text-3xl font-extrabold mb-3 ml-2 dark:text-gray-300">Bayramlar</h3>
     <div class="grid grid-cols-2 gap-1 mb-5">
       <div class="custom-height overflow-y-auto mt-3 px-1">
         <div class="grid grid-cols-2 gap-2">
-          <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+          <div class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 dark:from-blue-500 dark:via-blue-700 dark:to-blue-800 bg-gradient-to-br">
             <div x-data="{open: false}" class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div x-show="open" x-on:click.outside="open = false" class="flex justify-center items-center">
-                <i @click="openAddTempToBirtdayModal(settings)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
-                <i @click="openInfoTempToBirtdayModal()" class="fa-solid fa-circle-info cursor-pointer text-gray-700 hover:text-blue-600"></i>
+                <i @click="openAddTempToBirtdayModal(settings)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 dark:text-gray-200 dark:hover:text-gray-400  mr-2"></i>
+                <i @click="openInfoTempToBirtdayModal()" class="fa-solid fa-circle-info cursor-pointer text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400"></i>
               </div>
               <i x-show="!open" x-on:click="open = true" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
               <i x-show="open" x-on:click="open = false" class="fa-solid fa-times py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
-            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg dark:bg-gray-800">
               <div class="text-center -mt-10 mb-2">
-                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white dark:bg-blue-500 dark:border-gray-800 w-20 h-20 rounded-full mx-auto">
                   <i class="fa-solid fa-cake-candles"></i>
                 </div>
               </div>
-              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">Tug'ilgan kunlar</h3>
-              <p class="text-gray-500 mb-1 py-1 text-center">Kontaktlarning tug'ilgan kunlari</p>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black dark:text-gray-300">Tug'ilgan kunlar</h3>
+              <p class="text-gray-500 dark:text-gray-400 mb-1 py-1 text-center">Kontaktlarning tug'ilgan kunlari</p>
             </div>
           </div>
-          <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 bg-gradient-to-br">
+          <div v-for="(holiday, index) in holidays" :key="index" class="relative h-52 rounded-lg from-blue-100 via-blue-300 to-blue-500 dark:from-blue-500 dark:via-blue-700 dark:to-blue-800 bg-gradient-to-br">
             <div x-data="{open: false}" class="actions absolute right-0 top-2 flex justify-end items-center px-1 w-11 cursor-pointer rounded-full">
               <div class="flex justify-center items-center" x-show="open" x-on:click.outside="open = false">
-                <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2"></i>
-                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 mr-2"></i>
-                <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 mr-2"></i>
+                <i @click="openModal(holiday)" class="fa-solid fa-circle-plus text-gray-700 hover:text-green-600 mr-2 dark:text-gray-200 dark:hover:text-gray-400"></i>
+                <i @click="openEditModal(holiday)" class="fa-solid fa-feather-pointed cursor-pointer text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-gray-400 mr-2"></i>
+                <i @click="deleteHoliday(holiday.id)" class="fa-solid fa-trash-can cursor-pointer text-gray-700 hover:text-red-600 dark:text-gray-200 dark:hover:text-gray-400"></i>
               </div>
               <i x-show="!open" x-on:click="open = true" class="fa-solid fa-ellipsis-vertical py-2.5 px-4 hover:shadow rounded-full"></i>
               <i x-show="open" x-on:click="open = false" class="fa-solid fa-times py-2.5 px-4 hover:shadow rounded-full"></i>
             </div>
-            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white rounded-b-lg">
+            <div class="absolute bottom-0 w-full max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-b-lg">
               <div class="text-center -mt-10 mb-2">
-                <div class="flex items-center justify-center text-4xl bg-blue-200 border-4 text-white border-white w-20 h-20 rounded-full mx-auto">
+                <div class="flex items-center justify-center text-4xl bg-blue-200 dark:bg-blue-500 border-4 text-white border-white dark:border-gray-800 w-20 h-20 rounded-full mx-auto">
                   <i class="fa-solid fa-gift"></i>
                 </div>
               </div>
-              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black">{{ holiday.name }}</h3>
-              <p class="text-gray-500 mb-1 py-1 text-center">{{ holiday.day }} - {{ holiday.month }}</p>
+              <h3 class="text-lg text-center py-1 leading-normal mb-1 font-semibold text-black dark:text-gray-300">{{ holiday.name }}</h3>
+              <p class="text-gray-500 dark:text-gray-400 mb-1 py-1 text-center">{{ holiday.day }} - {{ holiday.month }}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="p-3">
-        <div class="bg-white rounded-lg p-3 px-5">
-          <h3 class="text-2xl font-extrabold mb-3">Bayram qo'shish</h3>
-          <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+        <div class="bg-white rounded-lg p-3 px-5 dark:bg-gray-800">
+          <h3 class="text-2xl font-extrabold mb-3 dark:text-gray-300">Bayram qo'shish</h3>
+          <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-600" />
           <form @submit.prevent="createHoliday()">
             <div class="mb-6">
               <label for="name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
-              <input type="text" v-model="createHolidayParam.name" id="name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
+              <input type="text" v-model="createHolidayParam.name" id="name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-300 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bayram nomini kiriting..." />
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram kuni</label>
-              <select id="gender-input" v-model="createHolidayParam.day" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="createHolidayParam.day" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-300 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bayram kunini tanlang</option>
                 <option v-for="item in 31" :key="item" :value="item">{{ item }}</option>
               </select>
             </div>
             <div class="mb-6">
               <label for="gender-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram oyi</label>
-              <select id="gender-input" v-model="createHolidayParam.month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <select id="gender-input" v-model="createHolidayParam.month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-300 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Bayram oyini tanlang</option>
                 <option value="january">Yanvar</option>
                 <option value="february">Fevral</option>
@@ -79,7 +79,7 @@
                 <option value="december">Dekabr</option>
               </select>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-700" />
             <div class="flex justify-end">
               <input type="reset" id="reset-form" class="mx-1 bg-blue-200 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Tozalash" />
               <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Jo'natish</button>
@@ -92,16 +92,16 @@
 
   <div v-show="isShowModal.addTemplate" id="add-template-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-        <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-800 z-50">
+        <button type="button" @click="closeModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-500" data-modal-toggle="popup-modal">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <h3 class="text-2xl font-extrabold py-5 ml-5">Bayram tabrigi</h3>
-        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+        <h3 class="text-2xl font-extrabold py-5 ml-5 dark:text-gray-300">Bayram tabrigi</h3>
+        <div class="rounded-lg p-3 px-5 max-content-h">
           <form @submit.prevent="updateSMSIdsInHoliday()">
-            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+            <h3 class="text-lg font-semibold ml-3 mb-2 dark:text-gray-300">Erkaklar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
+              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1 dark:border-gray-600">
                 <input v-model="editSMSIdsInHolidayParam.smsMenId" :value="template.id" :id="'man' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
                 <label :for="'man' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                   <div class="text-md font-semibold">{{ template.title }}</div>
@@ -109,10 +109,10 @@
                 </label>
               </div>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
-            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3 dark:border-gray-600" />
+            <h3 class="text-lg font-semibold ml-3 mb-2 dark:text-gray-300">Ayollar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1 dark:border-gray-600">
                 <input v-model="editSMSIdsInHolidayParam.smsWomenId" :value="template.id" :id="'woman' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
                 <label :for="'woman' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                   <div class="text-md font-semibold">{{ template.title }}</div>
@@ -120,9 +120,9 @@
                 </label>
               </div>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-600" />
             <div class="flex justify-end items-center">
-              <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="button" @click="closeModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-500 dark:hover:bg-gray-600" data-modal-toggle="popup-modal">Yopish</button>
               <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
             </div>
           </form>
@@ -133,16 +133,16 @@
 
   <div v-show="isShowModal.addTempToBirthday" id="add-temp-birthday-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-        <button type="button" @click="closeAddTempToBirtdayModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-800 z-50">
+        <button type="button" @click="closeAddTempToBirtdayModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-500" data-modal-toggle="popup-modal">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <h3 class="text-2xl font-extrabold py-5 ml-5">Tug'ilgan kun tabrigi</h3>
-        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+        <h3 class="text-2xl font-extrabold py-5 ml-5 dark:text-gray-300">Tug'ilgan kun tabrigi</h3>
+        <div class="rounded-lg p-3 px-5 max-content-h">
           <form @submit.prevent="updateSMSTemplateOfBirthday()">
-            <h3 class="text-lg font-semibold ml-3 mb-2">Erkaklar uchun</h3>
+            <h3 class="text-lg font-semibold ml-3 mb-2 dark:text-gray-300">Erkaklar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1">
+              <div v-for="(template, index) in templatesForMan" :key="index" class="flex items-center border-b border-dashed py-1 dark:border-gray-600">
                 <input v-model="editSMSIdsOfBirthdayParam.smsMenId" :value="template.id" :id="'man-radio' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="men" />
                 <label :for="'man-radio' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                   <div class="text-md font-semibold">{{ template.title }}</div>
@@ -150,10 +150,10 @@
                 </label>
               </div>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-3" />
-            <h3 class="text-lg font-semibold ml-3 mb-2">Ayollar uchun</h3>
+            <hr class="border-gray-200 border-dotted bottom-1 mb-3 dark:border-gray-600" />
+            <h3 class="text-lg font-semibold ml-3 mb-2 dark:text-gray-300">Ayollar uchun</h3>
             <div class="max-h-40 overflow-y-auto p-3 mb-6">
-              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1">
+              <div v-for="(template, index) in templatesForWoman" :key="index" class="flex items-center border-b border-dashed py-1 dark:border-gray-600">
                 <input v-model="editSMSIdsOfBirthdayParam.smsWomenId" :value="template.id" :id="'woman-radio' + template.id" class="my-auto transform scale-125 mr-5" type="radio" name="women" />
                 <label :for="'woman-radio' + template.id" class="block font-medium text-gray-900 dark:text-gray-300 cursor-pointer">
                   <div class="text-md font-semibold">{{ template.title }}</div>
@@ -161,9 +161,9 @@
                 </label>
               </div>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-600" />
             <div class="flex justify-end items-center">
-              <button type="button" @click="closeAddTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="button" @click="closeAddTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-500 dark:hover:bg-gray-600" data-modal-toggle="popup-modal">Yopish</button>
               <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
             </div>
           </form>
@@ -174,19 +174,19 @@
 
   <div v-show="isShowModal.infoTempToBirthday" id="info-temp-birthday-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-        <button type="button" @click="closeInfoTempToBirtdayModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-800 z-50">
+        <button type="button" @click="closeInfoTempToBirtdayModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-500" data-modal-toggle="popup-modal">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <h3 class="text-2xl font-extrabold py-5 ml-5">Tug'ilgan kun tabrigi</h3>
-        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
-          <div class="text-center overflow-y-auto text-9xl text-gray-300">
+        <h3 class="text-2xl font-extrabold py-5 ml-5 dark:text-gray-300">Tug'ilgan kun tabrigi</h3>
+        <div class="rounded-lg p-3 px-5 max-content-h">
+          <div class="text-center overflow-y-auto text-9xl text-gray-300 dark:text-gray-400">
             <ion-icon name="information-circle-outline"></ion-icon>
           </div>
-          <div class="overflow-y-auto p-2 mb-6">Tug'ilgan kun tabrigi har bir kontaktning tug'ilgan kunida SMS tabrik jo'natadi. Buning uchun tug'ilgan kun tabrigi uchun SMS shablon biriktirib qoyishingiz kerak va sozlamalardan tug'ilgan kun uchun avto tabriklashni yoqib qo'yishingiz lozim.</div>
-          <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+          <div class="overflow-y-auto p-2 mb-6 dark:text-gray-300">Tug'ilgan kun tabrigi har bir kontaktning tug'ilgan kunida SMS tabrik jo'natadi. Buning uchun tug'ilgan kun tabrigi uchun SMS shablon biriktirib qoyishingiz kerak va sozlamalardan tug'ilgan kun uchun avto tabriklashni yoqib qo'yishingiz lozim.</div>
+          <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-600" />
           <div class="flex justify-end items-center">
-            <button type="button" @click="closeInfoTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+            <button type="button" @click="closeInfoTempToBirtdayModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-500 dark:hover:bg-gray-600" data-modal-toggle="popup-modal">Yopish</button>
           </div>
         </div>
       </div>
@@ -195,12 +195,12 @@
 
   <div v-show="isShowModal.editHoliday" id="edit-modal" tabindex="-1" class="overflow-y-auto w-full overlay overflow-x-hidden fixed top-0 right-0 left-0 z-40 flex items-center justify-center md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto text-gray-800">
-      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 z-50">
-        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="popup-modal">
+      <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-800 z-50">
+        <button type="button" @click="closeEditModal()" class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:text-gray-300 dark:hover:text-gray-500" data-modal-toggle="popup-modal">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <h3 class="text-2xl font-extrabold py-5 ml-5">Bayramni taxrirlash</h3>
-        <div class="bg-white rounded-lg p-3 px-5 max-content-h">
+        <h3 class="text-2xl font-extrabold py-5 ml-5 dark:text-gray-300">Bayramni taxrirlash</h3>
+        <div class="rounded-lg p-3 px-5 max-content-h">
           <form @submit.prevent="updateHoliday()">
             <div class="mb-6">
               <label for="edit-name-input" class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300">Bayram nomi</label>
@@ -231,9 +231,9 @@
                 <option value="december">Dekabr</option>
               </select>
             </div>
-            <hr class="border-gray-200 border-dotted bottom-1 mb-6" />
+            <hr class="border-gray-200 border-dotted bottom-1 mb-6 dark:border-gray-600" />
             <div class="flex justify-end items-center">
-              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center" data-modal-toggle="popup-modal">Yopish</button>
+              <button type="button" @click="closeEditModal()" class="mr-3 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-500 dark:hover:bg-gray-600" data-modal-toggle="popup-modal">Yopish</button>
               <button type="submit" class="mx-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Saqlash</button>
             </div>
           </form>

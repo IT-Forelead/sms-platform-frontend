@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .active {
   background-color: rgb(237 233 254);
-  color: rgb(139 92 246);
+  color: rgb(139 92 246) !important;
 }
 .custom-top {
   top: 49vh;
