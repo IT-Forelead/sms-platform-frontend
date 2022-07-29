@@ -1,16 +1,16 @@
 <template>
   <div class="flex justify-between items-center mt-10">
-    <h3 class="text-3xl font-extrabold">Raqamli statistika</h3>
+    <h3 class="text-3xl font-extrabold dark:text-gray-300">Raqamli statistika</h3>
   </div>
   <div class="grid grid-cols-4 grid-flow-row-2 auto-rows-max gap-5 mt-5">
-    <div v-for="item in mitems" :key="item" class="flex items-center justify-center flex-col bg-white rounded-xl p-5 pt-10">
-      <div class="flex items-center justify-center bg-teal-100 rounded-xl px-4 p-3 text-gray-500 text-3xl">
+    <div v-for="item in mitems" :key="item" class="flex items-center justify-center flex-col bg-white rounded-xl p-5 pt-10 dark:bg-gray-800">
+      <div class="flex items-center justify-center bg-teal-100 rounded-xl px-4 p-3 text-gray-500 text-3xl dark:bg-gray-700 dark:text-gray-300">
         <ion-icon :name="item.icon"></ion-icon>
       </div>
-      <h1 class="text-2xl font-bold pt-2">{{ item.value }}</h1>
-      <span>{{ item.title }}</span>
-      <hr class="my-3 mt-5 w-full"/>
-      <hr class="w-1/2"/>
+      <h1 class="text-2xl font-bold pt-2 dark:text-gray-300">{{ item.value }}</h1>
+      <span class="dark:text-gray-300">{{ item.title }}</span>
+      <hr class="my-3 mt-5 w-full dark:border-gray-600"/>
+      <hr class="w-1/2 dark:border-gray-600"/>
     </div>
   </div>
 </template>
